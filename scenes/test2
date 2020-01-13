@@ -1,0 +1,9 @@
+camera:
+position 0,0
+light:
+position 0,0,0
+intensity 100
+figure:
+type sphere
+position 0,0,10
+radius 10
