@@ -11,6 +11,8 @@ $(NAME): $(LIB) $(OBJ)
 	gcc -Wall -Wextra -Werror -o $(NAME) -I $(HDR) $(LIB) $(OBJ) -L mlx -lmlx -framework OpenGL -framework AppKit
 %.o: src/%.c $(HDR)
 	gcc -c $<
+$(LIB):
+	make -C ./libft
 clean:
 	make clean -C ./libft
 	rm -rf $(OBJ)

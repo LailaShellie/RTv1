@@ -1,6 +1,18 @@
 
 #include "../rtv1.h"
 
+
+
+int		count_split(char **split)
+{
+	int 	len;
+
+	len = 0;
+	while (split[len])
+		++len;
+	return (len);
+}
+
 int		is_mark(char *line)
 {
 	if (ft_strcmp(line, "camera") == 0)

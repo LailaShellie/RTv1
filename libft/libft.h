@@ -98,5 +98,6 @@ unsigned long int	ft_fast_bit_pow(unsigned long int a,
 int					get_next_line(const int fd, char **line);
 int					ft_abs(int a);
 int					ft_free_mas(char **mas, int len);
+double		ft_atod(char *str);
 
 #endif

@@ -40,12 +40,14 @@ typedef struct  s_rtv1
     t_img         *img;
     double       *cam;
     char              *file;
+    char                **split;
 }                     t_rtv1;
 
 int     init_mlx(t_rtv1 *rt);
 int     read_file(t_rtv1 *rt, int ac, char **av);
 int     parse_file(t_rtv1 *rt);
 char       *get_line(char *line);
-int 	is_mark(char *line)
+int 	is_mark(char *line);
+int		count_split(char **split);
 
 #endif
