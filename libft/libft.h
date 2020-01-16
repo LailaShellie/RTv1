@@ -99,5 +99,8 @@ int					get_next_line(const int fd, char **line);
 int					ft_abs(int a);
 int					ft_free_mas(char **mas, int len);
 double		ft_atod(char *str);
+int		ft_isnumber(char *s);
+int		ft_isdouble(char *s);
+
 
 #endif

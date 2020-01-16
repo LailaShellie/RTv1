@@ -1,4 +1,4 @@
-SRC = init_mlx.c main.c read_file.c parse_file.c parsing_func.c get_cam.c
+SRC = init_mlx.c main.c read_file.c parse_file.c parsing_func.c parse_marks.c parse_params.c
 OBJ = $(SRC:.c=.o)
 HDR = rtv1.h
 LIB = libft/libft.a

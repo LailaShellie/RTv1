@@ -7,6 +7,7 @@ int		parse_file(t_rtv1 *rt)
 		return (ERR);
 	if (ERR == get_cam(rt))
 		return (ERR);
-
+	if (ERR == get_lights(rt))
+		return (ERR);
 	return (1);
 }

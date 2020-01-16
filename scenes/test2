@@ -1,5 +1,5 @@
 camera:
-position 534.45354,0,0
+position 534.45354,--5.0,23.0423
 light:
 position 0,0,0
 intensity 100

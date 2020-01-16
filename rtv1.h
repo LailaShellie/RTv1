@@ -17,12 +17,27 @@
 # define Y 1
 # define Z 2
 
-typedef struct       s_figure
+# define SPHERE 1
+# define CONE 2
+# define PLANE 3
+# define CYLINDER 4
+
+# define CAM 0
+# define LIGHTS 2
+
+# define COORDS_NUM 3
+# define POSITION 2
+
+# define ARG1 1
+# define ARG2 2
+# define ARG3 3
+
+typedef struct		s_figure
 {
-    double       c[3];
-    int            type;
-    double       r;
-}                              t_fgr;
+    double			c[3];
+    int				type;
+    double			r;
+}					t_fgr;
 
 typedef struct		s_img
 {
@@ -33,21 +48,24 @@ typedef struct		s_img
     char			*data;
 }					t_img;
 
-typedef struct  s_rtv1
+typedef struct		s_rtv1
 {
-    void              *mlx_ptr;
-    void              *win_ptr;
-    t_img         *img;
-    double       *cam;
-    char              *file;
-    char                **split;
+    void			*mlx_ptr;
+    void			*win_ptr;
+    t_img			*img;
+    double			*cam;
+    char			*file;
+    char			**split;
 }                     t_rtv1;
 
-int     init_mlx(t_rtv1 *rt);
-int     read_file(t_rtv1 *rt, int ac, char **av);
-int     parse_file(t_rtv1 *rt);
-char       *get_line(char *line);
-int 	is_mark(char *line);
-int		count_split(char **split);
+int					init_mlx(t_rtv1 *rt);
+int					read_file(t_rtv1 *rt, int ac, char **av);
+int					parse_file(t_rtv1 *rt);
+char				*get_line(char *line);
+int					is_mark(char *line);
+int					count_split(char **split);
+int					get_cam(t_rtv1 *rt);
+double				*get_coords(char *coords);
+int					get_position(t_rtv1 *rt, char *pos);
 
 #endif
