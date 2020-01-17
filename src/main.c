@@ -9,7 +9,11 @@ int main(int ac, char** av)
 		exit(0);
 	if (ERR == read_file(rt, ac, av))
 		exit(0);
-	parse_file(rt);
+	if (ERR == parse_file(rt))
+	{
+		ft_putendl("Error");
+		return (0);
+	}
 //	if (ERR == init_mlx(rt))
 //		exit(0);
     return (0);

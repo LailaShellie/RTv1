@@ -19,7 +19,7 @@ static void	ft_join(t_rtv1 *rt, char *line)
 
 	if (line[0] == 0)
 		return ;
-	if (rt->file) // сделать за один вызов стрджойна
+	if (rt->file)
 	{
 		tmp = rt->file;
 		rt->file = ft_strjoin(rt->file, "\n");
@@ -45,7 +45,7 @@ int     read_file(t_rtv1 *rt, int ac, char **av)
 	while (get_next_line(fd, &line) > 0)
 	{
 		ft_trim(&line);
-		ft_join(rt, line); // обработать ошибки
+		ft_join(rt, line);
 		free(line);
 		line = 0;
 	}

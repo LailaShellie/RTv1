@@ -1,7 +1,20 @@
 
 #include "../rtv1.h"
 
+char	**check_param(char *str)
+{
+	char	**split;
+	int 	len;
 
+	if (!(split = ft_strsplit(str, ' ')))
+		return (ERR);
+	if ((len = count_split(split)) != 2)
+	{
+		ft_free_mas(split, len);
+		return (ERR);
+	}
+	return (split);
+}
 
 int		count_split(char **split)
 {
@@ -13,25 +26,45 @@ int		count_split(char **split)
 	return (len);
 }
 
-int		is_mark(char *line)
+int		is_param(char *str)
 {
-	if (ft_strcmp(line, "camera") == 0)
+	if (ft_strncmp(str, "type", 4) == 0)
 		return (1);
-	else if (ft_strcmp(line, "light") == 0)
+	else if (ft_strncmp(str, "radius", 6) == 0)
 		return (1);
-	else if (ft_strcmp(line, "figure") == 0)
+	else if (ft_strncmp(str, "intensity", 9) == 0)
 		return (1);
-	return (0);
+	else if (ft_strncmp(str, "specularity", 11) == 0)
+		return (1);
+	else if (ft_strncmp(str, "color", 5) == 0)
+		return (1);
+	else if (ft_strncmp(str, "vector", 6) == 0)
+		return (1);
+	else if (ft_strncmp(str, "point", 5) == 0)
+		return (1);
+	return (ERR);
 }
 
-char *get_line(char *line)
+int		is_figure(char *str)
 {
-	char	*next;
+	if (ft_strncmp(str, "sphere", 6) == 0)
+		return (1);
+	else if (ft_strncmp(str, "cone", 4) == 0)
+		return (1);
+	else if (ft_strncmp(str, "plane", 5) == 0)
+		return (1);
+	else if (ft_strncmp(str, "cylinder", 8) == 0)
+		return (1);
+	return (ERR);
+}
 
-	if (!line || *line == 0)
-		return (0);
-	next = ft_strchr(line, '\n');
-	if (next)
-		++next;
-	return (next);
+int		is_mark(char *str)
+{
+	if (ft_strcmp(str, "camera:") == 0)
+		return (1);
+	else if (ft_strcmp(str, "light:") == 0)
+		return (1);
+	else if (ft_strcmp(str, "figure:") == 0)
+		return (1);
+	return (ERR);
 }

@@ -3,18 +3,18 @@
 
 
 camera:
-
-	position 1.320,4120,53.0
-
-
-
+	point 1.320,41.20,53.0
+	vector 1.32430,41.0,5.0
+	camera:
+    	point 1.320,41.20,53.0
+    	vector 1.32430,41.0,5.0
 light:
-	position 0,0,0
+	point 0,0,0
 	intensity 100
 
 figure:
 			type sphere
-	position 0,0,10
+	point 0,0,10
 	radius 10
 
 

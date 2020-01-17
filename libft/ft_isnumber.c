@@ -33,7 +33,7 @@ int		ft_isdouble(char *s)
 	i = 0;
 	if (!s || s[i] == 0)
 		return (0);
-	if (s[i + 1] != 0 && (s[i] == '+' || s[i] == '-'))
+	if (s[i + 1] != 0 && s[i] == '-')
 		++i;
 	while (s[i])
 	{

@@ -1,9 +1,9 @@
 camera:
-position 534.45354,--5.0,23.0423
+point 534.45354,-5.0,23.0423
 light:
-position 0,0,0
+point 0,0,0
 intensity 100
 figure:
 type sphere
-position 0,0,10
+point 0,0,10
 radius 10
