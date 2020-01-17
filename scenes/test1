@@ -5,9 +5,6 @@
 camera:
 	point 1.320,41.20,53.0
 	vector 1.32430,41.0,5.0
-	camera:
-    	point 1.320,41.20,53.0
-    	vector 1.32430,41.0,5.0
 light:
 	point 0,0,0
 	intensity 100
@@ -15,6 +12,9 @@ light:
 figure:
 			type sphere
 	point 0,0,10
-	radius 10
+	vector 0,234,244.432
+	color 255,255,255
+	radius 3.14
+	specularity 123
 
 

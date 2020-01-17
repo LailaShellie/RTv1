@@ -38,7 +38,7 @@ static int		*get_rgb(char *str)
 {
 	char	**split;
 	int 	len;
-	int 	ret;
+	int 	*ret;
 
 	if (!(split = ft_strsplit(str, ',')))
 		return (ERR);
@@ -48,12 +48,13 @@ static int		*get_rgb(char *str)
 		return (ERR);
 	}
 	if (!ft_isnumber(split[R]) ||
-		!ft_isnumber(split[B]) || !ft_isnumber(split[B]))
+		!ft_isnumber(split[G]) ||
+		!ft_isnumber(split[B]))
 	{
 		ft_free_mas(split, len);
 		return (ERR);
 	}
-	if (!(ret = ft_memalloc(sizeof(int) * 4)))
+	if (!(ret = ft_memalloc(sizeof(int *) * 4)))
 		return (ERR);
 	ret[R] = ft_abs(ft_atod(split[R])) % 256;
 	ret[G] = ft_abs(ft_atod(split[G])) % 256;
@@ -61,7 +62,7 @@ static int		*get_rgb(char *str)
 	return (ret);
 }
 
-static char	**check_param(char *str)
+static char	**check_color(char *str)
 {
 	char	**split;
 	int 	len;
@@ -86,7 +87,7 @@ int		*get_color(char *str)
 	char	**split;
 	int 	*ret;
 
-	if (!(split = check_param(str)))
+	if (!(split = check_color(str)))
 		return (ERR);
 	ret = get_rgb(split[1]);
 	ft_free_mas(split, count_split(split));

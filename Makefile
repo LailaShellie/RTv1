@@ -1,4 +1,6 @@
-SRC = init_mlx.c main.c read_file.c parse_file.c parsing_func.c parse_marks.c get_parametr.c get_point_or_vector.c get_type.c
+SRC = init_mlx.c main.c read_file.c parse_file.c \
+	parsing_func.c parse_marks.c get_parametr.c \
+	get_point_or_vector.c get_type.c light.c figure.c get_color.c
 OBJ = $(SRC:.c=.o)
 HDR = rtv1.h
 LIB = libft/libft.a

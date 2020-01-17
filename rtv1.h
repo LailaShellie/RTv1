@@ -18,14 +18,16 @@
 # define Y 1
 # define Z 2
 
-# define O 0
-# define R 1
-# define G 2
-# define B 3
+# define R 0
+# define G 1
+# define B 2
 
 # define ARG1 1
 # define ARG2 2
 # define ARG3 3
+# define ARG4 4
+# define ARG5 5
+# define ARG6 6
 
 # define SPHERE 1
 # define CONE 2
@@ -44,6 +46,13 @@ typedef struct		s_cam
 	double			*xyz2;
 }					t_cam;
 
+typedef struct		s_light
+{
+	double			*c;
+	double			i;
+	struct s_light	*next;
+}					t_light;
+
 typedef struct		s_figure
 {
 	int				type;
@@ -52,7 +61,8 @@ typedef struct		s_figure
 	int				*color;
     double			r;
     double			s;
-}					t_fgr;
+	struct s_figure	*next;
+}					t_figure;
 
 typedef struct		s_img
 {
@@ -71,6 +81,8 @@ typedef struct		s_rtv1
     char			*file;
     char			**split;
     t_cam			*cam;
+    t_light			*lights;
+    t_figure		*figures;
 }                     t_rtv1;
 
 int					init_mlx(t_rtv1 *rt);
@@ -90,9 +102,15 @@ double				*get_vector(char *str);
 
 double				get_radius(char *str);
 double				get_intensity(char *str);
+double				get_specularity(char *str);
 
 int					get_type(char *str);
 
 int					*get_color(char *str);
+
+t_figure			*new_figure();
+void				add_figure(t_figure **figures, t_figure *new);
+t_light				*new_light();
+void				add_light(t_light **lights, t_light *new);
 
 #endif
