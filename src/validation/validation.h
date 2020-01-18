@@ -44,4 +44,6 @@ void				add_figure(t_figure **figures, t_figure *new);
 t_light				*new_light();
 void				add_light(t_light **lights, t_light *new);
 
+t_cam				*new_cam();
+
 #endif

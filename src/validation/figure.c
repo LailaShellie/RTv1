@@ -10,6 +10,10 @@ t_figure		*new_figure()
 
 	if (!(new = ft_memalloc(sizeof(t_figure))))
 		return (ERR);
+	if (!(new->c = new_vect3d()))
+		return (ERR);
+	if (!(new->v = new_vect3d()))
+		return (ERR);
 	return (new);
 }
 

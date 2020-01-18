@@ -26,15 +26,20 @@
 # define CAM 0
 # define LIGHTS 2
 
+typedef struct		s_vect3d
+{
+	double			*coords;
+}					t_vect3d;
+
 typedef struct		s_cam
 {
-	double			*xyz1;
-	double			*xyz2;
+	t_vect3d		*c;
+	t_vect3d		*v;
 }					t_cam;
 
 typedef struct		s_light
 {
-	double			*c;
+	t_vect3d		*c;
 	double			i;
 	struct s_light	*next;
 }					t_light;
@@ -42,8 +47,8 @@ typedef struct		s_light
 typedef struct		s_figure
 {
 	int				type;
-    double			*c;
-	double			*v;
+    t_vect3d		*c;
+	t_vect3d		*v;
 	int				color;
     double			r;
     double			s;
@@ -75,5 +80,6 @@ int					init_mlx(t_rtv1 *rt);
 int					validation_main(t_rtv1 *rt, int ac, char **av);
 int					set_colors(unsigned char o, unsigned char r, \
 			unsigned char g, unsigned char b);
+t_vect3d			*new_vect3d();
 
 #endif

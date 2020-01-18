@@ -9,8 +9,7 @@ int main(int ac, char** av)
 		exit(0);
 	if (!(validation_main(rt, ac, av)))
 		return (ERR);
-	if (ERR == init_mlx(rt))
-		exit(0);
-	printf("%.x\n", set_colors(0x99, 0xAA, 0xCC, 0xFF));
+//	if (ERR == init_mlx(rt))
+//		exit(0);
     return (0);
 }

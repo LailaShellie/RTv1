@@ -10,9 +10,9 @@ static int get_figure(t_rtv1 *rt, char **str)
 		return (ERR);
 	if (!(new->type = get_type(str[ARG1])))
 		return (ERR);
-	if (!(new->c = get_point(str[ARG2])))
+	if (!(new->c->coords = get_point(str[ARG2])))
 		return (ERR);
-	if (!(new->v = get_vector(str[ARG3])))
+	if (!(new->v->coords = get_vector(str[ARG3])))
 		return (ERR);
 	if (!(new->color = get_color(str[ARG4])))
 		return (ERR);
@@ -31,13 +31,13 @@ static int get_light(t_rtv1 *rt, char **str)
 
 	if (!(new = new_light()))
 		return (ERR);
-	if (!(new->c = get_point(str[ARG1])))
+	if (!(new->c->coords = get_point(str[ARG1])))
 		return (ERR);
 	if (!(new->i = get_intensity(str[ARG2])))
 		return (ERR);
 	add_light(&rt->lights, new);
 	printf("light:\n");
-	printf("%lf %lf %lf\n", new->c[X], new->c[Y], new->c[Z]);
+	printf("%lf %lf %lf\n", new->c->coords[X], new->c->coords[Y], new->c->coords[Z]);
 	printf("%lf\n", new->i);
 	return (1);
 }
@@ -46,15 +46,15 @@ static int get_cam(t_rtv1 *rt, char **str)
 {
 	if (rt->cam)
 		return (ERR);
-	if (!(rt->cam = ft_memalloc(sizeof(t_cam))))
+	if (!(rt->cam = new_cam()))
 		return (ERR);
-	if (!(rt->cam->xyz1 = get_point(str[ARG1])))
+	if (!(rt->cam->c->coords = get_point(str[ARG1])))
 		return (ERR);
-	if (!(rt->cam->xyz2 = get_vector(str[ARG2])))
+	if (!(rt->cam->v->coords = get_vector(str[ARG2])))
 		return (ERR);
 	printf("camera:\n");
-	printf("%lf %lf %lf\n", rt->cam->xyz1[X], rt->cam->xyz1[Y], rt->cam->xyz1[Z]);
-	printf("%lf %lf %lf\n", rt->cam->xyz2[X], rt->cam->xyz2[Y], rt->cam->xyz2[Z]);
+	printf("%lf %lf %lf\n", rt->cam->c->coords[X], rt->cam->c->coords[Y], rt->cam->c->coords[Z]);
+	printf("%lf %lf %lf\n", rt->cam->v->coords[X], rt->cam->v->coords[Y], rt->cam->v->coords[Z]);
 	return (1);
 }
 
