@@ -1,5 +1,5 @@
 
-#include "../rtv1.h"
+#include "validation.h"
 
 static int get_figure(t_rtv1 *rt, char **str)
 {

@@ -2,11 +2,10 @@
 // Created by Laila Shellie on 2020-01-17.
 //
 
-#include "../rtv1.h"
+#include "validation.h"
 
 static double	get_param(char **split)
 {
-	int 	len;
 	double	ret;
 
 	if (ft_isdouble(split[1]))

@@ -1,5 +1,5 @@
 
-#include "../rtv1.h"
+#include "validation.h"
 
 static char	***get_marks(char **split, int num)
 {

@@ -2,7 +2,7 @@
 // Created by Laila Shellie on 2020-01-17.
 //
 
-#include "../rtv1.h"
+#include "validation.h"
 
 int	set_colors(unsigned char o, unsigned char r, \
 			unsigned char g, unsigned char b)

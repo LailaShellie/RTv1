@@ -1,5 +1,5 @@
 
-#include "../rtv1.h"
+#include "validation.h"
 
 char	**check_param(char *str)
 {
