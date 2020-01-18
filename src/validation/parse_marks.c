@@ -20,6 +20,7 @@ static int get_figure(t_rtv1 *rt, char **str)
 	if (!(new->s = get_specularity(str[ARG6])))
 		return (ERR);
 	add_figure(&rt->figures, new);
+	printf("%#x\n", new->color);
 	return (1);
 }
 

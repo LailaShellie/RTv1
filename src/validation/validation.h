@@ -33,7 +33,7 @@ double				get_specularity(char *str);
 
 int					get_type(char *str);
 
-int					*get_color(char *str);
+int					get_color(char *str);
 
 t_figure			*new_figure();
 void				add_figure(t_figure **figures, t_figure *new);

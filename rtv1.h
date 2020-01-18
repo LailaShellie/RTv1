@@ -51,7 +51,7 @@ typedef struct		s_figure
 	int				type;
     double			*c;
 	double			*v;
-	int				*color;
+	int				color;
     double			r;
     double			s;
 	struct s_figure	*next;
@@ -80,5 +80,7 @@ typedef struct		s_rtv1
 
 int					init_mlx(t_rtv1 *rt);
 int					validation_main(t_rtv1 *rt, int ac, char **av);
+int					set_colors(unsigned char o, unsigned char r, \
+			unsigned char g, unsigned char b);
 
 #endif
