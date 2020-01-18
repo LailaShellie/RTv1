@@ -8,13 +8,12 @@ NAME = RTv1
 
 all: $(NAME)
 
-$(NAME): $(LIB) $(OBJ) $(VAL)
+$(NAME): libs $(OBJ)
 	gcc -Wall -Wextra -Werror -o $(NAME) -I $(HDR) $(LIB) $(VAL) $(OBJ) -L mlx -lmlx -framework OpenGL -framework AppKit
 %.o: src/%.c $(HDR)
 	gcc -c $<
-$(LIB):
+libs:
 	make -C ./libft
-$(VAL):
 	make -C ./src/validation
 clean:
 	make clean -C ./libft

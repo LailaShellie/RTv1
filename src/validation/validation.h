@@ -7,6 +7,10 @@
 
 #include "../../rtv1.h"
 
+# define R 0
+# define G 1
+# define B 2
+
 # define ARG1 1
 # define ARG2 2
 # define ARG3 3

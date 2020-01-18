@@ -5,7 +5,8 @@ static int get_figure(t_rtv1 *rt, char **str)
 {
 	t_figure	*new;
 
-	if (!(new = new_figure()))
+	if (!(new = new_figure())
+	|| count_split(str) < 7)
 		return (ERR);
 	if (!(new->type = get_type(str[ARG1])))
 		return (ERR);

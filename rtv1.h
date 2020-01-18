@@ -18,10 +18,6 @@
 # define Y 1
 # define Z 2
 
-# define R 0
-# define G 1
-# define B 2
-
 # define SPHERE 1
 # define CONE 2
 # define PLANE 3
@@ -29,9 +25,6 @@
 
 # define CAM 0
 # define LIGHTS 2
-
-# define COORDS_NUM 3
-# define POSITION 2
 
 typedef struct		s_cam
 {

@@ -17,7 +17,7 @@ static int		get_rgb(char *str)
 
 	if (!(split = ft_strsplit(str, ',')))
 		return (ERR);
-	if ((len = count_split(split)) != COORDS_NUM)
+	if ((len = count_split(split)) != 3)
 	{
 		ft_free_mas(split, len);
 		return (ERR);
