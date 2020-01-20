@@ -4,41 +4,27 @@
 
 #include "../rtv1.h"
 
-int			intersect_sphere(t_vect3d *o, t_vect3d *d,
+int			intersect_sphere(t_vect3d *cam_pos, t_vect3d *ray,
 		t_figure *sphere, t_roots *t)
 {
-	double		k1;
-	double 		k2;
-	double 		k3;
+	double		a;
+	double 		b;
+	double 		c;
+	double		d;
 
-	t_vect3d	*oc = new_vect3d();
-
-	sub_vect3d(oc, sphere->center, o);
-
-	k1 = dot_vect3d(d, d);
-	k2 = 2.0 * dot_vect3d(oc, d);
-	k3 = dot_vect3d(oc, oc) - (sphere->radius * sphere->radius);
-
-//	printf("%lf %lf\n", dot_vect3d(oc, oc), sphere->r * sphere->r);
-
-	double 		disc;
-
-	disc = k2 * k2 - 4.0 * k1 * k3;
-	free_vect3d(oc);
-//	printf("%lf\n", dot_vect3d(oc, oc));
-//	printf("%lf %lf %lf\n", k1, k2, k3);
-	if (disc < 0)
-	{
-//		printf("INF\n");
+	sub_vect3d(sphere->oc, sphere->center, cam_pos);
+	a = dot_vect3d(ray, ray);
+	b = 2.0 * dot_vect3d(sphere->oc, ray);
+	c = dot_vect3d(sphere->oc, sphere->oc) - (sphere->radius * sphere->radius);
+	d = b * b - 4.0 * a * c;
+	if (d < 0)
 		return (0);
-	}
-	t->t1 = (-k2 + sqrt(disc)) / (2.0 * k1);
-	t->t2 = (-k2 - sqrt(disc)) / (2.0 * k1);
-//	printf("%lf %lf\n", t->t1, t->t2);
+	t->t1 = (-b + sqrt(d)) / (2.0 * a);
+	t->t2 = (-b - sqrt(d)) / (2.0 * a);
 	return (1);
 }
 
-int		trace_ray(t_rtv1 *rt, t_vect3d *o, t_vect3d *d)
+int		trace_ray(t_rtv1 *rt, t_vect3d *cam_pos, t_vect3d *ray)
 {
 	t_figure	*cur;
 	t_figure	*closest_f;
@@ -50,7 +36,7 @@ int		trace_ray(t_rtv1 *rt, t_vect3d *o, t_vect3d *d)
 	cur = rt->figures;
 	while (cur)
 	{
-		if (intersect_sphere(o, d, cur, t))
+		if (intersect_sphere(cam_pos, ray, cur, t))
 		{
 			if (t->t1 > VZ && t->t1 < closest_t)
 			{
@@ -72,25 +58,21 @@ int		trace_ray(t_rtv1 *rt, t_vect3d *o, t_vect3d *d)
 
 void		render(t_rtv1 *rt)
 {
-	int 	x;
-	int 	y;
+	int 		x;
+	int 		y;
+	t_vect3d	*ray;
 
-	t_vect3d	*d;
-
-	d = new_vect3d();
-
+	ray = new_vect3d();
 	y = -1;
 	while (++y < H)
 	{
 		x = -1;
 		while (++x < W)
 		{
-			init_vect3d(d, (double)(x - W / 2) * ((double)VW / W), (double)(y - H / 2) * ((double)VH / H), VZ);
-		//	printf("1 %lf %lf %lf\n", d->coords[X], d->coords[Y], d->coords[Z]);
-			sub_vect3d(d, rt->cam->center, d);
-	//		printf("%lf %lf %lf\n", d->coords[X], d->coords[Y], d->coords[Z]);
+			init_vect3d(ray, (double)(x - W / 2) * ((double)VW / W), (double)(y - H / 2) * ((double)VH / H), VZ);
+			sub_vect3d(ray, rt->cam->center, ray);
 			((int *)rt->img->data)[x + y * rt->img->size_line / 4]
-			= trace_ray(rt, rt->cam->center, d);
+			= trace_ray(rt, rt->cam->center, ray);
 		}
 	}
 }

@@ -4,7 +4,7 @@
 
 #include "validation.h"
 
-static int		get_coords(char *str, t_vect3d *vect)
+static int		get_xyz(char *str, t_vect3d *vect)
 {
 	char	**split;
 	int 	len;
@@ -22,9 +22,9 @@ static int		get_coords(char *str, t_vect3d *vect)
 		ft_free_mas(split, len);
 		return (ERR);
 	}
-	vect->coords[X] = ft_atod(split[X]);
-	vect->coords[Y] = ft_atod(split[Y]);
-	vect->coords[Z] = ft_atod(split[Z]);
+	vect->xyz[X] = ft_atod(split[X]);
+	vect->xyz[Y] = ft_atod(split[Y]);
+	vect->xyz[Z] = ft_atod(split[Z]);
 	ft_free_mas(split, len);
 	return (1);
 }
@@ -40,7 +40,7 @@ int		get_vector(char *str, t_vect3d *vect)
 		ft_free_mas(split, count_split(split));
 		return (ERR);
 	}
-	get_coords(split[1], vect);
+	get_xyz(split[1], vect);
 	ft_free_mas(split, count_split(split));
 	return (1);
 }

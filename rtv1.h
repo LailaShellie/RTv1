@@ -64,6 +64,7 @@ typedef struct		s_figure
 	int				type;
     t_vect3d		*center;
 	t_vect3d		*direction;
+	t_vect3d		*oc;
 	int				color;
     double			radius;
     double			s;

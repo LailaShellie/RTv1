@@ -14,6 +14,8 @@ t_figure		*new_figure()
 		return (ERR);
 	if (!(new->direction = new_vect3d()))
 		return (ERR);
+	if (!(new->oc = new_vect3d()))
+		return (ERR);
 	return (new);
 }
 
