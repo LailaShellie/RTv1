@@ -1,4 +1,4 @@
-SRC = init_mlx.c main.c vector3d.c render.c
+SRC = init_mlx.c main.c vector3d.c render.c intersection.c
 OBJ = $(SRC:.c=.o)
 HDR = rtv1.h
 VAL = src/validation/validation.a

@@ -104,4 +104,6 @@ void	free_vect3d(t_vect3d *vect);
 void		render(t_rtv1 *rt);
 void		hooks(t_rtv1 *rt);
 
+int		intersection(t_vect3d *cam_pos, t_vect3d *ray, t_figure *figure, t_roots *t);
+
 #endif
