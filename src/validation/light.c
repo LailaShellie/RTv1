@@ -10,7 +10,7 @@ t_light		*new_light()
 
 	if (!(new = ft_memalloc(sizeof(t_light))))
 		return (ERR);
-	if (!(new->c = new_vect3d()))
+	if (!(new->ccenter = new_vect3d()))
 		return (ERR);
 //	if (!(new->v = new_vect3d()))
 //		return (ERR);
@@ -24,6 +24,7 @@ void		add_light(t_light **lights, t_light *new)
 	if (!*lights)
 	{
 		*lights = new;
+		new->next = 0;
 		return ;
 	}
 	first = *lights;

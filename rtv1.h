@@ -13,8 +13,8 @@
 # define W 800
 # define H 800
 
-# define VW 800
-# define VH 800
+# define VW 1
+# define VH 1
 # define VZ 1
 
 # define ERR 0
@@ -43,18 +43,18 @@ typedef	struct		s_roots
 
 typedef struct		s_vect3d
 {
-	double			*coords;
+	double			*xyz;
 }					t_vect3d;
 
 typedef struct		s_cam
 {
-	t_vect3d		*c;
-	t_vect3d		*v;
+	t_vect3d		*center;
+	t_vect3d		*direction;
 }					t_cam;
 
 typedef struct		s_light
 {
-	t_vect3d		*c;
+	t_vect3d		*ccenter;
 	double			i;
 	struct s_light	*next;
 }					t_light;
@@ -62,10 +62,10 @@ typedef struct		s_light
 typedef struct		s_figure
 {
 	int				type;
-    t_vect3d		*c;
-	t_vect3d		*v;
+    t_vect3d		*center;
+	t_vect3d		*direction;
 	int				color;
-    double			r;
+    double			radius;
     double			s;
 	struct s_figure	*next;
 }					t_figure;

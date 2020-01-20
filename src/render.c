@@ -13,11 +13,11 @@ int			intersect_sphere(t_vect3d *o, t_vect3d *d,
 
 	t_vect3d	*oc = new_vect3d();
 
-	sub_vect3d(oc, sphere->c, o);
+	sub_vect3d(oc, sphere->center, o);
 
 	k1 = dot_vect3d(d, d);
 	k2 = 2.0 * dot_vect3d(oc, d);
-	k3 = dot_vect3d(oc, oc) - (sphere->r * sphere->r);
+	k3 = dot_vect3d(oc, oc) - (sphere->radius * sphere->radius);
 
 //	printf("%lf %lf\n", dot_vect3d(oc, oc), sphere->r * sphere->r);
 
@@ -85,12 +85,12 @@ void		render(t_rtv1 *rt)
 		x = -1;
 		while (++x < W)
 		{
-			init_vect3d(d, (double)(x - W / 2) / W, (double)(y + H / 2) / H, VZ);
+			init_vect3d(d, (double)(x - W / 2) * ((double)VW / W), (double)(y - H / 2) * ((double)VH / H), VZ);
 		//	printf("1 %lf %lf %lf\n", d->coords[X], d->coords[Y], d->coords[Z]);
-			sub_vect3d(d, rt->cam->c, d);
+			sub_vect3d(d, rt->cam->center, d);
 	//		printf("%lf %lf %lf\n", d->coords[X], d->coords[Y], d->coords[Z]);
 			((int *)rt->img->data)[x + y * rt->img->size_line / 4]
-			= trace_ray(rt, rt->cam->c, d);
+			= trace_ray(rt, rt->cam->center, d);
 		}
 	}
 }
