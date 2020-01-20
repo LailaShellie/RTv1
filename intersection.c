@@ -19,7 +19,17 @@ int			intersect_cone(t_vect3d *cam_pos, t_vect3d *ray,
 int			intersect_plane(t_vect3d *cam_pos, t_vect3d *ray,
 								t_figure *plane, t_roots *t)
 {
-	return (0);
+	double	a;
+	double	b;
+
+	sub_vect3d(plane->oc, plane->center, cam_pos);
+	a = dot_vect3d(plane->oc, plane->direction);
+	b = dot_vect3d(ray, plane->direction);
+	if (b == 0)
+		return (0);
+	t->t1 = -a / b;
+	t->t2 = -a / b;
+	return (1);
 }
 
 int			intersect_sphere(t_vect3d *cam_pos, t_vect3d *ray,

@@ -19,10 +19,17 @@ figure:
 
 figure:
 			type sphere
-	vector 0,1,4
+	vector 1,1.2,5
 	vector 0,0,0
 	color 0,255,0
-	radius 0.2
+	radius 1
 	specularity 123
+figure:
+    		type plane
+    	vector 0,0,10
+    	vector 0,1,0.1
+    	color 50,0,50
+    	radius 0.2
+    	specularity 123
 
 

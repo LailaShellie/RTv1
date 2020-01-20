@@ -15,7 +15,7 @@ int		trace_ray(t_rtv1 *rt, t_vect3d *cam_pos, t_vect3d *ray, t_roots *t)
 	cur = rt->figures;
 	while (cur)
 	{
-		if (intersect_sphere(cam_pos, ray, cur, t))
+		if (intersection(cam_pos, ray, cur, t))
 		{
 			if (t->t1 > VZ && t->t1 < closest_t)
 			{
@@ -42,8 +42,8 @@ void		render(t_rtv1 *rt)
 	t_vect3d	*ray;
 	t_roots		t;
 
-	ray = new_vect3d();
 	y = -1;
+	ray = new_vect3d();
 	while (++y < H)
 	{
 		x = -1;
