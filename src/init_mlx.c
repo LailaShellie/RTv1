@@ -1,6 +1,17 @@
 #include "../rtv1.h"
 
 
+int			ft_close(t_rtv1 *rt)
+{
+	exit(0);
+}
+
+void		hooks(t_rtv1 *rt)
+{
+	mlx_hook(rt->win_ptr, 17, 0, ft_close, rt);
+	mlx_loop(rt->mlx_ptr);
+}
+
 int  init_mlx(t_rtv1 *rt)
 {
     if (!(rt->mlx_ptr = mlx_init()))

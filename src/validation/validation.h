@@ -28,8 +28,7 @@ int					count_split(char **split);
 char				**check_param(char *str);
 int					parse_marks(t_rtv1 *rt, char ***marks);
 
-double				*get_point(char *str);
-double				*get_vector(char *str);
+int					get_vector(char *str, t_vect3d *vect);
 
 double				get_radius(char *str);
 double				get_intensity(char *str);

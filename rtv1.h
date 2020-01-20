@@ -5,14 +5,21 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdio.h>
+# include <math.h>
 
 # include "mlx/mlx.h"
 # include "libft/libft.h"
 
 # define W 800
 # define H 800
+
+# define VW 800
+# define VH 800
+# define VZ 1
+
 # define ERR 0
 # define ERR_1 0.0 / 0.0
+# define INF 1.0 / 0.0
 
 # define X 0
 # define Y 1
@@ -25,6 +32,14 @@
 
 # define CAM 0
 # define LIGHTS 2
+
+# define BACKGROUND 0x000000
+
+typedef	struct		s_roots
+{
+	double			t1;
+	double			t2;
+}					t_roots;
 
 typedef struct		s_vect3d
 {
@@ -81,5 +96,11 @@ int					validation_main(t_rtv1 *rt, int ac, char **av);
 int					set_colors(unsigned char o, unsigned char r, \
 			unsigned char g, unsigned char b);
 t_vect3d			*new_vect3d();
+void	init_vect3d(t_vect3d *vect, double x, double y, double z);
+void		sub_vect3d(t_vect3d *res, t_vect3d *start, t_vect3d *end);
+double		dot_vect3d(t_vect3d *a, t_vect3d *b);
+void	free_vect3d(t_vect3d *vect);
+void		render(t_rtv1 *rt);
+void		hooks(t_rtv1 *rt);
 
 #endif

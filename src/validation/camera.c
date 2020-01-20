@@ -10,9 +10,9 @@ t_cam		*new_cam()
 
 	if (!(new = ft_memalloc(sizeof(t_cam))))
 		return (ERR);
-	if (!(new->c = ft_memalloc(sizeof(t_vect3d))))
+	if (!(new->c = new_vect3d()))
 		return (ERR);
-	if (!(new->v = ft_memalloc(sizeof(t_vect3d))))
+	if (!(new->v = new_vect3d()))
 		return (ERR);
 	return (new);
 }

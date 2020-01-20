@@ -10,9 +10,9 @@ static int get_figure(t_rtv1 *rt, char **str)
 		return (ERR);
 	if (!(new->type = get_type(str[ARG1])))
 		return (ERR);
-	if (!(new->c->coords = get_point(str[ARG2])))
+	if (!(get_vector(str[ARG2], new->c)))
 		return (ERR);
-	if (!(new->v->coords = get_vector(str[ARG3])))
+	if (!(get_vector(str[ARG3], new->v)))
 		return (ERR);
 	if (!(new->color = get_color(str[ARG4])))
 		return (ERR);
@@ -21,6 +21,9 @@ static int get_figure(t_rtv1 *rt, char **str)
 	if (!(new->s = get_specularity(str[ARG6])))
 		return (ERR);
 	add_figure(&rt->figures, new);
+	printf("Figure\n");
+	printf("radius %lf\n", rt->figures->r);
+	printf("specularity %lf\n", new->s);
 	printf("%#x\n", new->color);
 	return (1);
 }
@@ -31,7 +34,7 @@ static int get_light(t_rtv1 *rt, char **str)
 
 	if (!(new = new_light()))
 		return (ERR);
-	if (!(new->c->coords = get_point(str[ARG1])))
+	if (!(get_vector(str[ARG1], new->c)))
 		return (ERR);
 	if (!(new->i = get_intensity(str[ARG2])))
 		return (ERR);
@@ -48,9 +51,9 @@ static int get_cam(t_rtv1 *rt, char **str)
 		return (ERR);
 	if (!(rt->cam = new_cam()))
 		return (ERR);
-	if (!(rt->cam->c->coords = get_point(str[ARG1])))
+	if (!(get_vector(str[ARG1], rt->cam->c)))
 		return (ERR);
-	if (!(rt->cam->v->coords = get_vector(str[ARG2])))
+	if (!(get_vector(str[ARG2], rt->cam->v)))
 		return (ERR);
 	printf("camera:\n");
 	printf("%lf %lf %lf\n", rt->cam->c->coords[X], rt->cam->c->coords[Y], rt->cam->c->coords[Z]);

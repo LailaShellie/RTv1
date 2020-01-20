@@ -3,18 +3,18 @@
 
 
 camera:
-	point 1.320,41.20,53.0
-	vector 1.32430,41.0,5.0
+	vector 0,0,0
+	vector 0,0,0
 light:
-	point 0,0,0
+	vector 0,0,0
 	intensity 100
 
 figure:
 			type sphere
-	point 0,0,10
-	vector 0,234,244.432
-	color 255,255,255
-	radius 3.14
+	vector 0,3.5,5
+	vector 0,0,0
+	color 0,0,255
+	radius 1
 	specularity 123
 
 

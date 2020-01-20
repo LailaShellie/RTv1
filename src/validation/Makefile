@@ -1,5 +1,5 @@
 
-SRC = figure.c get_color.c get_parametr.c get_point_or_vector.c \
+SRC = figure.c get_color.c get_parametr.c get_vector.c \
 		get_type.c light.c parse_file.c parse_marks.c parsing_func.c \
 		read_file.c validation_main.c camera.c
 

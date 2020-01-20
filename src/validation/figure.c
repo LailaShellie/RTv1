@@ -24,6 +24,7 @@ void		add_figure(t_figure **figures, t_figure *new)
  	if (!*figures)
 	{
 		*figures = new;
+		new->next = 0;
 		return ;
 	}
 	first = *figures;

@@ -20,10 +20,13 @@ double		get_radius(char *str)
 {
 	char **split;
 
+
 	if (!(split = check_param(str)))
 		return (ERR_1);
 	if (ft_strcmp(split[0], "radius") == 0)
+	{
 		return (get_param(split));
+	}
 	ft_free_mas(split, count_split(split));
 	return (ERR_1);
 }
