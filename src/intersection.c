@@ -2,7 +2,7 @@
 // Created by Ivan on 20/01/2020.
 //
 
-#include "rtv1.h"
+#include "../rtv1.h"
 
 int			intersect_cylinder(t_vect3d *cam_pos, t_vect3d *ray,
 							   t_figure *cylinder, t_roots *t)
@@ -29,6 +29,7 @@ int			intersect_plane(t_vect3d *cam_pos, t_vect3d *ray,
 		return (0);
 	t->t1 = -a / b;
 	t->t2 = -a / b;
+	//printf("%lf %lf\n", t->t1, t->t2);
 	return (1);
 }
 

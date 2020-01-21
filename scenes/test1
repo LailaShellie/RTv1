@@ -26,8 +26,8 @@ figure:
 	specularity 123
 figure:
     		type plane
-    	vector 0,0,10
-    	vector 0,1,0.1
+    	vector 1,0,100
+    	vector 10,0,0
     	color 50,0,50
     	radius 0.2
     	specularity 123
