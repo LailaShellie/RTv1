@@ -4,6 +4,18 @@
 
 #include "../rtv1.h"
 
+void	norm_vect(t_vect3d *vect)
+{
+	double		len;
+
+	len = fabs(vect->xyz[X] + vect->xyz[X]);
+	len += fabs(vect->xyz[Y] + vect->xyz[Y]);
+	len += fabs(vect->xyz[Z] + vect->xyz[Z]);
+	vect->xyz[X] /= len;
+	vect->xyz[Y] /= len;
+	vect->xyz[Z] /= len;
+}
+
 void	init_vect3d(t_vect3d *vect, double x, double y, double z)
 {
 	vect->xyz[X] = x;

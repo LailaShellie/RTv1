@@ -7,13 +7,86 @@
 int			intersect_cylinder(t_vect3d *cam_pos, t_vect3d *ray,
 							   t_figure *cylinder, t_roots *t)
 {
-	return (0);
+	double		a;
+	double 		b;
+	double 		c;
+	double		d;
+
+	t_vect3d	*v1;
+	t_vect3d	*v2;
+
+
+	v1 = new_vect3d();
+	v2 = new_vect3d();
+
+
+	init_vect3d(v1, -cylinder->direction->xyz[Y], cylinder->direction->xyz[X], 0);
+	init_vect3d(v2, cylinder->direction->xyz[X] * cylinder->direction->xyz[Z],
+			cylinder->direction->xyz[Y] * cylinder->direction->xyz[Z],
+			-cylinder->direction->xyz[Y] * cylinder->direction->xyz[Y]
+			- cylinder->direction->xyz[X] * cylinder->direction->xyz[X]);
+	norm_vect(v1);
+	norm_vect(v2);
+	sub_vect3d(cylinder->oc, cylinder->center, cam_pos);
+	a = dot_vect3d(v1, ray) * dot_vect3d(v1, ray)
+			+ dot_vect3d(v2, ray) * dot_vect3d(v2, ray);
+	b = 2.0 * (dot_vect3d(v1, cylinder->oc) * dot_vect3d(v1, ray)
+			+ dot_vect3d(v2, cylinder->oc) * dot_vect3d(v2, ray));
+	c = dot_vect3d(v1, cylinder->oc) * dot_vect3d(v1, cylinder->oc)
+			+ dot_vect3d(v2, cylinder->oc)* dot_vect3d(v2, cylinder->oc)
+			- cylinder->radius * cylinder->radius;
+	d = b * b - 4.0 * a * c;
+	if (d < 0)
+		return (0);
+	t->t1 = (-b + sqrt(d)) / (2.0 * a);
+	t->t2 = (-b - sqrt(d)) / (2.0 * a);
+	return (1);
 }
 
 int			intersect_cone(t_vect3d *cam_pos, t_vect3d *ray,
 							   t_figure *cone, t_roots *t)
 {
-	return (0);
+	double		a;
+	double 		b;
+	double 		c;
+	double		d;
+
+	t_vect3d	*v1;
+	t_vect3d	*v2;
+	t_vect3d	*v3;
+
+
+	v1 = new_vect3d();
+	v2 = new_vect3d();
+	v3 = new_vect3d();
+
+
+	init_vect3d(v1, -cone->direction->xyz[Y], cone->direction->xyz[X], 0);
+	init_vect3d(v2, cone->direction->xyz[X] * cone->direction->xyz[Z],
+				cone->direction->xyz[Y] * cone->direction->xyz[Z],
+				-cone->direction->xyz[Y] * cone->direction->xyz[Y]
+				-cone->direction->xyz[X] * cone->direction->xyz[X]);
+	norm_vect(v1);
+	norm_vect(v2);
+//	printf("1 %lf %lf %lf\n", cone->direction->xyz[X], cone->direction->xyz[Y], cone->direction->xyz[Z]);
+//	norm_vect(cone->direction);
+	sub_vect3d(cone->oc, cone->center, cam_pos);
+	a = dot_vect3d(v1, ray) * dot_vect3d(v1, ray)
+		+ dot_vect3d(v2, ray) * dot_vect3d(v2, ray)
+		- dot_vect3d(cone->direction, ray) * dot_vect3d(cone->direction, ray);
+	b = 2.0 * (dot_vect3d(v1, cone->oc) * dot_vect3d(v1, ray)
+			   + dot_vect3d(v2, cone->oc) * dot_vect3d(v2, ray)
+			   - dot_vect3d(cone->direction, ray) * dot_vect3d(cone->direction, cone->oc));
+	c = dot_vect3d(v1, cone->oc) * dot_vect3d(v1, cone->oc)
+		+ dot_vect3d(v2, cone->oc) * dot_vect3d(v2, cone->oc)
+		- dot_vect3d(cone->direction, cone->oc) * dot_vect3d(cone->direction, cone->oc);
+	d = b * b - 4.0 * a * c;
+	if (d < 0)
+		return (0);
+	t->t1 = (-b + sqrt(d)) / (2.0 * a);
+	t->t2 = (-b - sqrt(d)) / (2.0 * a);
+//	printf("! %lf %lf\n", t->t1, t->t2);
+	return (1);
 }
 
 int			intersect_plane(t_vect3d *cam_pos, t_vect3d *ray,

@@ -101,6 +101,8 @@ void	init_vect3d(t_vect3d *vect, double x, double y, double z);
 void		sub_vect3d(t_vect3d *res, t_vect3d *start, t_vect3d *end);
 double		dot_vect3d(t_vect3d *a, t_vect3d *b);
 void	free_vect3d(t_vect3d *vect);
+void	norm_vect(t_vect3d *vect);
+
 void		render(t_rtv1 *rt);
 void		hooks(t_rtv1 *rt);
 

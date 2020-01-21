@@ -49,7 +49,7 @@ void		render(t_rtv1 *rt)
 		x = -1;
 		while (++x < W)
 		{
-			init_vect3d(ray, (double)(x - W / 2) * ((double)VW / W), (double)(y - H / 2) * ((double)VH / H), VZ);
+			init_vect3d(ray, (double)(x - W / 2) * ((double)VW / W), -(double)(y - H / 2) * ((double)VH / H), VZ);
 			sub_vect3d(ray, rt->cam->center, ray);
 			((int *)rt->img->data)[x + y * rt->img->size_line / 4]
 			= trace_ray(rt, rt->cam->center, ray, &t);

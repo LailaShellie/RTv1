@@ -1,9 +1,21 @@
 camera:
-point 534.45354,-5.0,23.0423
+	vector 0,0,0
+	vector 0,0,0
 light:
-point 0,0,0
-intensity 100
+	vector 0,0,0
+	intensity 100
+
 figure:
-type sphere
-point 0,0,10
-radius 10
+    	type cylinder
+    	vector 0,20,70
+    	vector 1,0,0
+    	color 250,0,50
+    	radius 0.5
+    	specularity 123
+figure:
+        type cone
+        vector 0,0,100
+       	vector 1,0.2,0
+        color 0,0,250
+        radius 1
+        specularity 123
