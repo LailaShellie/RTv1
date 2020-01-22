@@ -1,6 +1,12 @@
 
 #include "../rtv1.h"
 
+void test(union u_color col)
+{
+	printf("%#x %#x %#x %#x %#x\n", col.color, col.s_parts.b, col.s_parts.g, col.s_parts.r, col.s_parts.o);
+
+}
+
 int main(int ac, char** av)
 {
     t_rtv1      *rt;

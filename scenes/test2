@@ -38,7 +38,7 @@ figure:
 figure:
         type cone
         vector -10,-1.3,100
-       	vector 1,0.2,-0.2
+       	vector 1,0,0
         color 0,0,250
-        radius 0.1
+        radius 0.009
         specularity 123

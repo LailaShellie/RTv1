@@ -34,11 +34,19 @@ double		get_radius(char *str)
 double		get_intensity(char *str)
 {
 	char	**split;
+	double 	i;
 
 	if (!(split = check_param(str)))
 		return (ERR_1);
 	if (ft_strcmp(split[0], "intensity") == 0)
-		return (get_param(split));
+	{
+		i = get_param(split);
+		if (i > 1.0)
+			i = 1.0;
+		if (i < 0.0)
+			i = 0.0;
+		return (i);
+	}
 	ft_free_mas(split, count_split(split));
 	return (ERR_1);
 }

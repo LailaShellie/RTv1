@@ -15,7 +15,7 @@
 
 # define VW 1
 # define VH 1
-# define VZ 1
+# define VZ 0.6
 
 # define ERR 0
 # define ERR_1 0.0 / 0.0
@@ -34,6 +34,18 @@
 # define LIGHTS 2
 
 # define BACKGROUND 0x000000
+
+union				u_color
+{
+	int					color;
+	struct
+	{
+		unsigned char	b : 8;
+		unsigned char	g : 8;
+		unsigned char	r : 8;
+		unsigned char	o : 8;
+	}					s_parts;
+};
 
 typedef	struct		s_roots
 {

@@ -6,14 +6,37 @@ camera:
 	vector 0,0,0
 	vector 0,0,0
 light:
-	vector 0,-40,40
-	intensity 1
-
+	vector 2,10,10
+	intensity 0.5
+light:
+    	vector -2,-1,1
+    	intensity 0.5
 figure:
 			type sphere
-	vector 0,0,4
+	vector -1,2,5
 	vector 0,0,0
 	color 0,0,255
+	radius 0.5
+	specularity 123
+figure:
+			type sphere
+	vector -1,2,4
+	vector 0,0,0
+	color 0,255,255
+	radius 0.9
+	specularity 123
+figure:
+			type sphere
+	vector 3,2,4
+	vector 0,0,0
+	color 255,0,255
+	radius 0.9
+	specularity 123
+figure:
+			type sphere
+	vector 2,-2,4
+	vector 0,0,0
+	color 255,0,0
 	radius 0.9
 	specularity 123
 

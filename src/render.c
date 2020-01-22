@@ -4,6 +4,27 @@
 
 #include "../rtv1.h"
 
+int calculate_color(int color, double intensity)
+{
+	union u_color clr;
+
+	clr.color = color;
+	if (clr.s_parts.r * intensity > 255)
+		clr.s_parts.r = 255;
+	else
+		clr.s_parts.r *= intensity;
+	if (clr.s_parts.g * intensity > 255)
+		clr.s_parts.g = 255;
+	else
+		clr.s_parts.g *= intensity;
+	if (clr.s_parts.b * intensity > 255)
+		clr.s_parts.b = 255;
+	else
+		clr.s_parts.b *= intensity;
+	return (clr.color);
+
+}
+
 int		trace_ray(t_rtv1 *rt, t_vect3d *cam_pos, t_vect3d *ray, t_roots *t)
 {
 	t_figure	*cur;
@@ -31,6 +52,7 @@ int		trace_ray(t_rtv1 *rt, t_vect3d *cam_pos, t_vect3d *ray, t_roots *t)
 	}
 	if (closest_f == 0)
 		return (BACKGROUND);
+	return (calculate_color(closest_f->color, calc_light(rt, t, closest_f, ray, cam_pos)));
 	return (closest_f->color * calc_light(rt, t, closest_f, ray, cam_pos));
 }
 
