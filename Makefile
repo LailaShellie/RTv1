@@ -1,7 +1,9 @@
-SRC = init_mlx.c main.c vector3d.c render.c intersection.c
+SRC = init_mlx.c main.c vector3d.c render.c intersection.c \
+		figure.c get_color.c get_parametr.c get_vector.c \
+		get_type.c light.c parse_file.c parse_marks.c parsing_func.c \
+		read_file.c validation_main.c camera.c normals_to_figures.c calculate_light.c
 OBJ = $(SRC:.c=.o)
 HDR = rtv1.h
-VAL = src/validation/validation.a
 LIB = libft/libft.a
 MLX = mlx/lmlx.a
 NAME = RTv1
@@ -14,13 +16,10 @@ $(NAME): libs $(OBJ)
 	gcc -c $<
 libs:
 	make -C ./libft
-	make -C ./src/validation
 clean:
 	make clean -C ./libft
-	make clean -C ./src/validation
 	rm -rf $(OBJ)
 fclean: clean
 	make fclean -C ./libft
-	make fclean -C ./src/validation
 	rm -rf $(NAME)
 re: fclean all

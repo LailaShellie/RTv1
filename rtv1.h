@@ -39,6 +39,7 @@ typedef	struct		s_roots
 {
 	double			t1;
 	double			t2;
+	double			closest_t;
 }					t_roots;
 
 typedef struct		s_vect3d
@@ -99,13 +100,21 @@ int					set_colors(unsigned char o, unsigned char r, \
 t_vect3d			*new_vect3d();
 void	init_vect3d(t_vect3d *vect, double x, double y, double z);
 void		sub_vect3d(t_vect3d *res, t_vect3d *start, t_vect3d *end);
+void		add_vect3d(t_vect3d *res, t_vect3d *start, t_vect3d *end);
 double		dot_vect3d(t_vect3d *a, t_vect3d *b);
 void	free_vect3d(t_vect3d *vect);
 void	norm_vect(t_vect3d *vect);
+double		length_vect3d(t_vect3d *a);
+void		print_vect3d(t_vect3d *a);
 
 void		render(t_rtv1 *rt);
 void		hooks(t_rtv1 *rt);
 
 int		intersection(t_vect3d *cam_pos, t_vect3d *ray, t_figure *figure, t_roots *t);
+
+double		calc_light(t_rtv1 *rt, t_roots *t,
+						  t_figure *f, t_vect3d *ray, t_vect3d *cam_pos);
+double		get_normal(t_figure *f, t_vect3d *ray,
+						 t_vect3d *cam_pos, t_roots *t, t_light *light);
 
 #endif

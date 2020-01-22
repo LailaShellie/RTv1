@@ -5,7 +5,7 @@
 #ifndef RTV1_VALIDATION_H
 #define RTV1_VALIDATION_H
 
-#include "../../rtv1.h"
+#include "../rtv1.h"
 
 # define R 0
 # define G 1

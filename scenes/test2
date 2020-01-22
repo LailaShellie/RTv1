@@ -8,7 +8,7 @@ light:
 
 figure:
 	type sphere
-	vector -1,0,4
+	vector -1,0.3,6
 	vector 0,0,0
 	color 0,250,250
 	radius 0.2
@@ -30,15 +30,15 @@ figure:
     	specularity 123
 figure:
     	type cylinder
-    	vector 0,20,70
-    	vector 1,0,0
+    	vector 0,8,25
+    	vector 1,0,-0.1
     	color 250,0,50
-    	radius 0.5
+    	radius 0.9
     	specularity 123
 figure:
         type cone
         vector -10,-1.3,100
        	vector 1,0.2,-0.2
         color 0,0,250
-        radius 0.5
+        radius 0.1
         specularity 123

@@ -8,23 +8,22 @@ int		trace_ray(t_rtv1 *rt, t_vect3d *cam_pos, t_vect3d *ray, t_roots *t)
 {
 	t_figure	*cur;
 	t_figure	*closest_f;
-	double 		closest_t;
 
 	closest_f = 0;
-	closest_t = INF;
+	t->closest_t = INF;
 	cur = rt->figures;
 	while (cur)
 	{
 		if (intersection(cam_pos, ray, cur, t))
 		{
-			if (t->t1 > VZ && t->t1 < closest_t)
+			if (t->t1 > VZ && t->t1 < t->closest_t)
 			{
-				closest_t = t->t1;
+				t->closest_t = t->t1;
 				closest_f = cur;
 			}
-			if (t->t2 > VZ && t->t2 < closest_t)
+			if (t->t2 > VZ && t->t2 < t->closest_t)
 			{
-				closest_t = t->t2;
+				t->closest_t = t->t2;
 				closest_f = cur;
 			}
 		}
@@ -32,7 +31,7 @@ int		trace_ray(t_rtv1 *rt, t_vect3d *cam_pos, t_vect3d *ray, t_roots *t)
 	}
 	if (closest_f == 0)
 		return (BACKGROUND);
-	return (closest_f->color);
+	return (closest_f->color * calc_light(rt, t, closest_f, ray, cam_pos));
 }
 
 void		render(t_rtv1 *rt)
