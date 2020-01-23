@@ -10,7 +10,7 @@ double		calc_light(t_rtv1 *rt, t_roots *t, t_figure *f,
 	double i;
 	t_light	*cur;
 
-	i = 0.0;
+	i = 0.2;
 	cur = rt->lights;
 	while (cur)
 	{

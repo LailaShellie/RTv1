@@ -15,7 +15,7 @@
 
 # define VW 1
 # define VH 1
-# define VZ 0.6
+# define VZ 1
 
 # define ERR 0
 # define ERR_1 0.0 / 0.0
