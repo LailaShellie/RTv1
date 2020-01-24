@@ -1,5 +1,20 @@
 #include "../rtv1.h"
 
+int			testing(int key, t_rtv1 *rt)
+{
+	printf("%d\n", key);
+	if (key == 24)
+	{
+		rt->figures->direction->xyz[X] += 0.1;
+		render(rt);
+	}
+	else if (key == 27)
+	{
+		rt->figures->direction->xyz[X] -= 0.1;
+		render(rt);
+	}
+	return (1);
+}
 
 int			ft_close(t_rtv1 *rt)
 {
@@ -8,6 +23,7 @@ int			ft_close(t_rtv1 *rt)
 
 void		hooks(t_rtv1 *rt)
 {
+	mlx_hook(rt->win_ptr, 2, 0, testing, rt);
 	mlx_hook(rt->win_ptr, 17, 0, ft_close, rt);
 	mlx_loop(rt->mlx_ptr);
 }

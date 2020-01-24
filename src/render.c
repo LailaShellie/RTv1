@@ -76,4 +76,5 @@ void		render(t_rtv1 *rt)
 			= trace_ray(rt, rt->cam->center, ray, &t);
 		}
 	}
+	mlx_put_image_to_window(rt->mlx_ptr, rt->win_ptr, rt->img->img_ptr, 0, 0);
 }

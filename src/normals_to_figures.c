@@ -8,11 +8,34 @@ double	cos_cylinder(t_figure *f, t_vect3d *ray,
 					t_vect3d *cam_pos, t_roots *t, t_light *light)
 {
 	double	m;
-	t_vect3d	x;
+	t_vect3d	*x = new_vect3d();
+	t_vect3d	*n = new_vect3d();
+	t_vect3d	*p = new_vect3d();
+	t_vect3d	*v = new_vect3d();
+	t_vect3d	*l = new_vect3d();
 
-	sub_vect3d(&x, f->center, cam_pos);
-	m = dot_vect3d(ray, f->direction) * t->closest_t + dot_vect3d(&x, f->direction);
+	sub_vect3d(x, f->center, cam_pos);
+	norm_vect(f->direction);
+	init_vect3d(v,
+			t->closest_t * f->direction->xyz[X],
+			t->closest_t * f->direction->xyz[Y],
+			t->closest_t * f->direction->xyz[Z]);
+	m = dot_vect3d(ray, f->direction) * t->closest_t + dot_vect3d(x, f->direction);
+	init_vect3d(p, t->closest_t * ray->xyz[X],
+				t->closest_t * ray->xyz[Y],
+				t->closest_t * ray->xyz[Z]);
+	init_vect3d(v, m * f->direction->xyz[X], m * f->direction->xyz[Y], m * f->direction->xyz[Z]);
+	sub_vect3d(n, f->center, p);
+	sub_vect3d(n, v, n);
+	norm_vect(n);
+	init_vect3d(l, light->ccenter->xyz[X], light->ccenter->xyz[Y], light->ccenter->xyz[Z]);
+	sub_vect3d(l, p, l);
 
+	double dot = dot_vect3d(l, n);
+
+	if (dot > 0)
+		return (light->i * dot) / (length_vect3d(l) * length_vect3d(n));
+	return (0);
 }
 
 double	cos_plane(t_figure *f, t_vect3d *ray,
@@ -87,5 +110,7 @@ double		get_normal(t_figure *f, t_vect3d *ray,
 		return (cos_sphere(f, ray, cam_pos, t, light));
 	else if (f->type == PLANE)
 		return (cos_plane(f, ray, cam_pos, t, light));
+	else if (f->type == CYLINDER)
+		return (cos_cylinder(f, ray, cam_pos, t, light));
 	return (0);
 }
