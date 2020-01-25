@@ -4,6 +4,43 @@
 
 #include "../rtv1.h"
 
+double	cos_cone(t_figure *f, t_vect3d *ray,
+					   t_vect3d *cam_pos, t_roots *t, t_light *light)
+{
+	double	m;
+	t_vect3d	x;
+	t_vect3d	n;
+	t_vect3d	p;
+	t_vect3d	v;
+	t_vect3d	l;
+	double		k = 1 / tan(f->radius);
+
+	sub_vect3d(&x, &f->center, cam_pos);
+	norm_vect(&f->direction);
+	init_vect3d(&v,
+				t->closest_t * f->direction.x,
+				t->closest_t * f->direction.y,
+				t->closest_t * f->direction.z);
+	m = dot_vect3d(ray, &f->direction) * t->closest_t + dot_vect3d(&x, &f->direction);
+	init_vect3d(&p, t->closest_t * ray->x,
+				t->closest_t * ray->y,
+				t->closest_t * ray->z);
+	init_vect3d(&v, (k) * m * f->direction.x,
+			(k) * m * f->direction.y,
+			(k) * m * f->direction.z);
+	sub_vect3d(&n, &f->center, &p);
+	sub_vect3d(&n, &v, &n);
+	norm_vect(&n);
+	init_vect3d(&l, light->center.x, light->center.y, light->center.z);
+	sub_vect3d(&l, &p, &l);
+
+	double dot = dot_vect3d(&l, &n);
+
+	if (dot > 0)
+		return (light->i * dot) / (length_vect3d(&l) * length_vect3d(&n));
+	return (0);
+}
+
 double	cos_cylinder(t_figure *f, t_vect3d *ray,
 					t_vect3d *cam_pos, t_roots *t, t_light *light)
 {
@@ -105,5 +142,7 @@ double		get_normal(t_figure *f, t_vect3d *ray,
 		return (cos_plane(f, ray, cam_pos, t, light));
 	else if (f->type == CYLINDER)
 		return (cos_cylinder(f, ray, cam_pos, t, light));
+	else if (f->type == CONE)
+		return (cos_cone(f, ray, cam_pos, t, light));
 	return (0);
 }

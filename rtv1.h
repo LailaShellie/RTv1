@@ -30,9 +30,6 @@
 # define PLANE 3
 # define CYLINDER 4
 
-# define CAM 0
-# define LIGHTS 2
-
 # define BACKGROUND 0x000000
 
 union				u_color
