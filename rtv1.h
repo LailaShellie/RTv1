@@ -56,18 +56,20 @@ typedef	struct		s_roots
 
 typedef struct		s_vect3d
 {
-	double			*xyz;
+	double			x;
+	double			y;
+	double			z;
 }					t_vect3d;
 
 typedef struct		s_cam
 {
-	t_vect3d		*center;
-	t_vect3d		*direction;
+	t_vect3d		center;
+	t_vect3d		direction;
 }					t_cam;
 
 typedef struct		s_light
 {
-	t_vect3d		*ccenter;
+	t_vect3d		center;
 	double			i;
 	struct s_light	*next;
 }					t_light;
@@ -75,9 +77,9 @@ typedef struct		s_light
 typedef struct		s_figure
 {
 	int				type;
-    t_vect3d		*center;
-	t_vect3d		*direction;
-	t_vect3d		*oc;
+    t_vect3d		center;
+	t_vect3d		direction;
+	t_vect3d		oc;
 	int				color;
     double			radius;
     double			s;
@@ -109,12 +111,10 @@ int					init_mlx(t_rtv1 *rt);
 int					validation_main(t_rtv1 *rt, int ac, char **av);
 int					set_colors(unsigned char o, unsigned char r, \
 			unsigned char g, unsigned char b);
-t_vect3d			*new_vect3d();
 void	init_vect3d(t_vect3d *vect, double x, double y, double z);
 void		sub_vect3d(t_vect3d *res, t_vect3d *start, t_vect3d *end);
 void		add_vect3d(t_vect3d *res, t_vect3d *start, t_vect3d *end);
 double		dot_vect3d(t_vect3d *a, t_vect3d *b);
-void	free_vect3d(t_vect3d *vect);
 void	norm_vect(t_vect3d *vect);
 double		length_vect3d(t_vect3d *a);
 void		print_vect3d(t_vect3d *a);

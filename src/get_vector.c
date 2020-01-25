@@ -22,9 +22,9 @@ static int		get_xyz(char *str, t_vect3d *vect)
 		ft_free_mas(split, len);
 		return (ERR);
 	}
-	vect->xyz[X] = ft_atod(split[X]);
-	vect->xyz[Y] = ft_atod(split[Y]);
-	vect->xyz[Z] = ft_atod(split[Z]);
+	vect->x = ft_atod(split[X]);
+	vect->y = ft_atod(split[Y]);
+	vect->z= ft_atod(split[Z]);
 	ft_free_mas(split, len);
 	return (1);
 }

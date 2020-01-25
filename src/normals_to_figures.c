@@ -8,98 +8,91 @@ double	cos_cylinder(t_figure *f, t_vect3d *ray,
 					t_vect3d *cam_pos, t_roots *t, t_light *light)
 {
 	double	m;
-	t_vect3d	*x = new_vect3d();
-	t_vect3d	*n = new_vect3d();
-	t_vect3d	*p = new_vect3d();
-	t_vect3d	*v = new_vect3d();
-	t_vect3d	*l = new_vect3d();
+	t_vect3d	x;
+	t_vect3d	n;
+	t_vect3d	p;
+	t_vect3d	v;
+	t_vect3d	l;
 
-	sub_vect3d(x, f->center, cam_pos);
-	norm_vect(f->direction);
-	init_vect3d(v,
-			t->closest_t * f->direction->xyz[X],
-			t->closest_t * f->direction->xyz[Y],
-			t->closest_t * f->direction->xyz[Z]);
-	m = dot_vect3d(ray, f->direction) * t->closest_t + dot_vect3d(x, f->direction);
-	init_vect3d(p, t->closest_t * ray->xyz[X],
-				t->closest_t * ray->xyz[Y],
-				t->closest_t * ray->xyz[Z]);
-	init_vect3d(v, m * f->direction->xyz[X], m * f->direction->xyz[Y], m * f->direction->xyz[Z]);
-	sub_vect3d(n, f->center, p);
-	sub_vect3d(n, v, n);
-	norm_vect(n);
-	init_vect3d(l, light->ccenter->xyz[X], light->ccenter->xyz[Y], light->ccenter->xyz[Z]);
-	sub_vect3d(l, p, l);
+	sub_vect3d(&x, &f->center, cam_pos);
+	norm_vect(&f->direction);
+	init_vect3d(&v,
+			t->closest_t * f->direction.x,
+			t->closest_t * f->direction.y,
+			t->closest_t * f->direction.z);
+	m = dot_vect3d(ray, &f->direction) * t->closest_t + dot_vect3d(&x, &f->direction);
+	init_vect3d(&p, t->closest_t * ray->x,
+				t->closest_t * ray->y,
+				t->closest_t * ray->z);
+	init_vect3d(&v, m * f->direction.x, m * f->direction.y, m * f->direction.z);
+	sub_vect3d(&n, &f->center, &p);
+	sub_vect3d(&n, &v, &n);
+	norm_vect(&n);
+	init_vect3d(&l, light->center.x, light->center.y, light->center.z);
+	sub_vect3d(&l, &p, &l);
 
-	double dot = dot_vect3d(l, n);
+	double dot = dot_vect3d(&l, &n);
 
 	if (dot > 0)
-		return (light->i * dot) / (length_vect3d(l) * length_vect3d(n));
+		return (light->i * dot) / (length_vect3d(&l) * length_vect3d(&n));
 	return (0);
 }
 
 double	cos_plane(t_figure *f, t_vect3d *ray,
 					 t_vect3d *cam_pos, t_roots *t, t_light *light)
 {
-	t_vect3d	*p;
-	t_vect3d	*n1;
-	t_vect3d	*l;
-	t_vect3d	*p1;
+	t_vect3d	p;
+	t_vect3d	n1;
+	t_vect3d	l;
+	t_vect3d	p1;
 
-	p = new_vect3d();
-	p1 = new_vect3d();
-	init_vect3d(p, t->closest_t * ray->xyz[X],
-					t->closest_t * ray->xyz[Y],
-					t->closest_t * ray->xyz[Z]);
-	add_vect3d(p, cam_pos, p);
-	n1 = new_vect3d();
-	init_vect3d(n1, f->direction->xyz[X],
-					f->direction->xyz[Y],
-					f->direction->xyz[Z]);
-	norm_vect(n1);
-	l = new_vect3d();
-	init_vect3d(l, light->ccenter->xyz[X],
-					light->ccenter->xyz[Y],
-					light->ccenter->xyz[Z]);
-	sub_vect3d(l, p, l);
-	init_vect3d(p1, -p->xyz[X], -p->xyz[Y], -p->xyz[Z]);
+	init_vect3d(&p, t->closest_t * ray->x,
+					t->closest_t * ray->y,
+					t->closest_t * ray->z);
+	add_vect3d(&p, cam_pos, &p);
+	init_vect3d(&n1, f->direction.x,
+					f->direction.y,
+					f->direction.z);
+	norm_vect(&n1);
+	init_vect3d(&l, light->center.x,
+					light->center.y,
+					light->center.z);
+	sub_vect3d(&l, &p, &l);
+	init_vect3d(&p1, -p.x, -p.y, -p.z);
 
 
-	double dot = dot_vect3d(p1, n1);
+	double dot = dot_vect3d(&p1, &n1);
 
 	if (dot < 0)
-		init_vect3d(n1, -n1->xyz[X], -n1->xyz[Y], -n1->xyz[Z]);
-	dot = dot_vect3d(l, n1);
+		init_vect3d(&n1, -n1.x, -n1.y, -n1.z);
+	dot = dot_vect3d(&l, &n1);
 	if (dot > 0)
-		return (light->i * dot) / (length_vect3d(l) * length_vect3d(n1));
+		return (light->i * dot) / (length_vect3d(&l) * length_vect3d(&n1));
 	return (0);
 }
 
 double	cos_sphere(t_figure *f, t_vect3d *ray,
 		t_vect3d *cam_pos, t_roots *t, t_light *light)
 {
-	t_vect3d	*p;
-	t_vect3d	*n;
-	t_vect3d	*l;
+	t_vect3d	p;
+	t_vect3d	n;
+	t_vect3d	l;
 
-	p = new_vect3d();
-	init_vect3d(p, t->closest_t * ray->xyz[X],
-			t->closest_t * ray->xyz[Y],
-			t->closest_t * ray->xyz[Z]);
-	add_vect3d(p, cam_pos, p);
-	n = new_vect3d();
-	sub_vect3d(n, f->center, p);
-	norm_vect(n);
-	l = new_vect3d();
-	init_vect3d(l, light->ccenter->xyz[X],
-				light->ccenter->xyz[Y],
-				light->ccenter->xyz[Z]);
-	sub_vect3d(l, p, l);
+	init_vect3d(&p, t->closest_t * ray->x,
+			t->closest_t * ray->y,
+			t->closest_t * ray->z);
+	add_vect3d(&p, cam_pos, &p);
+	sub_vect3d(&n, &f->center, &p);
+	norm_vect(&n);
+	init_vect3d(&l, light->center.x,
+				light->center.y,
+				light->center.z);
+	sub_vect3d(&l, &p, &l);
 
-	double dot = dot_vect3d(l, n);
+	double dot = dot_vect3d(&l, &n);
 
 	if (dot > 0)
-		return (light->i * dot) / (length_vect3d(l) * length_vect3d(n));
+		return (light->i * dot) / (length_vect3d(&l) * length_vect3d(&n));
 	return (0);
 }
 

@@ -10,9 +10,5 @@ t_cam		*new_cam()
 
 	if (!(new = ft_memalloc(sizeof(t_cam))))
 		return (ERR);
-	if (!(new->center = new_vect3d()))
-		return (ERR);
-	if (!(new->direction = new_vect3d()))
-		return (ERR);
 	return (new);
 }

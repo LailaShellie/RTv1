@@ -53,27 +53,25 @@ int		trace_ray(t_rtv1 *rt, t_vect3d *cam_pos, t_vect3d *ray, t_roots *t)
 	if (closest_f == 0)
 		return (BACKGROUND);
 	return (calculate_color(closest_f->color, calc_light(rt, t, closest_f, ray, cam_pos)));
-	return (closest_f->color * calc_light(rt, t, closest_f, ray, cam_pos));
 }
 
 void		render(t_rtv1 *rt)
 {
 	int 		x;
 	int 		y;
-	t_vect3d	*ray;
+	t_vect3d	ray;
 	t_roots		t;
 
 	y = -1;
-	ray = new_vect3d();
 	while (++y < H)
 	{
 		x = -1;
 		while (++x < W)
 		{
-			init_vect3d(ray, (double)(x - W / 2) * ((double)VW / W), -(double)(y - H / 2) * ((double)VH / H), VZ);
-			sub_vect3d(ray, rt->cam->center, ray);
+			init_vect3d(&ray, (double)(x - W / 2) * ((double)VW / W), -(double)(y - H / 2) * ((double)VH / H), VZ);
+			sub_vect3d(&ray, &rt->cam->center, &ray);
 			((int *)rt->img->data)[x + y * rt->img->size_line / 4]
-			= trace_ray(rt, rt->cam->center, ray, &t);
+			= trace_ray(rt, &rt->cam->center, &ray, &t);
 		}
 	}
 	mlx_put_image_to_window(rt->mlx_ptr, rt->win_ptr, rt->img->img_ptr, 0, 0);

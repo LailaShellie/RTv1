@@ -5,12 +5,12 @@ int			testing(int key, t_rtv1 *rt)
 	printf("%d\n", key);
 	if (key == 24)
 	{
-		rt->figures->direction->xyz[X] += 0.1;
+		rt->figures->direction.x += 0.1;
 		render(rt);
 	}
 	else if (key == 27)
 	{
-		rt->figures->direction->xyz[X] -= 0.1;
+		rt->figures->direction.x -= 0.1;
 		render(rt);
 	}
 	return (1);

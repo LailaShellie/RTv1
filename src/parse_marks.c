@@ -10,9 +10,9 @@ static int get_figure(t_rtv1 *rt, char **str)
 		return (ERR);
 	if (!(new->type = get_type(str[ARG1])))
 		return (ERR);
-	if (!(get_vector(str[ARG2], new->center)))
+	if (!(get_vector(str[ARG2], &new->center)))
 		return (ERR);
-	if (!(get_vector(str[ARG3], new->direction)))
+	if (!(get_vector(str[ARG3], &new->direction)))
 		return (ERR);
 	if (!(new->color = get_color(str[ARG4])))
 		return (ERR);
@@ -30,7 +30,7 @@ static int get_light(t_rtv1 *rt, char **str)
 
 	if (!(new = new_light()))
 		return (ERR);
-	if (!(get_vector(str[ARG1], new->ccenter)))
+	if (!(get_vector(str[ARG1], &new->center)))
 		return (ERR);
 	if (!(new->i = get_intensity(str[ARG2])))
 		return (ERR);
@@ -44,9 +44,9 @@ static int get_cam(t_rtv1 *rt, char **str)
 		return (ERR);
 	if (!(rt->cam = new_cam()))
 		return (ERR);
-	if (!(get_vector(str[ARG1], rt->cam->center)))
+	if (!(get_vector(str[ARG1], &rt->cam->center)))
 		return (ERR);
-	if (!(get_vector(str[ARG2], rt->cam->direction)))
+	if (!(get_vector(str[ARG2], &rt->cam->direction)))
 		return (ERR);
 	return (1);
 }
