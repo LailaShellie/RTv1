@@ -89,10 +89,10 @@ typedef struct		s_figure
 typedef struct		s_img
 {
     void			*img_ptr;
+	char			*data;
     int				bpp;
     int				size_line;
     int				endian;
-    char			*data;
 }					t_img;
 
 typedef struct		s_rtv1
@@ -119,13 +119,14 @@ double		length_vect3d(t_vect3d *a);
 void		print_vect3d(t_vect3d *a);
 
 void		render(t_rtv1 *rt);
+int			trace_ray(t_rtv1 *rt, t_vect3d *ray, t_roots *t);
 void		hooks(t_rtv1 *rt);
 
 int		intersection(t_vect3d *cam_pos, t_vect3d *ray, t_figure *figure, t_roots *t);
 
-double		calc_light(t_rtv1 *rt, t_roots *t,
-						  t_figure *f, t_vect3d *ray, t_vect3d *cam_pos);
-double		get_normal(t_figure *f, t_vect3d *ray,
-						 t_vect3d *cam_pos, t_roots *t, t_light *light);
+double		calc_light(t_rtv1 *rt, t_roots *t, t_figure *f, t_vect3d *ray);
+double		get_normal(t_rtv1 *rt, t_figure *f, t_vect3d *ray, t_roots *t, t_light *light);
+
+int 		check_light(t_rtv1 *rt, t_vect3d *p, t_light *light);
 
 #endif

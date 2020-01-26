@@ -25,7 +25,7 @@ int calculate_color(int color, double intensity)
 
 }
 
-int		trace_ray(t_rtv1 *rt, t_vect3d *cam_pos, t_vect3d *ray, t_roots *t)
+int		trace_ray(t_rtv1 *rt, t_vect3d *ray, t_roots *t)
 {
 	t_figure	*cur;
 	t_figure	*closest_f;
@@ -35,7 +35,7 @@ int		trace_ray(t_rtv1 *rt, t_vect3d *cam_pos, t_vect3d *ray, t_roots *t)
 	cur = rt->figures;
 	while (cur)
 	{
-		if (intersection(cam_pos, ray, cur, t))
+		if (intersection(&rt->cam->center, ray, cur, t))
 		{
 			if (t->t1 > VZ && t->t1 < t->closest_t)
 			{
@@ -52,7 +52,7 @@ int		trace_ray(t_rtv1 *rt, t_vect3d *cam_pos, t_vect3d *ray, t_roots *t)
 	}
 	if (closest_f == 0)
 		return (BACKGROUND);
-	return (calculate_color(closest_f->color, calc_light(rt, t, closest_f, ray, cam_pos)));
+	return (calculate_color(closest_f->color, calc_light(rt, t, closest_f, ray)));
 }
 
 void		render(t_rtv1 *rt)
@@ -68,10 +68,11 @@ void		render(t_rtv1 *rt)
 		x = -1;
 		while (++x < W)
 		{
-			init_vect3d(&ray, (double)(x - W / 2) * ((double)VW / W), -(double)(y - H / 2) * ((double)VH / H), VZ);
+			init_vect3d(&ray, (double)(x - (double)W / 2) * ((double)VW / W),
+					-(double)(y - (double)H / 2) * ((double)VH / H), VZ);
 			sub_vect3d(&ray, &rt->cam->center, &ray);
 			((int *)rt->img->data)[x + y * rt->img->size_line / 4]
-			= trace_ray(rt, &rt->cam->center, &ray, &t);
+			= trace_ray(rt, &ray, &t);
 		}
 	}
 	mlx_put_image_to_window(rt->mlx_ptr, rt->win_ptr, rt->img->img_ptr, 0, 0);

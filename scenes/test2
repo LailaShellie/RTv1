@@ -2,12 +2,12 @@ camera:
 	vector 0,0,0
 	vector 0,0,0
 light:
-	vector 0,0,5
+	vector 0,0,1
 	intensity 1
 figure:
-    type cone
-    vector 0,0,10
+    type sphere
+    vector 0,0,5
     vector 1,0,0
-    color 0,255,250
-    radius 0.5
+    color 255,255,0
+    radius 0.3
     specularity 123
