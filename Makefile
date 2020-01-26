@@ -1,7 +1,8 @@
 SRC = init_mlx.c main.c vector3d.c render.c intersection.c \
 		figure.c get_color.c get_parametr.c get_vector.c \
 		get_type.c light.c parse_file.c parse_marks.c parsing_func.c \
-		read_file.c validation_main.c camera.c normals_to_figures.c calculate_light.c
+		read_file.c validation_main.c camera.c normals_to_figures.c calculate_light.c \
+		prepare_figures.c
 OBJ = $(SRC:.c=.o)
 HDR = rtv1.h
 LIB = libft/libft.a

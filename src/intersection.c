@@ -5,32 +5,20 @@
 #include "../rtv1.h"
 
 int			intersect_cylinder(t_vect3d *cam_pos, t_vect3d *ray,
-							   t_figure *cylinder, t_roots *t)
+							   t_figure *f, t_roots *t)
 {
 	double		a;
 	double 		b;
 	double 		c;
 	double		d;
 
-	t_vect3d	v1;
-	t_vect3d	v2;
-
-
-	init_vect3d(&v1, -cylinder->direction.y, cylinder->direction.x, 0);
-	init_vect3d(&v2, cylinder->direction.x * cylinder->direction.z,
-			cylinder->direction.y * cylinder->direction.z,
-			-cylinder->direction.y * cylinder->direction.y
-			- cylinder->direction.x * cylinder->direction.x);
-	norm_vect(&v1);
-	norm_vect(&v2);
-	sub_vect3d(&cylinder->oc, &cylinder->center, cam_pos);
-	a = dot_vect3d(&v1, ray) * dot_vect3d(&v1, ray)
-			+ dot_vect3d(&v2, ray) * dot_vect3d(&v2, ray);
-	b = 2.0 * (dot_vect3d(&v1, &cylinder->oc) * dot_vect3d(&v1, ray)
-			+ dot_vect3d(&v2, &cylinder->oc) * dot_vect3d(&v2, ray));
-	c = dot_vect3d(&v1, &cylinder->oc) * dot_vect3d(&v1, &cylinder->oc)
-			+ dot_vect3d(&v2, &cylinder->oc)* dot_vect3d(&v2, &cylinder->oc)
-			- cylinder->radius * cylinder->radius;
+	a = dot_vect3d(&f->v1, ray) * dot_vect3d(&f->v1, ray)
+			+ dot_vect3d(&f->v2, ray) * dot_vect3d(&f->v2, ray);
+	b = 2.0 * (dot_vect3d(&f->v1, &f->oc) * dot_vect3d(&f->v1, ray)
+			+ dot_vect3d(&f->v2, &f->oc) * dot_vect3d(&f->v2, ray));
+	c = dot_vect3d(&f->v1, &f->oc) * dot_vect3d(&f->v1, &f->oc)
+			+ dot_vect3d(&f->v2, &f->oc)* dot_vect3d(&f->v2, &f->oc)
+			- f->radius * f->radius;
 	d = b * b - 4.0 * a * c;
 	if (d < 0)
 		return (0);
@@ -40,40 +28,26 @@ int			intersect_cylinder(t_vect3d *cam_pos, t_vect3d *ray,
 }
 
 int			intersect_cone(t_vect3d *cam_pos, t_vect3d *ray,
-							   t_figure *cone, t_roots *t)
+							   t_figure *f, t_roots *t)
 {
 	double		a;
 	double 		b;
 	double 		c;
 	double		d;
 
-	t_vect3d	v1;
-	t_vect3d	v2;
-	t_vect3d	v3;
+	double 		k = 1 / tan(f->radius);
+	
 
-
-	init_vect3d(&v3, cone->direction.x, cone->direction.y, cone->direction.z);
-	norm_vect(&v3);
-
-	init_vect3d(&v1, -v3.y, v3.x, 0);
-	norm_vect(&v1);
-
-	init_vect3d(&v2, v3.x * v3.z,
-				v3.y * v3.z,
-				-v3.y * v3.y
-				-v3.x * v3.x);
-	norm_vect(&v2);
-
-	sub_vect3d(&cone->oc, &cone->center, cam_pos);
-	a = dot_vect3d(&v1, ray) * dot_vect3d(&v1, ray) * (1 / tan(cone->radius))
-		+ dot_vect3d(&v2, ray) * dot_vect3d(&v2, ray) * (1 / tan(cone->radius))
-		- dot_vect3d(&v3, ray) * dot_vect3d(&v3, ray);
-	b = 2.0 * (dot_vect3d(&v1, &cone->oc) * dot_vect3d(&v1, ray) * (1 / tan(cone->radius))
-			   + dot_vect3d(&v2, &cone->oc) * dot_vect3d(&v2, ray) * (1 / tan(cone->radius))
-			   - dot_vect3d(&v3, ray) * dot_vect3d(&v3, &cone->oc));
-	c = dot_vect3d(&v1, &cone->oc) * dot_vect3d(&v1, &cone->oc) * (1 / tan(cone->radius))
-		+ dot_vect3d(&v2, &cone->oc) * dot_vect3d(&v2, &cone->oc) * (1 / tan(cone->radius))
-		- dot_vect3d(&v3, &cone->oc) * dot_vect3d(&v3, &cone->oc);
+	sub_vect3d(&f->oc, &f->center, cam_pos);
+	a = dot_vect3d(&f->v1, ray) * dot_vect3d(&f->v1, ray) * k
+		+ dot_vect3d(&f->v2, ray) * dot_vect3d(&f->v2, ray) * k
+		- dot_vect3d(&f->v3, ray) * dot_vect3d(&f->v3, ray);
+	b = 2.0 * (dot_vect3d(&f->v1, &f->oc) * dot_vect3d(&f->v1, ray) * k
+			   + dot_vect3d(&f->v2, &f->oc) * dot_vect3d(&f->v2, ray) * k
+			   - dot_vect3d(&f->v3, ray) * dot_vect3d(&f->v3, &f->oc));
+	c = dot_vect3d(&f->v1, &f->oc) * dot_vect3d(&f->v1, &f->oc) * k
+		+ dot_vect3d(&f->v2, &f->oc) * dot_vect3d(&f->v2, &f->oc) * k
+		- dot_vect3d(&f->v3, &f->oc) * dot_vect3d(&f->v3, &f->oc);
 	d = b * b - 4.0 * a * c;
 	if (d < 0)
 		return (0);
@@ -88,7 +62,6 @@ int			intersect_plane(t_vect3d *cam_pos, t_vect3d *ray,
 	double	a;
 	double	b;
 
-	sub_vect3d(&plane->oc, &plane->center, cam_pos);
 	a = dot_vect3d(&plane->oc, &plane->direction);
 	b = dot_vect3d(ray, &plane->direction);
 	if (b == 0)
@@ -105,8 +78,7 @@ int			intersect_sphere(t_vect3d *cam_pos, t_vect3d *ray,
 	double 		b;
 	double 		c;
 	double		d;
-
-	sub_vect3d(&sphere->oc, &sphere->center, cam_pos);
+	
 	a = dot_vect3d(ray, ray);
 	b = 2.0 * dot_vect3d(&sphere->oc, ray);
 	c = dot_vect3d(&sphere->oc, &sphere->oc) - (sphere->radius * sphere->radius);

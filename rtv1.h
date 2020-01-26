@@ -76,6 +76,9 @@ typedef struct		s_figure
 	int				type;
     t_vect3d		center;
 	t_vect3d		direction;
+	t_vect3d		v1;
+	t_vect3d		v2;
+	t_vect3d		v3;
 	t_vect3d		oc;
 	int				color;
     double			radius;
@@ -106,8 +109,7 @@ typedef struct		s_rtv1
 
 int					init_mlx(t_rtv1 *rt);
 int					validation_main(t_rtv1 *rt, int ac, char **av);
-int					set_colors(unsigned char o, unsigned char r, \
-			unsigned char g, unsigned char b);
+void		prepare_figures(t_rtv1 *rt);
 void	init_vect3d(t_vect3d *vect, double x, double y, double z);
 void		sub_vect3d(t_vect3d *res, t_vect3d *start, t_vect3d *end);
 void		add_vect3d(t_vect3d *res, t_vect3d *start, t_vect3d *end);

@@ -17,6 +17,7 @@ int main(int ac, char** av)
 		return (ERR);
 	if (ERR == init_mlx(rt))
 		exit(0);
+	prepare_figures(rt);
 	render(rt);
 	hooks(rt);
     return (0);
