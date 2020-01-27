@@ -119,8 +119,9 @@ double	cos_sphere(t_rtv1 *rt, t_figure *f, t_vect3d *ray,
 			t->closest_t * ray->y,
 			t->closest_t * ray->z);
 	add_vect3d(&p, &rt->cam->center, &p);
-	sub_vect3d(&n, &f->center, &p);
-	norm_vect(&n);
+//	sub_vect3d(&n, &f->center, &p);
+//	norm_vect(&n);
+	n = get_normal_of_figure(rt, f, ray, t);
 	init_vect3d(&l, light->center.x,
 				light->center.y,
 				light->center.z);

@@ -129,4 +129,6 @@ double		get_normal(t_rtv1 *rt, t_figure *f, t_vect3d *ray, t_roots *t, t_light *
 
 int 		check_light(t_rtv1 *rt, t_vect3d *p, t_light *light);
 
+t_vect3d		get_normal_of_figure(t_rtv1 *rt, t_figure *f, t_vect3d *ray, t_roots *t);
+
 #endif

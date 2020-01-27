@@ -22,10 +22,8 @@ double		calc_light(t_rtv1 *rt, t_roots *t, t_figure *f,
 	while (cur)
 	{
 		i += get_normal(rt, f, ray, t, cur);
-		if (f->s != -1)
-		{
-			
-		}
+	//	if (f->s != -1)
+		//	i += get_blare();
 		cur = cur->next;
 	}
 	return (i);
