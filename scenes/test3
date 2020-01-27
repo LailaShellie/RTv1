@@ -1,19 +1,18 @@
-
-
-
 camera:
 	vector 0,0,0
 	vector 0,0,0
 
-light:
+   light:
             	vector 0,0,6
             	intensity 1
 
 figure:
-			type sphere
-	vector -1.8,-1,7
-	vector 1,1,0
-	color 255,0,255
-	radius 0.5
-	specularity 600
+			type plane
+	vector 0,-1,10
+	vector 0,1,-0.1
+	color 255,0,0
+	radius 0.9
+	specularity 12
+
+
 
