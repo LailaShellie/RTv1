@@ -15,28 +15,27 @@
 
 char	*ft_strtrim(char const *s)
 {
-	char			*str;
-	unsigned int	start;
-	unsigned int	end;
-	unsigned int	i;
+    char	*str;
+    char	*begin;
+    int		i;
 
-	i = 0;
-	start = 0;
-	if (s == 0)
-		return (0);
-	end = ft_strlen(s);
-	while (s[start] != 0 && (s[start] == ' ' || s[start] == '\t'
-				|| s[start] == '\n'))
-		start++;
-	while (end != start && (s[end] == ' '
-				|| s[end] == '\t' || s[end] == '\n' || s[end] == 0))
-		end--;
-	i = end - start;
-	if (!(str = (char *)malloc(sizeof(*s) * (i + 1))))
-		return (0);
-	i = 0;
-	while (s[i] != 0 && start <= end)
-		str[i++] = s[start++];
-	str[i] = 0;
-	return (str);
+    if (s == NULL)
+        return (NULL);
+    begin = (char *)s;
+    while (begin[0] == ' ' || begin[0] == '\n' || begin[0] == '\t')
+        begin++;
+    if (begin[0] == '\0')
+        return (ft_strnew(0));
+    str = begin;
+    i = ft_strlen(begin);
+    while (str[i - 1] == ' ' || str[i - 1] == '\n' || str[i - 1] == '\t')
+        i--;
+    if (!(str = ft_strnew(i)))
+        return (NULL);
+    while (i > 0)
+    {
+        str[i - 1] = begin[i - 1];
+        i--;
+    }
+    return (str);
 }
