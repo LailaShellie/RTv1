@@ -108,12 +108,19 @@ double	cos_plane(t_rtv1 *rt, t_figure *f, t_vect3d *ray,
 	return (0);
 }
 
+//if s != -1 {
+//  R = 2*N*dot(N, L) - L
+//  r_dot_v = dot(R, V)
+//  if r_dot_v > 0
+//      i += light.intensity*pow(r_dot_v/(length(R)*length(V)), s)
+
 double	cos_sphere(t_rtv1 *rt, t_figure *f, t_vect3d *ray,
 		t_roots *t, t_light *light)
 {
 	t_vect3d	p;
 	t_vect3d	n;
 	t_vect3d	l;
+	double      i;
 
 	init_vect3d(&p, t->closest_t * ray->x,
 			t->closest_t * ray->y,
@@ -129,8 +136,22 @@ double	cos_sphere(t_rtv1 *rt, t_figure *f, t_vect3d *ray,
 	double dot = dot_vect3d(&l, &n);
 
 	if (dot > 0)
-		return (light->i * dot) / (length_vect3d(&l) * length_vect3d(&n));
-	return (0);
+		i = light->i * dot / (length_vect3d(&l) * length_vect3d(&n));
+    else
+        return (0);
+	t_vect3d    r;
+	double      r_dot_v;
+	t_vect3d    v;
+
+	sub_vect3d(&v, &p, &rt->cam->center);
+	init_vect3d(&r, 2 * n.x * dot - l.x, 2 * n.y * dot - l.y, 2 * n.z * dot - l.z);
+	if (f->s != -1)
+    {
+	    r_dot_v = dot_vect3d(&r, &v);
+	    if (r_dot_v > 0)
+            i += light->i * pow(r_dot_v / (length_vect3d(&r) * length_vect3d(&v)), f->s);
+    }
+	return (i);
 }
 
 double		get_normal(t_rtv1 *rt, t_figure *f, t_vect3d *ray, t_roots *t, t_light *light)
