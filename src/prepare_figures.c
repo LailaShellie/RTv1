@@ -2,7 +2,7 @@
 // Created by Ivan on 26/01/2020.
 //
 
-#include "../rtv1.h"
+#include "rtv1.h"
 
 void		calculate_consts(t_rtv1 *rt, t_figure *f)
 {

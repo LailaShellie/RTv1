@@ -1,5 +1,5 @@
 
-#include "../rtv1.h"
+#include "rtv1.h"
 
 void test(union u_color col)
 {

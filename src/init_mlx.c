@@ -1,4 +1,4 @@
-#include "../rtv1.h"
+#include "rtv1.h"
 
 int			testing(int key, t_rtv1 *rt)
 {

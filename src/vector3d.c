@@ -2,7 +2,7 @@
 // Created by Ivan on 19/01/2020.
 //
 
-#include "../rtv1.h"
+#include "rtv1.h"
 
 void	norm_vect(t_vect3d *vect)
 {

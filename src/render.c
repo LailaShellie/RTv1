@@ -2,7 +2,7 @@
 // Created by Laila Shellie on 2020-01-20.
 //
 
-#include "../rtv1.h"
+#include "rtv1.h"
 
 int calculate_color(int color, double intensity)
 {

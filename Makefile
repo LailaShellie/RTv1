@@ -6,23 +6,23 @@ SRC = init_mlx.c main.c vector3d.c render.c intersection.c \
 
 OBJ_DIR = ./objects
 SRC_DIR = ./src
+HDR_DIR = ./includes
+LIBFT_HDR_DIR = ./libft
+MLX_HDR_DIR = ./mlx
 OBJ = $(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 #OBJ = $(SRC:.c=.o)
-HDR = rtv1.h
+HDR = ./includes/rtv1.h ./includes/validation.h ./libft/libft.h ./mlx/mlx.h
 LIB = libft/libft.a
 MLX = mlx/lmlx.a
 NAME = RTv1
 
 all: $(NAME)
 
-$(NAME): $(OBJ_DIR) libs $(OBJ)
-	gcc -Wall -Wextra -Werror -o $(NAME) -I $(HDR) $(LIB) $(VAL) $(OBJ) -L mlx -lmlx -framework OpenGL -framework AppKit
-
 # %.o: src/%.c $(HDR)
 # 	gcc -c $<
 
-$(OBJ_DIR)/%.o:$(SRC_DIR)/%.c $(HDR)
-	gcc -o $@ -c $<
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HDR)
+	gcc  -I $(HDR_DIR) -I $(LIBFT_HDR_DIR) -I $(MLX_HDR_DIR) -o $@ -c $<
 
 libs:
 	make -C ./libft
@@ -34,6 +34,11 @@ fclean: clean
 	make fclean -C ./libft
 	rm -rf $(NAME)
 re: fclean all
+
+$(NAME): $(OBJ_DIR) libs $(OBJ)
+	#gcc -Wall -Wextra -Werror -o $(NAME) -I $(HDR) $(LIB) $(VAL) $(OBJ) -L mlx -lmlx -framework OpenGL -framework AppKit
+	@echo "test1"
+	gcc -Wall -Wextra -Werror -o $(NAME) -I $(HDR_DIR) -I $(LIBFT_HDR_DIR) -I $(MLX_HDR_DIR) $(LIB) $(VAL) $(OBJ) -L mlx -lmlx -framework OpenGL -framework AppKit
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)

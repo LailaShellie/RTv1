@@ -7,8 +7,8 @@
 # include <stdio.h>
 # include <math.h>
 
-# include "mlx/mlx.h"
-# include "libft/libft.h"
+# include "mlx.h"
+# include "libft.h"
 
 # define W 800
 # define H 800
@@ -109,24 +109,24 @@ typedef struct		s_rtv1
 
 int					init_mlx(t_rtv1 *rt);
 int					validation_main(t_rtv1 *rt, int ac, char **av);
-void		prepare_figures(t_rtv1 *rt);
-void	init_vect3d(t_vect3d *vect, double x, double y, double z);
-void		sub_vect3d(t_vect3d *res, t_vect3d *start, t_vect3d *end);
-void		add_vect3d(t_vect3d *res, t_vect3d *start, t_vect3d *end);
-double		dot_vect3d(t_vect3d *a, t_vect3d *b);
-void	norm_vect(t_vect3d *vect);
-double		length_vect3d(t_vect3d *a);
-void		print_vect3d(t_vect3d *a);
+void				prepare_figures(t_rtv1 *rt);
+void				init_vect3d(t_vect3d *vect, double x, double y, double z);
+void				sub_vect3d(t_vect3d *res, t_vect3d *start, t_vect3d *end);
+void				add_vect3d(t_vect3d *res, t_vect3d *start, t_vect3d *end);
+double				dot_vect3d(t_vect3d *a, t_vect3d *b);
+void				norm_vect(t_vect3d *vect);
+double				length_vect3d(t_vect3d *a);
+void				print_vect3d(t_vect3d *a);
 
-void		render(t_rtv1 *rt);
-int			trace_ray(t_rtv1 *rt, t_vect3d *ray, t_roots *t);
-void		hooks(t_rtv1 *rt);
+void				render(t_rtv1 *rt);
+int					trace_ray(t_rtv1 *rt, t_vect3d *ray, t_roots *t);
+void				hooks(t_rtv1 *rt);
 
-int		intersection(t_vect3d *cam_pos, t_vect3d *ray, t_figure *figure, t_roots *t);
+int					intersection(t_vect3d *cam_pos, t_vect3d *ray, t_figure *figure, t_roots *t);
 
-double		calc_light(t_rtv1 *rt, t_roots *t, t_figure *f, t_vect3d *ray);
-double		get_normal(t_rtv1 *rt, t_figure *f, t_vect3d *ray, t_roots *t, t_light *light);
+double				calc_light(t_rtv1 *rt, t_roots *t, t_figure *f, t_vect3d *ray);
+double				get_normal(t_rtv1 *rt, t_figure *f, t_vect3d *ray, t_roots *t, t_light *light);
 
-int 		check_light(t_rtv1 *rt, t_vect3d *p, t_light *light);
+int 				check_light(t_rtv1 *rt, t_vect3d *p, t_light *light);
 
 #endif

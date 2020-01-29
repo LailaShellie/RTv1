@@ -2,7 +2,7 @@
 // Created by Laila Shellie on 2020-01-22.
 //
 
-#include "../rtv1.h"
+#include "rtv1.h"
 
 double	cos_cone(t_rtv1 *rt, t_figure *f, t_vect3d *ray,
 					   t_roots *t, t_light *light)

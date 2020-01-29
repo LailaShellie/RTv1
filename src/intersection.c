@@ -2,7 +2,7 @@
 // Created by Ivan on 20/01/2020.
 //
 
-#include "../rtv1.h"
+#include "rtv1.h"
 
 int			intersect_cylinder(t_vect3d *cam_pos, t_vect3d *ray,
 							   t_figure *f, t_roots *t)
