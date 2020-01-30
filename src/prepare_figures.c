@@ -6,19 +6,15 @@
 
 void		calculate_consts(t_rtv1 *rt, t_figure *f)
 {
-	norm_vect(&f->direction);
-	init_vect3d(&f->v3, f->direction.x, f->direction.y, f->direction.z);
+	norm_vect3d(&f->direction);
+	f->v3 = init_vect3d(f->direction.x, f->direction.y, f->direction.z);
+	f->v1 = init_vect3d(-f->v3.y, f->v3.x, 0);
 
-	init_vect3d(&f->v1, -f->v3.y, f->v3.x, 0);
-	norm_vect(&f->v1);
-
-	init_vect3d(&f->v2, f->v3.x * f->v3.z,
+	f->v2 = init_vect3d(f->v3.x * f->v3.z,
 				f->v3.y * f->v3.z,
 				-f->v3.y * f->v3.y
 				-f->v3.x * f->v3.x);
-	norm_vect(&f->v2);
-
-	sub_vect3d(&f->oc, &f->center, &rt->cam->center);
+	f->oc = sub_vect3d(&f->center, &rt->cam->center);
 }
 
 void		prepare_figures(t_rtv1 *rt)
