@@ -110,12 +110,14 @@ typedef struct		s_rtv1
 int					init_mlx(t_rtv1 *rt);
 int					validation_main(t_rtv1 *rt, int ac, char **av);
 void		prepare_figures(t_rtv1 *rt);
-void	init_vect3d(t_vect3d *vect, double x, double y, double z);
-void		sub_vect3d(t_vect3d *res, t_vect3d *start, t_vect3d *end);
-void		add_vect3d(t_vect3d *res, t_vect3d *start, t_vect3d *end);
-double		dot_vect3d(t_vect3d *a, t_vect3d *b);
-void	norm_vect(t_vect3d *vect);
+
+t_vect3d	scale_vect3d(double scale, t_vect3d *a);
+void		norm_vect3d(t_vect3d *vect);
+t_vect3d	init_vect3d(double x, double y, double z);
 double		length_vect3d(t_vect3d *a);
+t_vect3d	sub_vect3d(t_vect3d *start, t_vect3d *end);
+t_vect3d	add_vect3d(t_vect3d *start, t_vect3d *end);
+double		dot_vect3d(t_vect3d *a, t_vect3d *b);
 void		print_vect3d(t_vect3d *a);
 
 void		render(t_rtv1 *rt);

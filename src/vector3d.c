@@ -4,7 +4,17 @@
 
 #include "../rtv1.h"
 
-void	norm_vect(t_vect3d *vect)
+t_vect3d	scale_vect3d(double scale, t_vect3d *a)
+{
+	t_vect3d res;
+
+	res.x = a->x * scale;
+	res.y = a->y * scale;
+	res.z = a->z * scale;
+	return (res);
+}
+
+void	norm_vect3d(t_vect3d *vect)
 {
 	double		len;
 
@@ -14,11 +24,14 @@ void	norm_vect(t_vect3d *vect)
 	vect->z /= len;
 }
 
-void	init_vect3d(t_vect3d *vect, double x, double y, double z)
+t_vect3d	init_vect3d(double x, double y, double z)
 {
-	vect->x = x;
-	vect->y = y;
-	vect->z = z;
+	t_vect3d vect;
+
+	vect.x = x;
+	vect.y = y;
+	vect.z = z;
+	return (vect);
 }
 
 double		length_vect3d(t_vect3d *a)
@@ -31,18 +44,24 @@ double		length_vect3d(t_vect3d *a)
 	return (sqrt(len));
 }
 
-void		sub_vect3d(t_vect3d *res, t_vect3d *start, t_vect3d *end)
+t_vect3d	sub_vect3d(t_vect3d *start, t_vect3d *end)
 {
-	res->x = end->x - start->x;
-	res->y = end->y - start->y;
-	res->z = end->z - start->z;
+	t_vect3d res;
+
+	res.x = end->x - start->x;
+	res.y = end->y - start->y;
+	res.z = end->z - start->z;
+	return (res);
 }
 
-void		add_vect3d(t_vect3d *res, t_vect3d *start, t_vect3d *end)
+t_vect3d	add_vect3d(t_vect3d *start, t_vect3d *end)
 {
-	res->x = end->x + start->x;
-	res->y = end->y + start->y;
-	res->z = end->z + start->z;
+	t_vect3d res;
+
+	res.x = end->x + start->x;
+	res.y = end->y + start->y;
+	res.z = end->z + start->z;
+	return (res);
 }
 
 double		dot_vect3d(t_vect3d *a, t_vect3d *b)

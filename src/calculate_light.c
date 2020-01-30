@@ -17,7 +17,7 @@ double		calc_light(t_rtv1 *rt, t_roots *t, t_figure *f,
 //		i += light.intensity*pow(r_dot_v/(length(R)*length(V)), s)
 
 
-	i = 0.2;
+	i = 0.0;
 	cur = rt->lights;
 	while (cur)
 	{
@@ -36,8 +36,8 @@ int 		check_light(t_rtv1 *rt, t_vect3d *p, t_light *light)
 	t_figure	*cur;
 
 	cur = rt->figures;
-	sub_vect3d(&l, &light->center, p);
-	norm_vect(&l);
+	l = sub_vect3d(&light->center, p);
+	norm_vect3d(&l);
 	while (cur)
 	{
 		if (intersection(p, &l, cur, &t))

@@ -35,19 +35,24 @@ int			intersect_cone(t_vect3d *cam_pos, t_vect3d *ray,
 	double 		c;
 	double		d;
 
-	double 		k = 1 / tan(f->radius);
-	
+	double 		k = (1 + f->radius * f->radius);
 
-	sub_vect3d(&f->oc, &f->center, cam_pos);
-	a = dot_vect3d(&f->v1, ray) * dot_vect3d(&f->v1, ray) * k
-		+ dot_vect3d(&f->v2, ray) * dot_vect3d(&f->v2, ray) * k
-		- dot_vect3d(&f->v3, ray) * dot_vect3d(&f->v3, ray);
-	b = 2.0 * (dot_vect3d(&f->v1, &f->oc) * dot_vect3d(&f->v1, ray) * k
-			   + dot_vect3d(&f->v2, &f->oc) * dot_vect3d(&f->v2, ray) * k
-			   - dot_vect3d(&f->v3, ray) * dot_vect3d(&f->v3, &f->oc));
-	c = dot_vect3d(&f->v1, &f->oc) * dot_vect3d(&f->v1, &f->oc) * k
-		+ dot_vect3d(&f->v2, &f->oc) * dot_vect3d(&f->v2, &f->oc) * k
-		- dot_vect3d(&f->v3, &f->oc) * dot_vect3d(&f->v3, &f->oc);
+	double v1_dot_ray = dot_vect3d(&f->v1, ray);
+	double v2_dot_ray = dot_vect3d(&f->v2, ray);
+	double v3_dot_ray = dot_vect3d(&f->v3, ray);
+
+	a = pow(v1_dot_ray, 2) + pow(v2_dot_ray, 2) - pow(v3_dot_ray, 2);
+	b = 2.0 * (v1_dot_ray * dot_vect3d(&f->v1, &f->oc)
+			   + v2_dot_ray * dot_vect3d(&f->v2, &f->oc)
+			   - v3_dot_ray * dot_vect3d(&f->v3, &f->oc));
+	c = pow(dot_vect3d(&f->v1, &f->oc), 2)
+			+ pow(dot_vect3d(&f->v2, &f->oc), 2)
+			- pow(dot_vect3d(&f->v3, &f->oc), 2);
+//
+//	t_vect3d x = sub_vect3d(&f->center, cam_pos);
+//	a = dot_vect3d(ray, ray) - dot_vect3d(ray, &f->direction) * dot_vect3d(ray, &f->direction);
+//	b = (dot_vect3d(ray, &x) - (1 + f->radius * f->radius) * dot_vect3d(ray, &f->direction) * dot_vect3d(&x, &f->direction)) * 2;
+//	c = dot_vect3d(&x, &x) - (1 + f->radius * f->radius) * dot_vect3d(&x, &f->direction) * dot_vect3d(&x, &f->direction);
 	d = b * b - 4.0 * a * c;
 	if (d < 0)
 		return (0);
@@ -78,7 +83,7 @@ int			intersect_sphere(t_vect3d *cam_pos, t_vect3d *ray,
 	double 		b;
 	double 		c;
 	double		d;
-	
+
 	a = dot_vect3d(ray, ray);
 	b = 2.0 * dot_vect3d(&sphere->oc, ray);
 	c = dot_vect3d(&sphere->oc, &sphere->oc) - (sphere->radius * sphere->radius);
