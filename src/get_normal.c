@@ -2,7 +2,7 @@
 // Created by Ivan on 26/01/2020.
 //
 
-#include "../rtv1.h"
+#include "rtv1.h"
 
 t_vect3d		normal_plane(t_figure *plane, t_vect3d *p)
 {
