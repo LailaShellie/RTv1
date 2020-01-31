@@ -6,25 +6,25 @@ int			testing(int key, t_rtv1 *rt)
 	if (key >= 123 && key <= 126)
 	{
 		if (key == 123)
-			rt->figures->center.x -= 0.1;
+			rt->cam->center.x -= 0.05;
 		if (key == 124)
-			rt->figures->center.x += 0.1;
+			rt->cam->center.x += 0.05;
 		if (key == 126)
-			rt->figures->center.z += 0.1;
+			rt->cam->center.z += 0.05;
 		if (key == 125)
-			rt->figures->center.z -= 0.1;
+			rt->cam->center.z -= 0.05;
 		prepare_figures(rt);
 		render(rt);
 	}
 	if (key == 24)
 	{
-		rt->figures->center.y += 0.1;
+		rt->cam->center.y += 0.05;
 		prepare_figures(rt);
 		render(rt);
 	}
 	else if (key == 27)
 	{
-		rt->figures->center.y -= 0.1;
+		rt->cam->center.y -= 0.05;
 		prepare_figures(rt);
 		render(rt);
 	}

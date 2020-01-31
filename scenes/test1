@@ -37,7 +37,7 @@ figure:
 
 figure:
 			type cylinder
-	vector -1,-1,10
+	vector -1,1,6
 	vector 1,0,0
 	color 255,255,0
 	radius 0.3
@@ -46,7 +46,7 @@ figure:
 	figure:
                        			type cone
                        	vector 0,0,10
-                       	vector 0,1,0
+                       	vector 0.1,1,0
                        	color 255,255,0
                        	radius 0.7
                        	specularity 120

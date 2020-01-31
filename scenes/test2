@@ -1,5 +1,5 @@
 camera:
-	vector 0,0,0
+	vector 10,0,0
 	vector 0,0,0
 light:
 	vector 0,0,1
@@ -10,4 +10,11 @@ figure:
     vector 1,0,0
     color 255,255,0
     radius 0.3
+    specularity 123
+figure:
+    type sphere
+    vector 0,0,1
+    vector 1,0,0
+    color 255,255,0
+    radius 0.05
     specularity 123

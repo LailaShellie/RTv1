@@ -41,18 +41,13 @@ int			intersect_cone(t_vect3d *cam_pos, t_vect3d *ray,
 	double v2_dot_ray = dot_vect3d(&f->v2, ray);
 	double v3_dot_ray = dot_vect3d(&f->v3, ray);
 
-	a = pow(v1_dot_ray, 2) + pow(v2_dot_ray, 2) - pow(v3_dot_ray, 2);
-	b = 2.0 * (v1_dot_ray * dot_vect3d(&f->v1, &f->oc)
-			   + v2_dot_ray * dot_vect3d(&f->v2, &f->oc)
+	a = pow(v1_dot_ray, 2) * k + pow(v2_dot_ray, 2) * k - pow(v3_dot_ray, 2);
+	b = 2.0 * (v1_dot_ray * dot_vect3d(&f->v1, &f->oc) * k
+			   + v2_dot_ray * dot_vect3d(&f->v2, &f->oc) * k
 			   - v3_dot_ray * dot_vect3d(&f->v3, &f->oc));
-	c = pow(dot_vect3d(&f->v1, &f->oc), 2)
-			+ pow(dot_vect3d(&f->v2, &f->oc), 2)
+	c = pow(dot_vect3d(&f->v1, &f->oc), 2) * k
+			+ pow(dot_vect3d(&f->v2, &f->oc), 2) * k
 			- pow(dot_vect3d(&f->v3, &f->oc), 2);
-//
-//	t_vect3d x = sub_vect3d(&f->center, cam_pos);
-//	a = dot_vect3d(ray, ray) - dot_vect3d(ray, &f->direction) * dot_vect3d(ray, &f->direction);
-//	b = (dot_vect3d(ray, &x) - (1 + f->radius * f->radius) * dot_vect3d(ray, &f->direction) * dot_vect3d(&x, &f->direction)) * 2;
-//	c = dot_vect3d(&x, &x) - (1 + f->radius * f->radius) * dot_vect3d(&x, &f->direction) * dot_vect3d(&x, &f->direction);
 	d = b * b - 4.0 * a * c;
 	if (d < 0)
 		return (0);
