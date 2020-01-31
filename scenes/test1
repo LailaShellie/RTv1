@@ -7,7 +7,7 @@ camera:
 	vector 0,0,0
 
    light:
-            	vector 0,0,6
+            	vector 0,1,4
             	intensity 1
 
 figure:
@@ -16,7 +16,7 @@ figure:
 	vector 0,1,-0.1
 	color 255,0,0
 	radius 0.9
-	specularity 12
+	specularity 1200
 
 figure:
 			type cylinder
@@ -24,7 +24,7 @@ figure:
 	vector 1,1,0
 	color 255,0,255
 	radius 0.3
-	specularity 123
+	specularity 1000
 
 figure:
 			type sphere
@@ -32,7 +32,7 @@ figure:
 	vector 1,1,0
 	color 255,0,255
 	radius 0.5
-	specularity 123
+	specularity 1000
 
 
 figure:
@@ -41,7 +41,7 @@ figure:
 	vector 1,0,0
 	color 255,255,0
 	radius 0.3
-	specularity 123
+	specularity 1000
 
 	figure:
                        			type cone
@@ -49,5 +49,5 @@ figure:
                        	vector 0.1,1,0
                        	color 255,255,0
                        	radius 0.7
-                       	specularity 120
+                       	specularity 1000
 
