@@ -1,8 +1,8 @@
 SRC = init_mlx.c main.c vector3d.c render.c intersection.c \
 		figure.c get_color.c get_parametr.c get_vector.c \
 		get_type.c light.c parse_file.c parse_marks.c parsing_func.c \
-		read_file.c validation_main.c camera.c normals_to_figures.c calculate_light.c \
-		prepare_figures.c get_normal.c
+		read_file.c validation_main.c camera.c diffusive_light.c calculate_light.c \
+		prepare_figures.c get_normal.c specular_light.c
 
 OBJ_DIR = ./objects
 SRC_DIR = ./src

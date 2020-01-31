@@ -34,5 +34,6 @@ t_vect3d		get_normal_of_figure(t_rtv1 *rt, t_figure *f, t_vect3d *ray, t_roots *
 //		return (cos_cylinder(rt, f, ray, &p));
 //	else if (f->type == CONE)
 //		return (cos_cone(rt, f, ray, &p));
+	return (p);
 }
 

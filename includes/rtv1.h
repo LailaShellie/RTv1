@@ -109,16 +109,16 @@ typedef struct		s_rtv1
 
 int					init_mlx(t_rtv1 *rt);
 int					validation_main(t_rtv1 *rt, int ac, char **av);
-void		prepare_figures(t_rtv1 *rt);
+void				prepare_figures(t_rtv1 *rt);
 
-t_vect3d	scale_vect3d(double scale, t_vect3d *a);
-void		norm_vect3d(t_vect3d *vect);
-t_vect3d	init_vect3d(double x, double y, double z);
-double		length_vect3d(t_vect3d *a);
-t_vect3d	sub_vect3d(t_vect3d *start, t_vect3d *end);
-t_vect3d	add_vect3d(t_vect3d *start, t_vect3d *end);
-double		dot_vect3d(t_vect3d *a, t_vect3d *b);
-void		print_vect3d(t_vect3d *a);
+t_vect3d			scale_vect3d(double scale, t_vect3d *a);
+void				norm_vect3d(t_vect3d *vect);
+t_vect3d			init_vect3d(double x, double y, double z);
+double				length_vect3d(t_vect3d *a);
+t_vect3d			sub_vect3d(t_vect3d *start, t_vect3d *end);
+t_vect3d			add_vect3d(t_vect3d *start, t_vect3d *end);
+double				dot_vect3d(t_vect3d *a, t_vect3d *b);
+void				print_vect3d(t_vect3d *a);
 
 void				render(t_rtv1 *rt);
 int					trace_ray(t_rtv1 *rt, t_vect3d *ray, t_roots *t);
@@ -126,11 +126,15 @@ void				hooks(t_rtv1 *rt);
 
 int					intersection(t_vect3d *cam_pos, t_vect3d *ray, t_figure *figure, t_roots *t);
 
-double				calc_light(t_rtv1 *rt, t_roots *t, t_figure *f, t_vect3d *ray);
-double				get_normal(t_rtv1 *rt, t_figure *f, t_vect3d *ray, t_roots *t, t_light *light);
+int					calc_light(t_rtv1 *rt, t_roots *t, t_figure *f, t_vect3d *ray);
+double				get_diffusive(t_rtv1 *rt, t_figure *f, t_vect3d *ray, t_roots *t, t_light *light);
+double				get_specular(t_rtv1 *rt, t_figure *f, t_vect3d *ray, t_roots *t, t_light *light);
 
 int 				check_light(t_rtv1 *rt, t_vect3d *p, t_light *light);
 
-t_vect3d		get_normal_of_figure(t_rtv1 *rt, t_figure *f, t_vect3d *ray, t_roots *t, t_vect3d *light);
+t_vect3d			get_normal_of_figure(t_rtv1 *rt, t_figure *f, t_vect3d *ray, t_roots *t, t_vect3d *light);
+
+int					calculate_color(int color, double intensity);
+int	sum_color(int color1, int color2);
 
 #endif
