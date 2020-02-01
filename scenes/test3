@@ -5,9 +5,7 @@ camera:
    light:
             	vector 6,6,6
             	intensity 1
-    light:
-                 vector -6,6,6
-                 intensity 1
+
 
 figure:
 			type sphere

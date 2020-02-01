@@ -22,7 +22,7 @@ int			calc_light(t_rtv1 *rt, t_roots *t, t_figure *f,
 		i_spec += get_specular(rt, f, ray, t, cur);
 		cur = cur->next;
 	}
-	return (sum_color(calculate_color(f->color, i_diff), calculate_color(0xffffff, i_spec)));
+	return (sum_color(calculate_color(f->color, i_diff), calculate_color(f->color, i_spec)));
 }
 
 int 		check_light(t_rtv1 *rt, t_vect3d *p, t_light *light)
