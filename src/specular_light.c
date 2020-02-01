@@ -4,6 +4,8 @@
 
 #include "rtv1.h"
 
+#define SPEC 100
+
 double	spec_light_cone(t_rtv1 *rt, t_figure *f, t_vect3d *ray,
 						  t_roots *t, t_light *light)
 {
@@ -13,7 +15,7 @@ double	spec_light_cone(t_rtv1 *rt, t_figure *f, t_vect3d *ray,
 	t_vect3d	p;
 	t_vect3d	v;
 	t_vect3d	l;
-	double		k = 1;//(1 + f->radius * f->radius);
+	double		k = 1;
 
 	x = sub_vect3d(&f->center, &rt->cam->center);
 	v = scale_vect3d(t->closest_t, &f->direction);
@@ -38,7 +40,7 @@ double	spec_light_cone(t_rtv1 *rt, t_figure *f, t_vect3d *ray,
 	r = init_vect3d(2 * n.x * dot - l.x, 2 * n.y * dot - l.y, 2 * n.z * dot - l.z);
 	r_dot_v1 = dot_vect3d(&r, &v1);
 	if (r_dot_v1 > 0)
-		i += light->i * pow(r_dot_v1 / (length_vect3d(&r) * length_vect3d(&v1)), f->s);
+		i += light->i * pow(r_dot_v1 / (length_vect3d(&r) * length_vect3d(&v1)), SPEC);
 	return (i);
 }
 
@@ -76,7 +78,7 @@ double	spec_light_cylinder(t_rtv1 *rt, t_figure *f, t_vect3d *ray,
 	r = init_vect3d(2 * n.x * dot - l.x, 2 * n.y * dot - l.y, 2 * n.z * dot - l.z);
 	r_dot_v1 = dot_vect3d(&r, &v1);
 	if (r_dot_v1 > 0)
-		i += light->i * pow(r_dot_v1 / (length_vect3d(&r) * length_vect3d(&v1)), f->s);
+		i += light->i * pow(r_dot_v1 / (length_vect3d(&r) * length_vect3d(&v1)), SPEC);
 	return (i);
 }
 
@@ -103,7 +105,7 @@ double	spec_light_plane(t_rtv1 *rt, t_figure *f, t_vect3d *ray,
 	r = init_vect3d(2 * n.x * dot - l.x, 2 * n.y * dot - l.y, 2 * n.z * dot - l.z);
 	r_dot_v = dot_vect3d(&r, &v);
 	if (r_dot_v > 0)
-		i = light->i * pow(r_dot_v / (length_vect3d(&r) * length_vect3d(&v)), f->s);
+		i = light->i * pow(r_dot_v / (length_vect3d(&r) * length_vect3d(&v)), SPEC);
 	return (i);
 }
 
@@ -130,7 +132,11 @@ double	spec_light_sphere(t_rtv1 *rt, t_figure *f, t_vect3d *ray,
 	r = init_vect3d(2 * n.x * dot - l.x, 2 * n.y * dot - l.y, 2 * n.z * dot - l.z);
 	r_dot_v = dot_vect3d(&r, &v);
 	if (r_dot_v > 0)
-		i += light->i * pow(r_dot_v / (length_vect3d(&r) * length_vect3d(&v)), f->s);
+	{
+		i += light->i * pow(r_dot_v / (length_vect3d(&r) * length_vect3d(&v)), SPEC);
+		if (calculate_color(0xffffff, i) <= 0xfffff)
+			i = 0;
+	}
 	return (i);
 }
 

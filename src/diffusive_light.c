@@ -13,7 +13,7 @@ double	diff_light_cone(t_rtv1 *rt, t_figure *f, t_vect3d *ray,
 	t_vect3d	p;
 	t_vect3d	v;
 	t_vect3d	l;
-	double		k = 1;//(1 + f->radius * f->radius);
+	double		k = 1;
 
 	x = sub_vect3d(&f->center, &rt->cam->center);
 	v = scale_vect3d(t->closest_t, &f->direction);
@@ -31,21 +31,9 @@ double	diff_light_cone(t_rtv1 *rt, t_figure *f, t_vect3d *ray,
 	double i;
 
 	if (dot > 0)
-		i = (light->i * dot) / (length_vect3d(&l) * length_vect3d(&n));
+		i = (light->i * dot / 1.4) / (length_vect3d(&l) * length_vect3d(&n));
 	else
 		return (0);
-//	t_vect3d    r;
-//	double      r_dot_v1;
-//	t_vect3d    v1;
-//
-//	v1 = sub_vect3d(&p, &rt->cam->center);
-//	r = init_vect3d(2 * n.x * dot - l.x, 2 * n.y * dot - l.y, 2 * n.z * dot - l.z);
-//	if (f->s > 10)
-//	{
-//		r_dot_v1 = dot_vect3d(&r, &v1);
-//		if (r_dot_v1 > 0)
-//			i += light->i * pow(r_dot_v1 / (length_vect3d(&r) * length_vect3d(&v1)), f->s);
-//	}
 	return (i);
 }
 
@@ -76,21 +64,9 @@ double	diff_light_cylinder(t_rtv1 *rt, t_figure *f, t_vect3d *ray,
 	double i;
 
 	if (dot > 0)
-		i = (light->i * dot) / (length_vect3d(&l) * length_vect3d(&n));
+		i = (light->i * dot / 1.4) / (length_vect3d(&l) * length_vect3d(&n));
 	else
 		return (0);
-//	t_vect3d    r;
-//	double      r_dot_v1;
-//	t_vect3d    v1;
-//
-//	v1 = sub_vect3d(&p, &rt->cam->center);
-//	r = init_vect3d(2 * n.x * dot - l.x, 2 * n.y * dot - l.y, 2 * n.z * dot - l.z);
-//	if (f->s > 10)
-//	{
-//		r_dot_v1 = dot_vect3d(&r, &v1);
-//		if (r_dot_v1 > 0)
-//			i += light->i * pow(r_dot_v1 / (length_vect3d(&r) * length_vect3d(&v1)), f->s);
-//	}
 	return (i);
 }
 
@@ -109,7 +85,7 @@ double	diff_light_plane(t_rtv1 *rt, t_figure *f, t_vect3d *ray,
 	double dot = dot_vect3d(&l, &n);
 
 	if (dot > 0)
-		return (light->i * dot) / (length_vect3d(&l) * length_vect3d(&n));
+		return (light->i * dot / 1.4) / (length_vect3d(&l) * length_vect3d(&n));
 	return (0);
 }
 
@@ -129,21 +105,9 @@ double	diff_light_sphere(t_rtv1 *rt, t_figure *f, t_vect3d *ray,
 	double dot = dot_vect3d(&l, &n);
 
 	if (dot > 0)
-		i = light->i * (dot) / (length_vect3d(&l) * length_vect3d(&n));
+		i = light->i * (dot / 1.4) / (length_vect3d(&l) * length_vect3d(&n));
     else
         return (0);
-//	t_vect3d    r;
-//	double      r_dot_v;
-//	t_vect3d    v;
-//
-//	v = sub_vect3d(&p, &rt->cam->center);
-//	r = init_vect3d(2 * n.x * dot - l.x, 2 * n.y * dot - l.y, 2 * n.z * dot - l.z);
-//	if (f->s > 10)
-//    {
-//	    r_dot_v = dot_vect3d(&r, &v);
-//	    if (r_dot_v > 0)
-//            i += light->i * pow(r_dot_v / (length_vect3d(&r) * length_vect3d(&v)), f->s);
-//    }
 	return (i);
 }
 
