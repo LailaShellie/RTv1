@@ -10,7 +10,7 @@ int	sum_color(int color1, int color2)
 	union u_color clr2;
 
 	clr1.color = color1;
-	if (clr1.s_parts.r * clr2.s_parts.r > 255)
+	if (clr1.s_parts.r + clr2.s_parts.r > 255)
 		clr1.s_parts.r = 255;
 	else
 		clr1.s_parts.r += clr2.s_parts.r;
@@ -18,7 +18,7 @@ int	sum_color(int color1, int color2)
 		clr1.s_parts.g = 255;
 	else
 		clr1.s_parts.g += clr2.s_parts.g;
-	if (clr1.s_parts.b * clr2.s_parts.b > 255)
+	if (clr1.s_parts.b + clr2.s_parts.b > 255)
 		clr1.s_parts.b = 255;
 	else
 		clr1.s_parts.b += clr2.s_parts.b;
