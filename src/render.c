@@ -30,16 +30,16 @@ int calculate_color(int color, double intensity)
 	union u_color clr;
 
 	clr.color = color;
-	if (clr.s_parts.r * intensity > 255)
-		clr.s_parts.r = 255;
+	if (clr.s_parts.r * intensity > clr.s_parts.r)
+		clr.s_parts.r = clr.s_parts.r;
 	else
 		clr.s_parts.r *= intensity;
-	if (clr.s_parts.g * intensity > 255)
-		clr.s_parts.g = 255;
+	if (clr.s_parts.g * intensity > clr.s_parts.g)
+		clr.s_parts.g = clr.s_parts.g;
 	else
 		clr.s_parts.g *= intensity;
-	if (clr.s_parts.b * intensity > 255)
-		clr.s_parts.b = 255;
+	if (clr.s_parts.b * intensity > clr.s_parts.b)
+		clr.s_parts.b = clr.s_parts.b;
 	else
 		clr.s_parts.b *= intensity;
 	return (clr.color);
