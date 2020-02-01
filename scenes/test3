@@ -5,12 +5,15 @@ camera:
    light:
             	vector 6,6,6
             	intensity 1
+    light:
+                 vector -6,6,6
+                 intensity 1
 
 figure:
 			type sphere
 	vector 0,-1,10
 	vector 0,1,-0.1
-	color 255,0,0
+	color 255,100,100
 	radius 0.9
 	specularity 1000
 
@@ -18,7 +21,7 @@ figure:
 			type sphere
 	vector 0,-2,5
 	vector 0,1,-0.1
-	color 255,0,0
+	color 100,0,0
 	radius 0.9
 	specularity 1000
 

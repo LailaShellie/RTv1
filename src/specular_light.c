@@ -30,6 +30,8 @@ double	spec_light_cone(t_rtv1 *rt, t_figure *f, t_vect3d *ray,
 	l = sub_vect3d(&p, &light->center);
 
 	double dot = dot_vect3d(&l, &n);
+	if (dot < 0)
+		return (0);
 	double i = 0;
 
 	t_vect3d    r;
@@ -68,6 +70,8 @@ double	spec_light_cylinder(t_rtv1 *rt, t_figure *f, t_vect3d *ray,
 	l = sub_vect3d(&p, &light->center);
 
 	double dot = dot_vect3d(&l, &n);
+	if (dot < 0)
+		return (0);
 	double i = 0;
 
 	t_vect3d    r;
@@ -95,6 +99,8 @@ double	spec_light_plane(t_rtv1 *rt, t_figure *f, t_vect3d *ray,
 	l = sub_vect3d(&p, &light->center);
 
 	double dot = dot_vect3d(&l, &n);
+	if (dot < 0)
+		return (0);
 
 	double		i = 0;
 	t_vect3d    r;
@@ -124,6 +130,8 @@ double	spec_light_sphere(t_rtv1 *rt, t_figure *f, t_vect3d *ray,
 
 	double dot = dot_vect3d(&l, &n);
 
+	if (dot < 0)
+		return (0);
 	t_vect3d    r;
 	double      r_dot_v;
 	t_vect3d    v;

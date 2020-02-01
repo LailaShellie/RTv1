@@ -1,5 +1,5 @@
 camera:
-	vector 10,0,0
+	vector 0,0,0
 	vector 0,0,0
 light:
 	vector 0,0,1
