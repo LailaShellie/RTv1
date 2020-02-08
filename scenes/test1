@@ -12,7 +12,12 @@ camera:
    light:
             	vector 0,-1,4
             	intensity 1
-
+   light:
+                vector 0,-1,4
+                intensity 1
+   light:
+                vector 0,-1,4
+                intensity 100
 figure:
 			type plane
 	vector 0,-1,10

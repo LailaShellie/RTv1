@@ -4,14 +4,31 @@
 
 #include "rtv1.h"
 
+double      get_max_light(t_rtv1 *rt)
+{
+    t_light	*cur;
+    double  res;
+
+    res = 0;
+    cur = rt->lights;
+    while (cur)
+    {
+        res += cur->i;
+        cur = cur->next;
+    }
+    return (res);
+}
+
 int			calc_light(t_rtv1 *rt, t_roots *t, t_figure *f,
 		t_vect3d *ray)
 {
 	double	i_diff;
 	double	i_spec;
 	int		color;
+	double  max;
 
 	t_light	*cur;
+	max = get_max_light(rt);
 	color = f->color;
 	i_diff = 0.0;
 	i_spec = 0.0;
@@ -22,7 +39,7 @@ int			calc_light(t_rtv1 *rt, t_roots *t, t_figure *f,
 		i_spec += get_specular(rt, f, ray, t, cur);
 		cur = cur->next;
 	}
-	return (sum_color(calculate_color(f->color, i_diff), calculate_color(f->color, i_spec)));
+	return (sum_color(calculate_color(f->color, i_diff / max), calculate_color(f->color, i_spec)));
 }
 
 int 		check_light(t_rtv1 *rt, t_vect3d *p, t_light *light)

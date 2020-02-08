@@ -26,15 +26,13 @@ double	diff_light_cone(t_rtv1 *rt, t_figure *f, t_vect3d *ray,
 	n = sub_vect3d(&v, &n);
 	norm_vect3d(&n);
 	l = sub_vect3d(&p, &light->center);
+    norm_vect3d(&l);
 
 	double dot = dot_vect3d(&l, &n);
-	double i;
 
 	if (dot > 0)
-		i = (light->i * dot / 1.4) / (length_vect3d(&l) * length_vect3d(&n));
-	else
-		return (0);
-	return (i);
+        return (light->i * dot) / (length_vect3d(&l) * length_vect3d(&n));
+	return (0);
 }
 
 double	diff_light_cylinder(t_rtv1 *rt, t_figure *f, t_vect3d *ray,
@@ -59,15 +57,13 @@ double	diff_light_cylinder(t_rtv1 *rt, t_figure *f, t_vect3d *ray,
 	norm_vect3d(&n);
 
 	l = sub_vect3d(&p, &light->center);
+    norm_vect3d(&l);
 
 	double dot = dot_vect3d(&l, &n);
-	double i;
 
 	if (dot > 0)
-		i = (light->i * dot / 1.4) / (length_vect3d(&l) * length_vect3d(&n));
-	else
-		return (0);
-	return (i);
+        return (light->i * dot) / (length_vect3d(&l) * length_vect3d(&n));
+	return (0);
 }
 
 double	diff_light_plane(t_rtv1 *rt, t_figure *f, t_vect3d *ray,
@@ -81,11 +77,12 @@ double	diff_light_plane(t_rtv1 *rt, t_figure *f, t_vect3d *ray,
 	p = add_vect3d(&rt->cam->center, &p);
 	n = get_normal_of_figure(rt, f, ray, t, &light->center);
 	l = sub_vect3d(&p, &light->center);
+    norm_vect3d(&l);
 
 	double dot = dot_vect3d(&l, &n);
 
 	if (dot > 0)
-		return (light->i * dot / 1.4) / (length_vect3d(&l) * length_vect3d(&n));
+		return (light->i * dot) / (length_vect3d(&l) * length_vect3d(&n));
 	return (0);
 }
 
@@ -95,20 +92,18 @@ double	diff_light_sphere(t_rtv1 *rt, t_figure *f, t_vect3d *ray,
 	t_vect3d	p;
 	t_vect3d	n;
 	t_vect3d	l;
-	double      i;
 
 	p = scale_vect3d(t->closest_t, ray);
 	p = add_vect3d(&rt->cam->center, &p);
 	n = get_normal_of_figure(rt, f, ray, t, &light->center);
 	l = sub_vect3d(&p, &light->center);
+	norm_vect3d(&l);
 
 	double dot = dot_vect3d(&l, &n);
 
 	if (dot > 0)
-		i = light->i * (dot / 1.4) / (length_vect3d(&l) * length_vect3d(&n));
-    else
-        return (0);
-	return (i);
+        return (light->i * (dot) / (length_vect3d(&l) * length_vect3d(&n)));
+	return (0);
 }
 
 double		get_diffusive(t_rtv1 *rt, t_figure *f, t_vect3d *ray, t_roots *t, t_light *light)
