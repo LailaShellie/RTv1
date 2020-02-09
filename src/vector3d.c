@@ -70,6 +70,16 @@ double		dot_vect3d(t_vect3d *a, t_vect3d *b)
 	* b->y + a->z * b->z);
 }
 
+t_vect3d            cross_vect3d(t_vect3d *a, t_vect3d *b)
+{
+    t_vect3d v;
+
+    v.x = a->y * b->z - a->z * b->y;
+    v.y = a->z * b->x - a->x * b->z;
+    v.z = a->x * b->y - a->y * b->x;
+    return (v);
+}
+
 void		print_vect3d(t_vect3d *a)
 {
 	printf("%lf %lf %lf\n", a->x, a->y, a->z);

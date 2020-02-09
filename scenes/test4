@@ -1,13 +1,13 @@
 
 camera:
 	vector 0,0,0
-	vector 0,0,0
+	vector 0,0,1
 
    light:
             	vector 1,3,5
             	intensity 1
    light:
-            	vector 0,-1,4
+            	vector -1,0,4
             	intensity 1
 figure:
 			type sphere

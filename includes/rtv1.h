@@ -15,7 +15,7 @@
 
 # define VW 1
 # define VH 1
-# define VZ 1
+# define VZ 2
 
 # define ERR 0
 # define ERR_1 0.0 / 0.0
@@ -29,6 +29,9 @@
 # define CONE 2
 # define PLANE 3
 # define CYLINDER 4
+
+# define FDF_KEY_ESC 53
+# define FDF_KEY_Q 12
 
 # define BACKGROUND 0x000000
 
@@ -62,6 +65,9 @@ typedef struct		s_cam
 {
 	t_vect3d		center;
 	t_vect3d		direction;
+    t_vect3d		v1;
+    t_vect3d		v2;
+    t_vect3d		v3;
 }					t_cam;
 
 typedef struct		s_light
@@ -118,6 +124,7 @@ double				length_vect3d(t_vect3d *a);
 t_vect3d			sub_vect3d(t_vect3d *start, t_vect3d *end);
 t_vect3d			add_vect3d(t_vect3d *start, t_vect3d *end);
 double				dot_vect3d(t_vect3d *a, t_vect3d *b);
+t_vect3d            cross_vect3d(t_vect3d *a, t_vect3d *b);
 void				print_vect3d(t_vect3d *a);
 
 void				render(t_rtv1 *rt);
