@@ -1,7 +1,7 @@
 
 #include "validation.h"
 
-static void	ft_trim(char **line)
+void		ft_trim(char **line)
 {
 	char 	*tmp;
 

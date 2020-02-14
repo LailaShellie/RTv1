@@ -1,0 +1,17 @@
+{
+	"title": "test1",
+	"camera": {
+		"center": [0,0,1],
+		"direction": [0,0,2]
+	},
+	"lights":[
+		{
+			"center": [1,2,4],
+			"intensity": 1
+		},
+		{
+			"center": [2,3,5],
+			"intensity": 0.5
+		}
+	]
+}

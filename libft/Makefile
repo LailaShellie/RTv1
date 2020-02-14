@@ -25,7 +25,8 @@ CFILE = ft_isalpha.c ft_lstadd.c ft_lstnew.c ft_memcpy.c ft_putchar_fd.c \
 		ft_putchar.c ft_putnbr_fd.c ft_strclr.c ft_strequ.c \
 		ft_strlen.c ft_strncpy.c ft_strsplit.c ft_toupper.c ft_sqrt.c \
 		ft_strstr_kmp.c ft_zfunc.c ft_is_prime.c ft_gcd.c ft_fast_bin_pow.c ft_fast_bit_pow.c \
-		get_next_line.c ft_abs.c ft_free_mas.c ft_itoa.c ft_atod.c ft_isnumber.c
+		get_next_line.c ft_abs.c ft_free_mas.c ft_itoa.c ft_atod.c ft_isnumber.c \
+		ft_trim_stop.c
 
 OFILE = $(CFILE:.c=.o)
 
@@ -38,9 +39,9 @@ $(NAME): $(OFILE)
 	ranlib $(NAME)
 
 %.o: %.c $(HFILE)
-	gcc -Wall -Werror -Wextra -I $(HFILE) -c $< -o $@
+	gcc -Wall -Werror -Wextra -g3 -I $(HFILE) -c $< -o $@
 
-clean: 
+clean:
 	/bin/rm -f $(OFILE)
 
 fclean: clean

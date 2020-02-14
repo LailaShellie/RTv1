@@ -1,5 +1,5 @@
-
 #include "rtv1.h"
+#include "validation.h"
 
 void test(union u_color col)
 {
@@ -13,6 +13,25 @@ int main(int ac, char** av)
 
 	if (!(rt = ft_memalloc(sizeof(t_rtv1))))
 		return (0);
+
+	// checking reading file
+	int		fd;
+	char	*file;
+
+	if (ac != 2)
+		return (ERR);
+	if ((fd = open(av[1], O_RDONLY)) == -1)
+		return (ERR);
+	file = ft_filetrim_stop(fd, " \t\n", "//");
+	printf("%s\n", file);
+
+	read_json(rt, &file);
+	//ft_memdel((void**)&file);
+	return (0);
+
+
+
+
 	if (!(validation_main(rt, ac, av)))
 		return (ERR);
 	if (ERR == init_mlx(rt))

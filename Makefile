@@ -2,7 +2,8 @@ SRC = init_mlx.c main.c vector3d.c render.c intersection.c \
 		figure.c get_color.c get_parametr.c get_vector.c \
 		get_type.c light.c parse_file.c parse_marks.c parsing_func.c \
 		read_file.c validation_main.c camera.c diffusive_light.c calculate_light.c \
-		prepare_figures.c get_normal.c specular_light.c
+		prepare_figures.c get_normal.c specular_light.c \
+		parse_json_goto.c parse_json_read_param.c parse_json.c
 
 OBJ_DIR = ./objects
 SRC_DIR = ./src
@@ -22,7 +23,7 @@ all: $(NAME)
 # 	gcc -c $<
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HDR)
-	gcc  -I $(HDR_DIR) -I $(LIBFT_HDR_DIR) -I $(MLX_HDR_DIR) -o $@ -c $<
+	gcc -g3  -I $(HDR_DIR) -I $(LIBFT_HDR_DIR) -I $(MLX_HDR_DIR) -o $@ -c $<
 
 libs:
 	make -C ./libft
@@ -38,7 +39,7 @@ re: fclean all
 $(NAME): $(OBJ_DIR) libs $(OBJ)
 	#gcc -Wall -Wextra -Werror -o $(NAME) -I $(HDR) $(LIB) $(VAL) $(OBJ) -L mlx -lmlx -framework OpenGL -framework AppKit
 	@echo "test1"
-	gcc -Wall -Wextra -Werror -o $(NAME) -I $(HDR_DIR) -I $(LIBFT_HDR_DIR) -I $(MLX_HDR_DIR) $(LIB) $(VAL) $(OBJ) -L mlx -lmlx -framework OpenGL -framework AppKit
+	gcc -Wall -Wextra -Werror -g3 -o $(NAME) -I $(HDR_DIR) -I $(LIBFT_HDR_DIR) -I $(MLX_HDR_DIR) $(LIB) $(VAL) $(OBJ) -L mlx -lmlx -framework OpenGL -framework AppKit
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)

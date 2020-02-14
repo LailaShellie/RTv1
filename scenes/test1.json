@@ -1,5 +1,5 @@
 {
-	"title":"test1",
+	"title": "test1",
 	"camera":{
 		"center": [0,0,1],
 		"direction": [0,0,2]

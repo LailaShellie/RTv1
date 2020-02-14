@@ -45,4 +45,17 @@ void				add_light(t_light **lights, t_light *new);
 
 t_cam				*new_cam();
 
+void		ft_trim(char **line);
+
+/*
+** parsing json
+*/
+int		ft_gotochar(char **str, char ch);
+int		ft_goto_endnumber(char **str);
+int		ft_goto_endparam(char **str, char openchar);
+
+char	*read_parameter_to_str(char **file);
+int		read_json(t_rtv1 *rt, char **file);
+
+
 #endif
