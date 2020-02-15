@@ -53,7 +53,7 @@ int		ft_goto_endparam(char **str, char openchar)
 		closechar = -1;
 
 	if (!str || !*str)
-		return (-1);
+		return (0);
 	if (closechar == -1)
 		return (0);
 	else if (closechar == 0)
@@ -77,5 +77,5 @@ int		ft_goto_endparam(char **str, char openchar)
 			(*str)++;
 		}
 	}
-	return (-1);
+	return (0);
 }

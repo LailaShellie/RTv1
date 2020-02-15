@@ -25,7 +25,9 @@ int main(int ac, char** av)
 	file = ft_filetrim_stop(fd, " \t\n", "//");
 	printf("%s\n", file);
 
-	read_json(rt, &file);
+	if (!(read_json(rt, &file)))
+		return (ERR);
+	return (0);
 	//ft_memdel((void**)&file);
 	// return (0);
 

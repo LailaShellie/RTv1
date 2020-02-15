@@ -9,7 +9,11 @@
 		{
 			"center": [1,2,4],
 			"intensity": 1
-		}
+		},
+		{
+			"center": [1,2,4],
+			"intensity": 1
+		}		
 	],
 	"figures":[
 		{
