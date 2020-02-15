@@ -4,61 +4,121 @@
 int		read_title_2nd_level(t_rtv1 *rt, char **file)
 {
 	rt->title = read_parameter_to_str(file);
-	printf("title = %s\n", rt->title);
+	printf("\ttitle = %s\n", rt->title);
 	return (1);
 }
 
 int		read_camera_2nd_level(t_rtv1 *rt, char **file)
 {
 	char	*param_name;
-	char	*param;
+	char	*value;
 	char	*param_camera;
 
 	if (rt->cam)
 		return (ERR);
 	rt->cam = new_cam();
 	param_camera = read_parameter_to_str(file);
-	printf("camera:\n");
+	printf("\tcamera:\n");
 	while ((param_name = read_parameter_to_str(&param_camera)))
 	{
-		param = read_parameter_to_str(&param_camera);
-		printf("%s = %s\n", param_name, param);
+		value = read_parameter_to_str(&param_camera);
+		printf("\t\t%s = %s\n", param_name, value);
+		if (ft_strequ(param_name, "center"))
+			get_xyz(value, &rt->cam->center);
+		if (ft_strequ(param_name, "direction"))
+			get_xyz(value, &rt->cam->direction);
 	}
+	printf("\t\t\tcamera data:\n");
+	printf("\t\t\t\tcenter: "); print_vect3d(&rt->cam->center);
+	printf("\t\t\t\tdirection: "); print_vect3d(&rt->cam->direction);
 	return (1);
 }
 
-int		read_light_params_4th_level(t_rtv1 *rt, char **file)
+double		get_light_intensity(char *str)
+{
+	double 	i;
+
+	if (ft_isdouble(str))
+		i = ft_atod(str);
+	else
+		i = ERR_1;
+	if (i > 1.0)
+		i = 1.0;
+	if (i < 0.0)
+		i = 0.0;
+	return (i);
+}
+
+int		read_light_params_4th_level(t_light *light, char **file)
 {
 	char	*param_name;
 	char	*value;
 
 	while ((param_name = read_parameter_to_str(file)))
 		{
+			value = read_parameter_to_str(file);
 			if (ft_strequ(param_name, "center"))
-				value = read_parameter_to_str(file);
+				get_xyz(value, &light->center);
 			else if (ft_strequ(param_name, "intensity"))
-				value = read_parameter_to_str(file);
-			printf("%s %s\n", param_name, value);
+				light->i = get_light_intensity(value);
+			printf("\t\t\t%s %s\n", param_name, value);
 		}
+	printf("\t\t\tlight data:\n");
+	printf("\t\t\t\tcenter: "); print_vect3d(&light->center);
+	printf("\t\t\t\tintensity: %lf\n", light->i);
 }
 
 int		read_lights_2nd_level(t_rtv1 *rt, char **file)
 {
 	char	*param_lights;
 	char	*param_light;
+	t_light	*new;
 
 	param_lights = read_parameter_to_str(file);
-	printf("lights: %s\n", param_lights);
+	printf("\tlights: %s\n", param_lights);
 	while ((param_light = read_parameter_to_str(&param_lights)))
 		{
-			printf("light: %s\n", param_light);
-			read_light_params_4th_level(rt, &param_light);
+			if (!(new = new_light()))
+				return (ERR);
+			printf("\t\tlight: %s\n", param_light);
+			read_light_params_4th_level(new, &param_light);
+			add_light(&rt->lights, new);
 		}
 	return (1);
 }
 
+int		read_figure_params_4th_level(t_figure *figure, char **file)
+{
+	char	*param_name;
+	char	*value;
+
+	while ((param_name = read_parameter_to_str(file)))
+		{
+			value = read_parameter_to_str(file);
+			if (ft_strequ(param_name, "type"))
+				figure->type = 
+				get_xyz(value, &light->center);
+
+			printf("\t\t\t%s %s\n", param_name, value);
+		}
+}
+
 int		read_figures_2nd_level(t_rtv1 *rt, char **file)
 {
+	char		*param_figures;
+	char		*param_figure;
+	t_figure	*new;
+
+	param_figures = read_parameter_to_str(file);
+	printf("\tfigures: %s\n", param_figures);
+	while ((param_figure = read_parameter_to_str(&param_figures)))
+		{
+			if (!(new = new_figure()))
+				return (ERR);
+			printf("\t\tfigure: %s\n", param_figure);
+			read_figure_params_4th_level(new, &param_figure);
+		}
+	return (1);
 	return (1);
 }
 

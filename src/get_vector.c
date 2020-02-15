@@ -4,7 +4,7 @@
 
 #include "validation.h"
 
-static int		get_xyz(char *str, t_vect3d *vect)
+int		get_xyz(char *str, t_vect3d *vect)
 {
 	char	**split;
 	int 	len;

@@ -1,6 +1,8 @@
 {
 	"files.associations": {
 		"rtv1.h": "c",
-		"validation.h": "c"
+		"validation.h": "c",
+		"sstream": "c",
+		"stdio.h": "c"
 	}
 }

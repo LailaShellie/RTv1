@@ -29,6 +29,7 @@ char				**check_param(char *str);
 int					parse_marks(t_rtv1 *rt, char ***marks);
 
 int					get_vector(char *str, t_vect3d *vect);
+int                 get_xyz(char *str, t_vect3d *vect);
 
 double				get_radius(char *str);
 double				get_intensity(char *str);
