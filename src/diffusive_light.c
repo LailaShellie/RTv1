@@ -31,7 +31,7 @@ double	diff_light_cone(t_rtv1 *rt, t_figure *f, t_vect3d *ray,
 	double dot = dot_vect3d(&l, &n);
 
 	if (dot > 0)
-        return (light->i * dot) / (length_vect3d(&l) * length_vect3d(&n));
+        return (light->i * dot / rt->total_light);
 	return (0);
 }
 
@@ -62,7 +62,7 @@ double	diff_light_cylinder(t_rtv1 *rt, t_figure *f, t_vect3d *ray,
 	double dot = dot_vect3d(&l, &n);
 
 	if (dot > 0)
-        return (light->i * dot) / (length_vect3d(&l) * length_vect3d(&n));
+        return (light->i * dot / rt->total_light);
 	return (0);
 }
 
@@ -82,7 +82,7 @@ double	diff_light_plane(t_rtv1 *rt, t_figure *f, t_vect3d *ray,
 	double dot = dot_vect3d(&l, &n);
 
 	if (dot > 0)
-		return (light->i * dot) / (length_vect3d(&l) * length_vect3d(&n));
+		return (light->i * dot / rt->total_light);
 	return (0);
 }
 
@@ -102,7 +102,7 @@ double	diff_light_sphere(t_rtv1 *rt, t_figure *f, t_vect3d *ray,
 	double dot = dot_vect3d(&l, &n);
 
 	if (dot > 0)
-        return (light->i * (dot) / (length_vect3d(&l) * length_vect3d(&n)));
+        return (light->i * dot / rt->total_light);
 	return (0);
 }
 

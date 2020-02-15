@@ -1,6 +1,6 @@
 camera:
 	vector 0,0,0
-	vector 0,0,0
+	vector 0,0,1
 light:
 	vector 0,0,1
 	intensity 1

@@ -21,7 +21,7 @@ figure:
 			type cylinder
 	vector 1,-1,6
 	vector 1,1,0
-	color 150,0,150
+	color 255,0,255
 	radius 0.3
 	specularity 200
 
@@ -33,12 +33,21 @@ figure:
 	radius 0.5
 	specularity 200
 
+
+figure:
+			type cylinder
+	vector 1,-1,6
+	vector 1,-1,0
+	color 255,0,255
+	radius 0.3
+	specularity 200
+
 figure:
 			type cylinder
 	vector -1,1,6
 	vector 1,0,0
-	color 150,150,0
-	radius 0.3
+	color 255,255,0
+	radius 0.2
 	specularity 200
 
 	figure:
