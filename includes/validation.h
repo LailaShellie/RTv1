@@ -36,8 +36,10 @@ double				get_intensity(char *str);
 double				get_specularity(char *str);
 
 int					get_type(char *str);
+int			        choose_type(char *line);
 
 int					get_color(char *str);
+int				    get_rgb(char *str);
 
 t_figure			*new_figure();
 void				add_figure(t_figure **figures, t_figure *new);

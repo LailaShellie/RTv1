@@ -10,7 +10,7 @@ int	set_colors(unsigned char o, unsigned char r, \
 	return ((int)o << 24 | (int)r << 16 | (int)g << 8 | (int)b);
 }
 
-static int		get_rgb(char *str)
+int				get_rgb(char *str)
 {
 	char	**split;
 	int 	len;

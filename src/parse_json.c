@@ -34,20 +34,45 @@ int		read_camera_2nd_level(t_rtv1 *rt, char **file)
 	return (1);
 }
 
+double		get_double(char *str)
+{
+	if (ft_isdouble(str))
+		return (ft_atod(str));
+	else
+		return(ERR_1);
+}
+
 double		get_light_intensity(char *str)
 {
 	double 	i;
 
-	if (ft_isdouble(str))
-		i = ft_atod(str);
-	else
-		i = ERR_1;
+	i = get_double(str);
 	if (i > 1.0)
 		i = 1.0;
 	if (i < 0.0)
 		i = 0.0;
 	return (i);
 }
+
+void		print_figure(t_figure *figure)
+{
+	printf("\t\t\tfigure data:\n");
+	printf("\t\t\t\ttype: %d\n", figure->type);
+	printf("\t\t\t\tcenter: "); print_vect3d(&figure->center);
+	printf("\t\t\t\tdirection: "); print_vect3d(&figure->direction);
+	printf("\t\t\t\tcolor: 0x%06x\n", figure->color);
+	printf("\t\t\t\tradius: %lf\n", figure->radius);
+	printf("\t\t\t\tspecularity: %lf\n", figure->s);
+}
+
+void		print_light(t_light *light)
+{
+	printf("\t\t\tlight data:\n");
+	printf("\t\t\t\tcenter: "); print_vect3d(&light->center);
+	printf("\t\t\t\tintensity: %lf\n", light->i);
+}
+
+
 
 int		read_light_params_4th_level(t_light *light, char **file)
 {
@@ -63,9 +88,7 @@ int		read_light_params_4th_level(t_light *light, char **file)
 				light->i = get_light_intensity(value);
 			printf("\t\t\t%s %s\n", param_name, value);
 		}
-	printf("\t\t\tlight data:\n");
-	printf("\t\t\t\tcenter: "); print_vect3d(&light->center);
-	printf("\t\t\t\tintensity: %lf\n", light->i);
+	print_light(light);
 }
 
 int		read_lights_2nd_level(t_rtv1 *rt, char **file)
@@ -93,14 +116,23 @@ int		read_figure_params_4th_level(t_figure *figure, char **file)
 	char	*value;
 
 	while ((param_name = read_parameter_to_str(file)))
-		{
-			value = read_parameter_to_str(file);
-			if (ft_strequ(param_name, "type"))
-				figure->type = 
-				get_xyz(value, &light->center);
-
-			printf("\t\t\t%s %s\n", param_name, value);
-		}
+	{
+		value = read_parameter_to_str(file);
+		if (ft_strequ(param_name, "type"))
+			figure->type = choose_type(value);
+		else if (ft_strequ(param_name, "center"))
+			get_xyz(value, &figure->center);
+		else if (ft_strequ(param_name, "direction"))
+			get_xyz(value, &figure->direction);
+		else if (ft_strequ(param_name, "color"))
+			figure->color = get_rgb(value);
+		else if (ft_strequ(param_name, "radius"))
+			figure->radius = get_double(value);
+		else if (ft_strequ(param_name, "specularity"))
+			figure->s = get_double(value);
+		printf("\t\t\t%s %s\n", param_name, value);
+	}
+	print_figure(figure);
 }
 
 int		read_figures_2nd_level(t_rtv1 *rt, char **file)
@@ -117,6 +149,7 @@ int		read_figures_2nd_level(t_rtv1 *rt, char **file)
 				return (ERR);
 			printf("\t\tfigure: %s\n", param_figure);
 			read_figure_params_4th_level(new, &param_figure);
+			add_figure(&rt->figures, new);
 		}
 	return (1);
 	return (1);

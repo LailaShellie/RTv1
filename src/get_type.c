@@ -3,7 +3,7 @@
 
 #include "validation.h"
 
-static int	choose_type(char *line)
+int			choose_type(char *line)
 {
 	if (ft_strcmp(line, "sphere") == 0)
 		return (SPHERE);

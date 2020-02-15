@@ -27,13 +27,13 @@ int main(int ac, char** av)
 
 	read_json(rt, &file);
 	//ft_memdel((void**)&file);
-	return (0);
+	// return (0);
 
 
 
 
-	if (!(validation_main(rt, ac, av)))
-		return (ERR);
+	// if (!(validation_main(rt, ac, av)))
+	// 	return (ERR);
 	if (ERR == init_mlx(rt))
 		return (0);
 	prepare_figures(rt);

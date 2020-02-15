@@ -18,7 +18,7 @@ static int get_figure(t_rtv1 *rt, char **str)
 		return (ERR);
 	if (!(new->radius = get_radius(str[ARG5])))
 		return (ERR);
-	if (!(new->s = get_specularity(str[ARG6])))
+	if (!(new->s = get_spec¡ularity(str[ARG6])))
 		return (ERR);
 	add_figure(&rt->figures, new);
 	return (1);
