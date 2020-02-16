@@ -3,8 +3,10 @@ SRC = init_mlx.c main.c vector3d.c render.c intersection.c \
 		get_type.c light.c parse_file.c parse_marks.c parsing_func.c \
 		read_file.c validation_main.c camera.c diffusive_light.c calculate_light.c \
 		prepare_figures.c get_normal.c specular_light.c \
-		parse_json_goto.c parse_json_read_param.c parse_json.c\
-		print_data.c parse_json_getdata.c parse_json_data_params.c
+		parse_json_goto.c parse_json_read_param.c parse_json.c \
+		print_data.c parse_json_getdata.c parse_json_data_params.c \
+		parse_json_name_value.c \
+		parse_json_2nd_level.c parse_json_3rd_level.c
 
 OBJ_DIR = ./objects
 SRC_DIR = ./src

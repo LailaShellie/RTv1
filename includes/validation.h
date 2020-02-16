@@ -68,14 +68,22 @@ int		ft_goto_endparam(char **str, char openchar);
 double		get_double(char *str);
 double		get_light_intensity(char *str);
 
-int		parse_params_camera(t_rtv1 *rt, char *param_name, char *value, t_cam *camera);
-int		parse_params_light(t_rtv1 *rt, char *param_name, char *value, t_light *light);
-int		parse_params_figure(t_rtv1 *rt, char *param_name, char *value, t_figure *figure);
-
-
 char	*read_parameter_to_str(char **file);
+int		parse_param_name_value(char *parameters, int func(), void *param);
+
+int		parse_params_scene(char *param_name, char *value, t_rtv1 *rt);
+int		parse_params_camera(char *param_name, char *value, t_cam *camera);
+int		parse_params_light(char *param_name, char *value, t_light *light);
+int		parse_params_figure(char *param_name, char *value, t_figure *figure);
+
 int		read_json(t_rtv1 *rt, int fd);
 
+int		read_title_2nd_level(t_rtv1 *rt, char *param_title);
+int		read_camera_2nd_level(t_rtv1 *rt, char *parameters);
+int		read_lights_2nd_level(t_rtv1 *rt, char *parameters);
+int		read_figures_2nd_level(t_rtv1 *rt, char *parameters);
 
+int		read_light_3rd_level(t_rtv1 *rt, char *parameters);
+int		read_figure_3rd_level(t_rtv1 *rt, char *parameters);
 
 #endif

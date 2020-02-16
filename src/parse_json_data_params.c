@@ -2,20 +2,37 @@
 #include "validation.h"
 #include "errno.h"
 
-int		parse_params_camera(t_rtv1 *rt, char *param_name, char *value, t_cam *camera)
+int		parse_params_scene(char *param_name, char *value, t_rtv1 *rt)
 {
 	int		res;
 
-	if (ft_strequ(param_name, "center"))
-		res = get_xyz(value, &rt->cam->center);
-	else if (ft_strequ(param_name, "direction"))
-		res = get_xyz(value, &rt->cam->direction);
+	if (ft_strequ(param_name, "title"))
+		res = read_title_2nd_level(rt, value);
+	else if (ft_strequ(param_name, "camera"))
+		res = read_camera_2nd_level(rt, value);
+	else if (ft_strequ(param_name, "lights"))
+		res = read_lights_2nd_level(rt, value);
+	else if (ft_strequ(param_name, "figures"))
+		res = read_figures_2nd_level(rt, value);
 	else
 		res = ERR;
 	return (res);
 }
 
-int		parse_params_light(t_rtv1 *rt, char *param_name, char *value, t_light *light)
+int		parse_params_camera(char *param_name, char *value, t_cam *camera)
+{
+	int		res;
+
+	if (ft_strequ(param_name, "center"))
+		res = get_xyz(value, &camera->center);
+	else if (ft_strequ(param_name, "direction"))
+		res = get_xyz(value, &camera->direction);
+	else
+		res = ERR;
+	return (res);
+}
+
+int		parse_params_light(char *param_name, char *value, t_light *light)
 {
 	if (ft_strequ(param_name, "center"))
 		get_xyz(value, &light->center);
@@ -26,7 +43,7 @@ int		parse_params_light(t_rtv1 *rt, char *param_name, char *value, t_light *ligh
 	return (1);
 }
 
-int		parse_params_figure(t_rtv1 *rt, char *param_name, char *value, t_figure *figure)
+int		parse_params_figure(char *param_name, char *value, t_figure *figure)
 {
 	if (ft_strequ(param_name, "type"))
 		figure->type = choose_type(value);
