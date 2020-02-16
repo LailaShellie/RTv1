@@ -6,7 +6,7 @@
 	},
 	"lights":[
 		{
-			"center": [1,2,4],
+			"center": [1,10,4],
 			"intensity": 1
 		},
 		{
@@ -24,18 +24,42 @@
 			"specularity": 12
 		},
 		{
+			"type": "cylinder",
+			"center": [1,-1,6],
+			"direction": [1,1,0],
+			"color": [200,0,200],
+			"radius": 0.3,
+			"specularity": 200
+		},
+		{
 			"type": "sphere",
 			"center": [-1.8,-1,7],
 			"direction": [1,1,0],
 			"color": [150,0,150],
-			"radius": 0.5,
+			"radius": 1,
+			"specularity": 200
+		},
+		{
+			"type": "cylinder",
+			"center": [1,-1,6],
+			"direction": [1,1,0],
+			"color": [200,200,200],
+			"radius": 0.3,
+			"specularity": 200
+		},
+		{
+			"type": "cylinder",
+			"center": [1,-1,6],
+			"direction": [1,0,0],
+			"color": [200,200,0],
+			"radius": 0.2,
 			"specularity": 200
 		},
 		{
 			"type": "cone",
-			"center": [0,0,10],
+			"center": [-1.5,-0.5,6.5],
 			"direction": [0.1,1,0],
-			"color": [150,150,0],
+			"color": [150,50,100],
 			"radius": 0.7,
 			"specularity": 200
 		}

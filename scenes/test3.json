@@ -1,0 +1,39 @@
+{
+	"title": "test3",
+	"camera": {
+		"center": [0,0,0],
+		"direction": [0,0,1]
+	},
+	"lights": [
+		{
+			"center": [6,6,6],
+			"intensity": 1
+		}
+	],
+	"figures": [
+		{
+			"type": "sphere",
+			"center": [0,-1,10],
+			"direction": [0,1,-0.1],
+			"color": [255,100,100],
+			"radius": 0.9,
+			"specularity": 1000
+		},
+		{
+			"type": "sphere",
+			"center": [0,-2,5],
+			"direction": [0,1,-0.1],
+			"color": [100,0,0],
+			"radius": 0.9,
+			"specularity": 1000
+		},
+		{
+			"type": "sphere",
+			"center": [0,1,10],
+			"direction": [0,1,-0.1],
+			"color": [255,0,0],
+			"radius": 0.9,
+			"specularity": 1000
+		}
+	]
+}
