@@ -51,14 +51,31 @@ t_cam				*new_cam();
 void		ft_trim(char **line);
 
 /*
+** print data
+*/
+void		print_figure(t_figure *figure);
+void		print_light(t_light *light);
+void		print_camera(t_cam *cam);
+
+
+/*
 ** parsing json
 */
 int		ft_gotochar(char **str, char ch);
 int		ft_goto_endnumber(char **str);
 int		ft_goto_endparam(char **str, char openchar);
 
+double		get_double(char *str);
+double		get_light_intensity(char *str);
+
+int		parse_params_camera(t_rtv1 *rt, char *param_name, char *value, t_cam *camera);
+int		parse_params_light(t_rtv1 *rt, char *param_name, char *value, t_light *light);
+int		parse_params_figure(t_rtv1 *rt, char *param_name, char *value, t_figure *figure);
+
+
 char	*read_parameter_to_str(char **file);
-int		read_json(t_rtv1 *rt, char **file);
+int		read_json(t_rtv1 *rt, int fd);
+
 
 
 #endif
