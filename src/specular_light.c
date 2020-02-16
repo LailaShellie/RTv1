@@ -19,7 +19,9 @@ double		get_specular(t_rtv1 *rt, t_light *light)
     if (dot < 0)
         return (0);
     v = sub_vect3d(&rt->calc.p, &rt->cam->center);
-    r = init_vect3d(2 * rt->calc.n.x * dot - l.x, 2 * rt->calc.n.y * dot - l.y, 2 * rt->calc.n.z * dot - l.z);
+    r = init_vect3d(2 * rt->calc.n.x * dot - l.x,
+            2 * rt->calc.n.y * dot - l.y,
+            2 * rt->calc.n.z * dot - l.z);
     r_dot_v = dot_vect3d(&r, &v);
     if (r_dot_v > 0)
         return (light->i * pow(r_dot_v / (length_vect3d(&r) * length_vect3d(&v)), SPEC) / rt->total_light);

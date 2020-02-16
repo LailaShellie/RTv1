@@ -4,9 +4,12 @@
 
 #include "rtv1.h"
 
-void		normal_plane(t_rtv1 *rt, t_light *light)
+void		normal_plane(t_rtv1 *rt)
 {
-    if (dot_vect3d(&rt->calc.closest_f->direction, &light->center) > 0)
+    t_vect3d    cam_p;
+
+    cam_p = sub_vect3d(&rt->calc.p, &rt->cam->center);
+    if (dot_vect3d(&rt->calc.closest_f->direction, &cam_p) > 0)
         rt->calc.n = scale_vect3d(1, &rt->calc.closest_f->direction);
     else
         rt->calc.n = scale_vect3d(-1, &rt->calc.closest_f->direction);
@@ -34,13 +37,13 @@ void       normal_cylinder_cone(t_rtv1 *rt)
     norm_vect3d(&rt->calc.n);
 }
 
-void		get_normal_of_figure(t_rtv1 *rt, t_light *light)
+void		get_normal_of_figure(t_rtv1 *rt)
 {
 
 	if (rt->calc.closest_f->type == SPHERE)
 		normal_sphere(rt);
 	else if (rt->calc.closest_f->type == PLANE)
-		normal_plane(rt, light);
+		normal_plane(rt);
 	else if (rt->calc.closest_f->type == CYLINDER)
 		normal_cylinder_cone(rt);
     else if (rt->calc.closest_f->type == CONE)

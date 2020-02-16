@@ -10,8 +10,8 @@
 # include "mlx.h"
 # include "libft.h"
 
-# define W 800
-# define H 800
+# define W 1000
+# define H 1000
 
 # define VW 1
 # define VH 1
@@ -150,7 +150,7 @@ double				get_specular(t_rtv1 *rt, t_light *light);
 
 int 				check_light(t_rtv1 *rt, t_vect3d *p, t_light *light);
 
-void			get_normal_of_figure(t_rtv1 *rt, t_light *light);
+void			get_normal_of_figure(t_rtv1 *rt);
 
 int					calculate_color(int color, double intensity);
 int	sum_color(int color1, int color2);
