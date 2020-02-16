@@ -117,11 +117,8 @@ typedef struct		s_rtv1
     t_img			*img;
     char			*file;
     char			**split;
-<<<<<<< HEAD
 	char			*title;
-=======
     int             total_light;
->>>>>>> master
     t_cam			*cam;
     t_light			*lights;
     t_figure		*figures;
