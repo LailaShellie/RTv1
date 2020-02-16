@@ -35,10 +35,27 @@ void		calculate_consts(t_rtv1 *rt, t_figure *f)
 	f->oc = sub_vect3d(&f->center, &rt->cam->center);
 }
 
+double      get_max_light(t_rtv1 *rt)
+{
+    t_light	*cur;
+    double  res;
+
+    res = 0;
+    cur = rt->lights;
+    while (cur)
+    {
+        res += cur->i;
+        cur = cur->next;
+    }
+    return (res);
+}
+
 void		prepare_figures(t_rtv1 *rt)
 {
 	t_figure	*cur;
 
+	rt->total_light = get_max_light(rt);
+	rt->total_light = (rt->total_light < 1 ? 1 : rt->total_light);
 	calculate_cam_consts(rt);
 	cur = rt->figures;
 	while (cur)

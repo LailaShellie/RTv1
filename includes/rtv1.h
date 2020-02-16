@@ -10,8 +10,8 @@
 # include "mlx.h"
 # include "libft.h"
 
-# define W 800
-# define H 800
+# define W 1000
+# define H 1000
 
 # define VW 1
 # define VH 1
@@ -101,6 +101,15 @@ typedef struct		s_img
     int				endian;
 }					t_img;
 
+typedef struct      s_calc
+{
+    t_vect3d        ray;
+    t_vect3d        p;
+    t_vect3d        n;
+    t_roots         t;
+    t_figure        *closest_f;
+}                   t_calc;
+
 typedef struct		s_rtv1
 {
     void			*mlx_ptr;
@@ -108,10 +117,15 @@ typedef struct		s_rtv1
     t_img			*img;
     char			*file;
     char			**split;
+<<<<<<< HEAD
 	char			*title;
+=======
+    int             total_light;
+>>>>>>> master
     t_cam			*cam;
     t_light			*lights;
     t_figure		*figures;
+    t_calc          calc;
 }                     t_rtv1;
 
 int					init_mlx(t_rtv1 *rt);
@@ -129,18 +143,18 @@ t_vect3d            cross_vect3d(t_vect3d *a, t_vect3d *b);
 void				print_vect3d(t_vect3d *a);
 
 void				render(t_rtv1 *rt);
-int					trace_ray(t_rtv1 *rt, t_vect3d *ray, t_roots *t);
+int					trace_ray(t_rtv1 *rt);
 void				hooks(t_rtv1 *rt);
 
-int					intersection(t_vect3d *cam_pos, t_vect3d *ray, t_figure *figure, t_roots *t);
+int					intersection(t_rtv1 *rt, t_figure *figure);
 
-int					calc_light(t_rtv1 *rt, t_roots *t, t_figure *f, t_vect3d *ray);
-double				get_diffusive(t_rtv1 *rt, t_figure *f, t_vect3d *ray, t_roots *t, t_light *light);
-double				get_specular(t_rtv1 *rt, t_figure *f, t_vect3d *ray, t_roots *t, t_light *light);
+int					calc_light(t_rtv1 *rt);
+double				get_diffusive(t_rtv1 *rt, t_light *light);
+double				get_specular(t_rtv1 *rt, t_light *light);
 
 int 				check_light(t_rtv1 *rt, t_vect3d *p, t_light *light);
 
-t_vect3d			get_normal_of_figure(t_rtv1 *rt, t_figure *f, t_vect3d *ray, t_roots *t, t_vect3d *light);
+void			get_normal_of_figure(t_rtv1 *rt);
 
 int					calculate_color(int color, double intensity);
 int	sum_color(int color1, int color2);

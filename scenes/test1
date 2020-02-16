@@ -7,8 +7,13 @@ camera:
 	vector 0,0,2
 
    light:
+            	vector 1,10,4
+            	intensity 1
+
+   light:
             	vector 1,2,4
             	intensity 1
+
 figure:
 			type plane
 	vector 0,-1,10
@@ -21,7 +26,7 @@ figure:
 			type cylinder
 	vector 1,-1,6
 	vector 1,1,0
-	color 150,0,150
+	color 200,0,200
 	radius 0.3
 	specularity 200
 
@@ -30,22 +35,30 @@ figure:
 	vector -1.8,-1,7
 	vector 1,1,0
 	color 150,0,150
-	radius 0.5
+	radius 1
+	specularity 200
+
+figure:
+			type cylinder
+	vector 1,-1,6
+	vector 1,-1,0
+	color 200,200,200
+	radius 0.3
 	specularity 200
 
 figure:
 			type cylinder
 	vector -1,1,6
 	vector 1,0,0
-	color 150,150,0
-	radius 0.3
+	color 200,200,0
+	radius 0.2
 	specularity 200
 
 	figure:
                        			type cone
-                       	vector 0,0,10
+                       	vector -1.5,-0.5,6.5
                        	vector 0.1,1,0
-                       	color 150,150,0
+                       	color 150,50,100
                        	radius 0.7
                        	specularity 200
 
