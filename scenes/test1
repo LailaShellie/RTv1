@@ -38,7 +38,7 @@ figure:
 			type cylinder
 	vector 1,-1,6
 	vector 1,-1,0
-	color 255,0,255
+	color 255,255,255
 	radius 0.3
 	specularity 200
 

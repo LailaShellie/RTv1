@@ -68,58 +68,47 @@ int calculate_color(int color, double intensity)
 //
 //}
 
-int		trace_ray(t_rtv1 *rt, t_vect3d *ray, t_roots *t)
+int		trace_ray(t_rtv1 *rt)
 {
 	t_figure	*cur;
-	t_figure	*closest_f;
 
-	closest_f = 0;
-	t->closest_t = INF;
+	rt->calc.closest_f = 0;
+	rt->calc.t.closest_t = INF;
 	cur = rt->figures;
 	while (cur)
 	{
-		if (intersection(&rt->cam->center, ray, cur, t))
+		if (intersection(rt, cur))
 		{
-			if (t->t1 > VZ && t->t1 < t->closest_t)
+			if (rt->calc.t.t1 > VZ && rt->calc.t.t1 < rt->calc.t.closest_t)
 			{
-				t->closest_t = t->t1;
-				closest_f = cur;
+                rt->calc.t.closest_t = rt->calc.t.t1;
+				rt->calc.closest_f = cur;
 			}
-			if (t->t2 > VZ && t->t2 < t->closest_t)
+			if (rt->calc.t.t2 > VZ && rt->calc.t.t2 < rt->calc.t.closest_t)
 			{
-				t->closest_t = t->t2;
-				closest_f = cur;
+                rt->calc.t.closest_t = rt->calc.t.t2;
+				rt->calc.closest_f = cur;
 			}
 		}
 		cur = cur->next;
 	}
-	if (closest_f == 0)
+	if (rt->calc.closest_f == 0)
 		return (BACKGROUND);
-	return (calc_light(rt, t, closest_f, ray));
+	return (calc_light(rt));
 }
 
 t_vect3d    gen_ray(t_rtv1 *rt, int x, int y)
 {
-    t_vect3d	ray;
-    double         u;
-    double         v;
+    t_vect3d        ray;
+    double          u;
+    double          v;
 
     u = ((double)W - (double)x * VZ) / H;
     v = ((double)H - (double)y * VZ) / W;
 
-
-//    u = (double)(x - (double)W / 2) * ((double)VW / W);
-//    v = -(double)(y - (double)H / 2) * ((double)VH / H);
-//    printf("%lf\n", u);
-//    printf("%lf\n", v);
-//  ray = init_vect3d((double)(x - (double)W / 2) * ((double)VW / W),
-//              -(double)(y - (double)H / 2) * ((double)VH / H), VZ);
- //   u * i.x + v * j.x + FOV * k.x, u * i.y + v * j.y + FOV * k.y,
-
     ray = init_vect3d(u * rt->cam->v1.x + v * rt->cam->v2.x + VZ * rt->cam->v3.x,
                       u * rt->cam->v1.y + v * rt->cam->v2.y + VZ * rt->cam->v3.y,
                       u * rt->cam->v1.z + v * rt->cam->v2.z + VZ * rt->cam->v3.z);
- //   u * i.z + v * j.z + FOV * k.z
     norm_vect3d(&ray);
     return (ray);
 }
@@ -128,8 +117,6 @@ void		render(t_rtv1 *rt)
 {
 	int 		x;
 	int 		y;
-	t_vect3d	ray;
-	t_roots		t;
 
 	y = -1;
 	while (++y < H)
@@ -137,16 +124,9 @@ void		render(t_rtv1 *rt)
 		x = -1;
 		while (++x < W)
 		{
-            ray = gen_ray(rt, x, y);
+            rt->calc.ray = gen_ray(rt, x, y);
 			((int *)rt->img->data)[x + y * rt->img->size_line / 4]
-			= trace_ray(rt, &ray, &t);
-
-//            ray = init_vect3d((double)(x - (double)W / 2) * ((double)VW / W),
-//                              -(double)(y - (double)H / 2) * ((double)VH / H), VZ);
-//            ray = sub_vect3d(&rt->cam->center, &ray);
-//            //norm_vect3d(&ray);
-//            ((int *)rt->img->data)[x + y * rt->img->size_line / 4]
-//                    = trace_ray(rt, &ray, &t);
+			= trace_ray(rt);
 		}
 	}
 	mlx_put_image_to_window(rt->mlx_ptr, rt->win_ptr, rt->img->img_ptr, 0, 0);

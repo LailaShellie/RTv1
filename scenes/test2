@@ -5,10 +5,10 @@ light:
 	vector 0,0,1
 	intensity 1
 figure:
-    type sphere
+    type cylinder
     vector 0,0,5
     vector 1,0,0
-    color 255,255,0
+    color 200,200,0
     radius 0.3
     specularity 123
 figure:
