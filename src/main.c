@@ -10,21 +10,16 @@ void test(union u_color col)
 int main(int ac, char** av)
 {
     t_rtv1      *rt;
+	int		fd;
 
 	if (!(rt = ft_memalloc(sizeof(t_rtv1))))
 		return (0);
-
-	// checking reading file
-	int		fd;
-
 	if (ac != 2)
 		return (ERR);
 	if ((fd = open(av[1], O_RDONLY)) == -1)
 		return (ERR);
 	if (!(read_json(rt, fd)))
 		return (ERR);
-	// if (!(validation_main(rt, ac, av)))
-	// 	return (ERR);
 	if (ERR == init_mlx(rt))
 		return (0);
 	prepare_figures(rt);
