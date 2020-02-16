@@ -4,5 +4,6 @@
 		"validation.h": "c",
 		"sstream": "c",
 		"stdio.h": "c"
-	}
+	},
+	"zenMode.hideLineNumbers": false
 }

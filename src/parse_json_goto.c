@@ -47,7 +47,7 @@ int		ft_goto_endparam(char **str, char openchar)
 		closechar = ']';
 	else if (openchar == '{')
 		closechar = '}';
-	else if ('0' <= openchar && openchar <= '9')
+	else if (('0' <= openchar && openchar <= '9') || openchar == '.')
 		closechar = 0;
 	else
 		closechar = -1;
