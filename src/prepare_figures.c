@@ -30,7 +30,6 @@ void		calculate_consts(t_rtv1 *rt, t_figure *f)
 				f->v3.y * f->v3.z,
 				-f->v3.y * f->v3.y
 				-f->v3.x * f->v3.x);
-	f->oc = sub_vect3d(&f->center, &rt->cam->center);
 }
 
 double      get_max_light(t_rtv1 *rt)

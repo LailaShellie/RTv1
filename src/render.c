@@ -77,6 +77,7 @@ int		trace_ray(t_rtv1 *rt)
 	cur = rt->figures;
 	while (cur)
 	{
+		rt->calc.oc = sub_vect3d(&cur->center, &rt->cam->center);
 		if (intersection(rt, cur))
 		{
 			if (rt->calc.t.t1 > VZ && rt->calc.t.t1 < rt->calc.t.closest_t)
