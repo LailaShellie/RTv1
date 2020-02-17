@@ -18,8 +18,6 @@ void        calculate_cam_consts(t_rtv1 *rt)
 
     rt->cam->v2 = cross_vect3d(&rt->cam->v1, &rt->cam->v3);
     norm_vect3d(&rt->cam->v2);
-    printf("!!!\n");
-
 }
 
 void		calculate_consts(t_rtv1 *rt, t_figure *f)

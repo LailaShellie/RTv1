@@ -2,7 +2,6 @@
 
 int			testing(int key, t_rtv1 *rt)
 {
-	printf("%d\n", key);
 	if (key >= 123 && key <= 126)
 	{
 		if (key == 123)
@@ -18,13 +17,13 @@ int			testing(int key, t_rtv1 *rt)
 	}
 	if (key == 24)
 	{
-		rt->lights->center.y += 0.01;
+		rt->lights->center.y += 0.1;
 		prepare_figures(rt);
 		render(rt);
 	}
 	else if (key == 27)
 	{
-		rt->lights->center.y -= 0.01;
+		rt->lights->center.y -= 0.1;
 		prepare_figures(rt);
 		render(rt);
 	}
