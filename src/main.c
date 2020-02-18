@@ -37,7 +37,7 @@ int main(int ac, char** av)
 	}
 	else
 	{
-		test_render();
+		test_render(rt);
 		hooks(rt);
 	}
     return (0);
