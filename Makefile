@@ -7,7 +7,7 @@ SRC = init_mlx.c main.c vector3d.c render.c intersection.c \
 		print_data.c parse_json_getdata.c parse_json_data_params.c \
 		parse_json_name_value.c \
 		parse_json_2nd_level.c parse_json_3rd_level.c \
-		test_render1.c
+		test_render1.c test_rotation_matrix.c
 
 OBJ_DIR = ./objects
 SRC_DIR = ./src
@@ -16,7 +16,7 @@ LIBFT_HDR_DIR = ./libft
 MLX_HDR_DIR = ./mlx
 OBJ = $(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 #OBJ = $(SRC:.c=.o)
-HDR = ./includes/rtv1.h ./includes/validation.h ./libft/libft.h ./mlx/mlx.h
+HDR = ./includes/rtv1.h ./includes/validation.h ./libft/libft.h ./mlx/mlx.h ./includes/test_render.h
 LIB = libft/libft.a
 MLX = mlx/lmlx.a
 NAME = RTv1

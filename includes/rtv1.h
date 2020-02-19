@@ -69,6 +69,7 @@ typedef struct		s_cam
 {
 	t_vect3d		center;
 	t_vect3d		direction;
+	t_vect3d		rotation;
     t_vect3d		v1;
     t_vect3d		v2;
     t_vect3d		v3;

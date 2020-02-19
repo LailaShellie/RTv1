@@ -185,15 +185,18 @@ void test_render(t_rtv1 *rt)
 	int			color;
 
 	int		Cx, Cy;
+	t_rot	rot_matrixes;
 
-	O = init_vect3d(0.0, 0.0, 0.0);
+	O = rt->cam->center;
 	y = -1;
+	calc_rotate_all(&rot_matrixes, &rt->cam->rotation);
 	while (++y < H)
 	{
 		x = -1;
 		while (++x < W)
 		{
 			D = canvas_to_viewport(x, y);
+			D = mult_vect3d_rmatrix(&D, rot_matrixes.r_all);
 			color = test_trace_ray(rt, O, D, 1, INF, 3);
 			((int *)rt->img->data)[x + y * rt->img->size_line / 4] = color;
 		}

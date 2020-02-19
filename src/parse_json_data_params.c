@@ -29,6 +29,8 @@ int		parse_params_camera(char *param_name, char *value, t_cam *camera)
 		res = get_xyz(value, &camera->center);
 	else if (ft_strequ(param_name, "direction"))
 		res = get_xyz(value, &camera->direction);
+	else if (ft_strequ(param_name, "rotation"))
+		res = get_xyz(value, &camera->rotation);
 	else
 		res = ERR;
 	return (res);

@@ -2,8 +2,9 @@
 	"title": "test1",
 	"background_color": [0,0,0],
 	"camera":{
-		"center": [0,0,1],
-		"direction": [0,0,2]
+		"center": [0,2,-4],
+		"direction": [0,0,1],
+		"rotation": [15, 0, 0]
 	},
 	"lights":[
 		{
@@ -20,7 +21,6 @@
 			"direction": [1,4,4],
 			"intensity": 0.2
 		}
-
 	],
 	"figures":[
 		{
