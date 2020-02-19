@@ -14,6 +14,8 @@ int		parse_params_scene(char *param_name, char *value, t_rtv1 *rt)
 		res = read_lights_2nd_level(rt, value);
 	else if (ft_strequ(param_name, "figures"))
 		res = read_figures_2nd_level(rt, value);
+	else if (ft_strequ(param_name, "background_color"))
+		rt->background_color = get_rgb(value);
 	else
 		res = ERR;
 	return (res);
@@ -36,8 +38,12 @@ int		parse_params_light(char *param_name, char *value, t_light *light)
 {
 	if (ft_strequ(param_name, "center"))
 		get_xyz(value, &light->center);
+	else if (ft_strequ(param_name, "direction"))
+		get_xyz(value, &light->direction);
 	else if (ft_strequ(param_name, "intensity"))
 		light->i = get_light_intensity(value);
+	else if (ft_strequ(param_name, "type"))
+		light->type = get_light_type(value);
 	else
 		return (ERR);
 	return (1);
@@ -57,6 +63,8 @@ int		parse_params_figure(char *param_name, char *value, t_figure *figure)
 		figure->radius = get_double(value);
 	else if (ft_strequ(param_name, "specularity"))
 		figure->s = get_double(value);
+	else if (ft_strequ(param_name, "reflective"))
+		figure->reflect = get_double(value);
 	else
 		return (ERR);
 	return (1);

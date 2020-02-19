@@ -10,8 +10,8 @@
 # include "mlx.h"
 # include "libft.h"
 
-# define W 1000
-# define H 1000
+# define W 800
+# define H 800
 
 # define VW 1
 # define VH 1
@@ -29,6 +29,10 @@
 # define CONE 2
 # define PLANE 3
 # define CYLINDER 4
+
+# define POINT 0
+# define AMBIENT 1
+# define DIRECTIONAL 2
 
 # define FDF_KEY_ESC 53
 # define FDF_KEY_Q 12
@@ -72,7 +76,9 @@ typedef struct		s_cam
 
 typedef struct		s_light
 {
+	int				type;
 	t_vect3d		center;
+	t_vect3d		direction;
 	double			i;
 	struct s_light	*next;
 }					t_light;
@@ -89,6 +95,7 @@ typedef struct		s_figure
 	int				color;
     double			radius;
     double			s;
+	double			reflect;
 	struct s_figure	*next;
 }					t_figure;
 
@@ -119,6 +126,7 @@ typedef struct		s_rtv1
     char			**split;
 	char			*title;
     int             total_light;
+	int				background_color;
     t_cam			*cam;
     t_light			*lights;
     t_figure		*figures;

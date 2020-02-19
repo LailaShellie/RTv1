@@ -24,3 +24,15 @@ double		get_light_intensity(char *str)
 		i = 0.0;
 	return (i);
 }
+
+double		get_light_type(char *str)
+{
+	if (ft_strequ(str, "ambient"))
+		return (AMBIENT);
+	else if (ft_strequ(str, "point"))
+		return (POINT);
+	else if (ft_strequ(str, "directional"))
+		return (DIRECTIONAL);
+	else
+		return (0);
+}

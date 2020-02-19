@@ -21,7 +21,7 @@
 			"type": "lldb",
 			"request": "launch",
 			"program": "${workspaceFolder}/RTv1",
-			"args": ["./scenes/test2.json"],
+			"args": ["./scenes/test_render.json", "--test-render"],
 			"cwd": "${workspaceFolder}"
 		}
 	]

@@ -67,6 +67,7 @@ int		ft_goto_endparam(char **str, char openchar);
 
 double		get_double(char *str);
 double		get_light_intensity(char *str);
+double		get_light_type(char *str);
 
 char	*read_parameter_to_str(char **file);
 int		parse_param_name_value(char *parameters, int func(), void *param);
