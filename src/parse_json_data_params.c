@@ -16,6 +16,8 @@ int		parse_params_scene(char *param_name, char *value, t_rtv1 *rt)
 		res = read_figures_2nd_level(rt, value);
 	else if (ft_strequ(param_name, "background_color"))
 		rt->background_color = get_rgb(value);
+	else if (ft_strequ(param_name, "reflection_depth"))
+		rt->reflection_depth = (int)get_double(value);
 	else
 		res = ERR;
 	return (res);

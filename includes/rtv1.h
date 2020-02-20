@@ -128,6 +128,7 @@ typedef struct		s_rtv1
 	char			*title;
     int             total_light;
 	int				background_color;
+	int				reflection_depth;
     t_cam			*cam;
     t_light			*lights;
     t_figure		*figures;

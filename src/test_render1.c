@@ -197,7 +197,7 @@ void test_render(t_rtv1 *rt)
 		{
 			D = canvas_to_viewport(x, y);
 			D = mult_vect3d_rmatrix(&D, rot_matrixes.r_all);
-			color = test_trace_ray(rt, O, D, 1, INF, 3);
+			color = test_trace_ray(rt, O, D, 1, INF, rt->reflection_depth);
 			((int *)rt->img->data)[x + y * rt->img->size_line / 4] = color;
 		}
 	}
