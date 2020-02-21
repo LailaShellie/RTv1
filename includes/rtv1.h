@@ -105,7 +105,6 @@ typedef struct      s_calc
     t_vect3d        ray;
     t_vect3d        p;
     t_vect3d        n;
-    t_vect3d		oc;
     t_roots         t;
     t_figure        *closest_f;
 }                   t_calc;
@@ -115,8 +114,6 @@ typedef struct		s_rtv1
     void			*mlx_ptr;
     void			*win_ptr;
     t_img			*img;
-    char			*file;
-    char			**split;
 	char			*title;
     int             total_light;
     t_cam			*cam;
@@ -126,7 +123,6 @@ typedef struct		s_rtv1
 }                     t_rtv1;
 
 int					init_mlx(t_rtv1 *rt);
-int					validation_main(t_rtv1 *rt, int ac, char **av);
 void				prepare_figures(t_rtv1 *rt);
 
 t_vect3d			scale_vect3d(double scale, t_vect3d *a);

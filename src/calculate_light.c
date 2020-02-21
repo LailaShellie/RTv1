@@ -13,9 +13,16 @@ void   get_intersection_point(t_rtv1 *rt)
 int in_shadow(t_rtv1 *rt, t_light *light)
 {
 	t_vect3d	l;
+	t_figure	*cur;
+
+	cur = rt->figures;
 	l = sub_vect3d(&rt->calc.p, &light->center);
 	l = sub_vect3d(&rt->calc.n, &l);
+	while (cur)
+	{
 
+		cur = cur->next;
+	}
 	return (0);
 }
 
