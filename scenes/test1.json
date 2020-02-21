@@ -6,11 +6,7 @@
 	},
 	"lights":[
 		{
-			"center": [1,10,4],
-			"intensity": 1
-		},
-		{
-			"center": [1,2,4],
+			"center": [0,1,0],
 			"intensity": 1
 		}
 	],

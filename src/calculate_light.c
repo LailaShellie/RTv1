@@ -4,6 +4,30 @@
 
 #include "rtv1.h"
 
+//if (figure_closest == NULL)
+//return (rt->background_color);
+//else
+//{
+//P = scale_vect3d(roots.closest_t, &D);
+//P = add_vect3d(&O, &P);
+//N = sub_vect3d(&figure_closest->center, &P);
+//norm_vect3d(&N);
+//V = scale_vect3d(-1.0, &D);
+//local_color = calculate_color(figure_closest->color, compute_light(rt, P, N, V, figure_closest->s));
+//
+//reflect = figure_closest->reflect;
+//if (depth <= 0 || reflect <= 0.001)
+//return (local_color);
+//else
+//{
+//ray = reflect_ray(&V, &N);
+//reflected_color = test_trace_ray(rt, P, ray, 0.001, INF, depth - 1);
+//local_color = calculate_color(local_color, 1 - reflect);
+//reflected_color = calculate_color(reflected_color, reflect);
+//return (sum_color(local_color, reflected_color));
+//}
+//}
+
 void   get_intersection_point(t_rtv1 *rt)
 {
     rt->calc.p = scale_vect3d(rt->calc.t.closest_t, &rt->calc.ray);
@@ -14,13 +38,16 @@ int in_shadow(t_rtv1 *rt, t_light *light)
 {
 	t_vect3d	l;
 	t_figure	*cur;
+	t_roots		t;
 
-	cur = rt->figures;
 	l = sub_vect3d(&rt->calc.p, &light->center);
-	l = sub_vect3d(&rt->calc.n, &l);
+	norm_vect3d(&l);
+	cur = rt->figures;
 	while (cur)
 	{
-
+		t = intersection(&l, &rt->calc.p, cur);
+		if (t.closest_t > 0.0001 && t.closest_t < INF)
+			return (1);
 		cur = cur->next;
 	}
 	return (0);
