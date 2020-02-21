@@ -140,16 +140,14 @@ t_vect3d            cross_vect3d(t_vect3d *a, t_vect3d *b);
 void				print_vect3d(t_vect3d *a);
 
 void				render(t_rtv1 *rt);
-int					trace_ray(t_rtv1 *rt);
+int					trace_ray(t_rtv1 *rt, t_vect3d *ray, t_vect3d *point);
 void				hooks(t_rtv1 *rt);
 
-int					intersection(t_rtv1 *rt, t_figure *figure);
+t_roots 			intersection(t_vect3d *ray, t_vect3d *p, t_figure *figure);
 
 int					calc_light(t_rtv1 *rt);
 double				get_diffusive(t_rtv1 *rt, t_light *light);
 double				get_specular(t_rtv1 *rt, t_light *light);
-
-int 				check_light(t_rtv1 *rt, t_vect3d *p, t_light *light);
 
 void			get_normal_of_figure(t_rtv1 *rt);
 

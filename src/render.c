@@ -47,49 +47,21 @@ int calculate_color(int color, double intensity)
 
 }
 
-//int calculate_color(int color, double intensity)
-//{
-//	union u_color clr;
-//
-//	clr.color = color;
-//	if (clr.s_parts.r * intensity > clr.s_parts.r)
-//		clr.s_parts.r = clr.s_parts.r;
-//	else
-//		clr.s_parts.r *= intensity;
-//	if (clr.s_parts.g * intensity > clr.s_parts.g)
-//		clr.s_parts.g = clr.s_parts.g;
-//	else
-//		clr.s_parts.g *= intensity;
-//	if (clr.s_parts.b * intensity > clr.s_parts.b)
-//		clr.s_parts.b = clr.s_parts.b;
-//	else
-//		clr.s_parts.b *= intensity;
-//	return (clr.color);
-//
-//}
-
-int		trace_ray(t_rtv1 *rt)
+int		trace_ray(t_rtv1 *rt, t_vect3d *ray, t_vect3d *o)
 {
 	t_figure	*cur;
+	t_roots		t;
 
 	rt->calc.closest_f = 0;
 	rt->calc.t.closest_t = INF;
 	cur = rt->figures;
 	while (cur)
 	{
-		rt->calc.oc = sub_vect3d(&cur->center, &rt->cam->center);
-		if (intersection(rt, cur))
+		t = intersection(ray, o, cur);
+		if (t.closest_t > VZ && t.closest_t <= rt->calc.t.closest_t)
 		{
-			if (rt->calc.t.t1 > VZ && rt->calc.t.t1 < rt->calc.t.closest_t)
-			{
-                rt->calc.t.closest_t = rt->calc.t.t1;
-				rt->calc.closest_f = cur;
-			}
-			if (rt->calc.t.t2 > VZ && rt->calc.t.t2 < rt->calc.t.closest_t)
-			{
-                rt->calc.t.closest_t = rt->calc.t.t2;
-				rt->calc.closest_f = cur;
-			}
+			rt->calc.closest_f = cur;
+			rt->calc.t = t;
 		}
 		cur = cur->next;
 	}
@@ -127,7 +99,7 @@ void		render(t_rtv1 *rt)
 		{
             rt->calc.ray = gen_ray(rt, x, y);
 			((int *)rt->img->data)[x + y * rt->img->size_line / 4]
-			= trace_ray(rt);
+			= trace_ray(rt, &rt->calc.ray, &rt->cam->center);
 		}
 	}
 	mlx_put_image_to_window(rt->mlx_ptr, rt->win_ptr, rt->img->img_ptr, 0, 0);
