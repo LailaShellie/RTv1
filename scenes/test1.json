@@ -6,54 +6,38 @@
 	},
 	"lights":[
 		{
-			"center": [1,10,4],
+			"center": [0,1,4],
 			"intensity": 1
 		},
 		{
-			"center": [1,2,4],
+			"center": [0,1,0],
 			"intensity": 1
 		}
 	],
 	"figures":[
 		{
+			"type": "cone",
+			"center": [0,0,5],
+			"direction": [1,1,0],
+			"color": [200,0,0],
+			"radius": 100,
+			"specularity": 123
+		},
+		{
 			"type": "plane",
-			"center": [0,-1,10],
+			"center": [0,-1,0],
 			"direction": [0,1,-0.1],
-			"color": [150,0,0],
-			"radius": 0.9,
-			"specularity": 12
-		},
-		{
-			"type": "cylinder",
-			"center": [-1,2,6],
-			"direction": [1,1,0],
-			"color": [200,0,200],
-			"radius": 0.3,
-			"specularity": 200
-		},
-		{
-			"type": "sphere",
-			"center": [-1.8,2,7],
-			"direction": [1,1,0],
-			"color": [150,0,150],
-			"radius": 1,
-			"specularity": 200
-		},
-		{
-			"type": "cylinder",
-			"center": [1,2,6],
-			"direction": [1,1,0],
 			"color": [200,200,200],
-			"radius": 0.3,
-			"specularity": 200
+			"radius": 100,
+			"specularity": 123
 		},
 		{
-			"type": "cylinder",
-			"center": [1,-1,6],
-			"direction": [1,1,0],
-			"color": [200,200,0],
-			"radius": 0.2,
-			"specularity": 200
+			"type": "plane",
+			"center": [-5,0,0],
+			"direction": [1,0,-1],
+			"color": [200,200,200],
+			"radius": 100,
+			"specularity": 123
 		}
 	]
 }
