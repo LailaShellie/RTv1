@@ -38,14 +38,14 @@
 		{
 			"type": "cylinder",
 			"center": [0,0,6.5],
-			"direction": [0,1,0],
+			"direction": [0,1,0.3],
 			"color": [200,0,0],
 			"radius": 0.1,
 			"specularity": 200
 		},
 		{
 			"type": "cylinder",
-			"center": [0,0,6.5],
+			"center": [0,0,6.2],
 			"direction": [1,0,0],
 			"color": [200,0,0],
 			"radius": 0.1,
