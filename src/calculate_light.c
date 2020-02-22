@@ -23,12 +23,9 @@ int			in_shadow(t_rtv1 *rt, t_light *light)
 	t_vect3d	l;
 	t_figure	*cur;
 	t_roots		t;
-	t_vect3d	tmp;
 	double		max;
 
 	l = sub_vect3d(&rt->calc.p, &light->center);
-	tmp = scale_vect3d(0.1, &rt->calc.n);
-	l = sub_vect3d(&tmp, &l);
 	max = length_vect3d(&l);
 	norm_vect3d(&l);
 	max /= length_vect3d(&l);
@@ -36,7 +33,7 @@ int			in_shadow(t_rtv1 *rt, t_light *light)
 	while (cur)
 	{
 		t = intersection(&l, &rt->calc.p, cur);
-		if (t.closest_t > 0.0001 && t.closest_t < max)
+		if (t.closest_t > 0.0001 && t.closest_t <= max + 0.0001)
 			return (1);
 		cur = cur->next;
 	}
