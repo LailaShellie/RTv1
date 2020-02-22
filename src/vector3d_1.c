@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lshellie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/22 14:51:55 by lshellie          #+#    #+#             */
-/*   Updated: 2020/02/22 14:51:56 by lshellie         ###   ########.fr       */
+/*   Created: 2020/02/22 14:57:42 by lshellie          #+#    #+#             */
+/*   Updated: 2020/02/22 14:57:42 by lshellie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,9 @@ double		length_vect3d(t_vect3d *a)
 	len += a->y * a->y;
 	len += a->z * a->z;
 	return (sqrt(len));
+}
+
+void		print_vect3d(t_vect3d *a)
+{
+	printf("%lf %lf %lf\n", a->x, a->y, a->z);
 }
