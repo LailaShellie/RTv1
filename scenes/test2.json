@@ -65,8 +65,8 @@
 		},
 		{
 			"type": "plane",
-			"center": [0,0,15],
-			"direction": [0,0,1],
+			"center": [0,0,7],
+			"direction": [0,0,-1],
 			"color": [200,0,0],
 			"radius": 0.2,
 			"specularity": 123

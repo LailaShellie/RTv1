@@ -1,8 +1,8 @@
 {
 	"title": "test1",
 	"camera":{
-		"center": [0,0,1],
-		"direction": [0,0,2]
+		"center": [0,0,-1],
+		"direction": [0,0,1]
 	},
 	"lights":[
 		{
@@ -25,7 +25,7 @@
 		},
 		{
 			"type": "cylinder",
-			"center": [1,-1,6],
+			"center": [-1,2,6],
 			"direction": [1,1,0],
 			"color": [200,0,200],
 			"radius": 0.3,
@@ -33,7 +33,7 @@
 		},
 		{
 			"type": "sphere",
-			"center": [-1.8,-1,7],
+			"center": [-1.8,2,7],
 			"direction": [1,1,0],
 			"color": [150,0,150],
 			"radius": 1,
@@ -41,7 +41,7 @@
 		},
 		{
 			"type": "cylinder",
-			"center": [1,-1,6],
+			"center": [1,2,6],
 			"direction": [1,1,0],
 			"color": [200,200,200],
 			"radius": 0.3,
@@ -50,7 +50,7 @@
 		{
 			"type": "cylinder",
 			"center": [1,-1,6],
-			"direction": [1,0,0],
+			"direction": [1,1,0],
 			"color": [200,200,0],
 			"radius": 0.2,
 			"specularity": 200
