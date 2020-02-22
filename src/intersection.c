@@ -55,15 +55,13 @@ t_roots		intersect_cone(t_vect3d *ray, t_vect3d *o, t_figure *f)
 	t_vect3d	oc;
 
 	oc = sub_vect3d(&f->center, o);
-	a = pow(dot_vect3d(&f->v1, ray), 2)
-			+ pow(dot_vect3d(&f->v2, ray), 2)
-			- pow(dot_vect3d(&f->v3, ray), 2);
-	b = 2.0 * (dot_vect3d(&f->v1, ray) * dot_vect3d(&f->v1, &oc)
-			+ dot_vect3d(&f->v2, ray) * dot_vect3d(&f->v2, &oc)
-			- dot_vect3d(&f->v3, ray) * dot_vect3d(&f->v3, &oc));
-	c = pow(dot_vect3d(&f->v1, &oc), 2)
-			+ pow(dot_vect3d(&f->v2, &oc), 2)
-			- pow(dot_vect3d(&f->v3, &oc), 2);
+	a = dot_vect3d(ray, ray)
+			- (1 + f->radius * f->radius) * dot_vect3d(ray, &f->direction)
+			* dot_vect3d(ray, &f->direction);
+	b = 2.0 * (dot_vect3d(ray, &oc) - (1 + f->radius * f->radius) * dot_vect3d(ray, &f->direction) *
+			dot_vect3d(&oc, &f->direction));
+	c = dot_vect3d(&oc, &oc) - (1 + f->radius * f->radius) * dot_vect3d(&oc, &f->direction) *
+			dot_vect3d(&oc, &f->direction);
 	return (manage(a, b, c));
 }
 
