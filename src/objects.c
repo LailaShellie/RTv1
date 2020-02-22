@@ -1,10 +1,18 @@
-//
-// Created by Laila Shellie on 2020-01-17.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   objects.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lshellie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/22 13:38:24 by lshellie          #+#    #+#             */
+/*   Updated: 2020/02/22 13:38:25 by lshellie         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "validation.h"
 
-t_figure		*new_figure()
+t_figure	*new_figure(void)
 {
 	t_figure		*new;
 
@@ -17,7 +25,7 @@ void		add_figure(t_figure **figures, t_figure *new)
 {
 	t_figure		*first;
 
- 	if (!*figures)
+	if (!*figures)
 	{
 		*figures = new;
 		new->next = 0;
@@ -28,7 +36,7 @@ void		add_figure(t_figure **figures, t_figure *new)
 	*figures = new;
 }
 
-t_light		*new_light()
+t_light		*new_light(void)
 {
 	t_light		*new;
 
@@ -52,7 +60,7 @@ void		add_light(t_light **lights, t_light *new)
 	*lights = new;
 }
 
-t_cam		*new_cam()
+t_cam		*new_cam(void)
 {
 	t_cam		*new;
 

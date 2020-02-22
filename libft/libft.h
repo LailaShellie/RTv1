@@ -98,12 +98,14 @@ unsigned long int	ft_fast_bit_pow(unsigned long int a,
 int					get_next_line(const int fd, char **line);
 int					ft_abs(int a);
 int					ft_free_mas(char **mas, int len);
-double		ft_atod(char *str);
-int		ft_isnumber(char *s);
-int		ft_isdouble(char *s);
-int		count_split(char **split);
+double				ft_atod(char *str);
+int					ft_isnumber(char *s);
+int					ft_isdouble(char *s);
+int					count_split(char **split);
 
-char	*ft_strtrim_stop(char **str, const char *pattern, const char *stop);
-char	*ft_filetrim_stop(int fd, const char *pattern, const char *stop);
+char				*ft_strtrim_stop(char **str, const char *pattern,
+		const char *stop);
+char				*ft_filetrim_stop(int fd, const char *pattern,
+		const char *stop);
 
 #endif

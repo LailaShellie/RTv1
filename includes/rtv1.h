@@ -10,8 +10,8 @@
 # include "mlx.h"
 # include "libft.h"
 
-# define W 800
-# define H 800
+# define W 1000
+# define H 1000
 
 # define VW 1
 # define VH 1

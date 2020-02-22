@@ -54,14 +54,6 @@
 			"color": [200,200,0],
 			"radius": 0.2,
 			"specularity": 200
-		},
-		{
-			"type": "cone",
-			"center": [-1.5,-0.5,6.5],
-			"direction": [0.1,1,0],
-			"color": [150,50,100],
-			"radius": 0.1,
-			"specularity": 200
 		}
 	]
 }

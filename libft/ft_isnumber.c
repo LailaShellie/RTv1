@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-static	int is_num(char *s)
+static	int		is_num(char *s)
 {
 	int		i;
 
@@ -26,7 +26,7 @@ static	int is_num(char *s)
 	return (1);
 }
 
-int		ft_isdouble(char *s)
+int				ft_isdouble(char *s)
 {
 	int		i;
 
@@ -46,7 +46,7 @@ int		ft_isdouble(char *s)
 	return (1);
 }
 
-int		ft_isnumber(char *s)
+int				ft_isnumber(char *s)
 {
 	int		i;
 

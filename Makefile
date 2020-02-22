@@ -1,4 +1,4 @@
-SRC = init_mlx.c main.c objects.c vector3d.c render.c intersection.c \
+SRC = init_mlx.c main.c objects.c vector3d_1.c vector3d_2.c render.c intersection.c \
 		diffusive_light.c calculate_light.c \
 		prepare_figures.c get_normal.c specular_light.c \
 		parse_json_goto.c parse_json_read_param.c parse_json.c \
