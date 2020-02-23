@@ -33,7 +33,9 @@ int			in_shadow(t_rtv1 *rt, t_light *light)
 	while (cur)
 	{
 		t = intersection(&l, &rt->calc.p, cur);
-		if (t.closest_t > 0.0001 && t.closest_t <= max + 0.0001)
+		if (t.t1 > 0.0001 && t.t1 <= max)
+			return (1);
+		if (t.t2 > 0.0001 && t.t2 <= max)
 			return (1);
 		cur = cur->next;
 	}
