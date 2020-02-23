@@ -1,7 +1,7 @@
 {
 	"title": "test1",
 	"background_color": [0,0,0],
-	"reflection_depth": 0,
+	"reflection_depth": 2,
 	"camera":{
 		"center": [0,2,-2],
 		"direction": [0,0,1],

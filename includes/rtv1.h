@@ -114,10 +114,22 @@ typedef struct      s_calc
     t_vect3d        ray;
     t_vect3d        p;
     t_vect3d        n;
+	t_vect3d		o; // ray_source
+	t_vect3d		d; // ray_direction
+	double			t_min;
+	double			t_max;
     t_roots         t;
     t_figure        *closest_f;
 }                   t_calc;
 
+typedef struct		s_trace_ray_params
+{
+	t_vect3d		o;
+	t_vect3d		d;
+	double			t_min;
+	double			t_max;
+	int				reflection_depth;
+}					t_trace_ray_params;
 typedef struct		s_rtv1
 {
     void			*mlx_ptr;
