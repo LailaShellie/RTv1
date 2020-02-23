@@ -6,7 +6,7 @@
   },
   "lights":[
     {
-      "center": [0,0,1],
+      "center": [0,0,0],
       "intensity": 1
     },
     {
@@ -21,14 +21,6 @@
       "direction": [1,1,0],
       "color": [200,0,0],
       "radius": 1,
-      "specularity": 123
-    },
-    {
-      "type": "sphere",
-      "center": [1.5,1,4],
-      "direction": [1,1,0],
-      "color": [200,0,0],
-      "radius": 0.71,
       "specularity": 123
     },
     {
@@ -48,11 +40,11 @@
       "specularity": 123
     },
     {
-      "type": "cone",
-      "center": [0,0,3],
-      "direction": [0,0,1],
+      "type": "cylinder",
+      "center": [0,0,0],
+      "direction": [0,1,0],
       "color": [200,200,0],
-      "radius": 0.31,
+      "radius": 2,
       "specularity": 123
     },
     {

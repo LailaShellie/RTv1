@@ -17,6 +17,7 @@ void	normal_plane(t_rtv1 *rt)
 	t_vect3d	cam_p;
 
 	cam_p = sub_vect3d(&rt->calc.p, &rt->cam->center);
+	norm_vect3d(&cam_p);
 	if (dot_vect3d(&rt->calc.closest_f->direction, &cam_p) > 0)
 		rt->calc.n = scale_vect3d(1, &rt->calc.closest_f->direction);
 	else
@@ -28,6 +29,7 @@ void	normal_sphere(t_rtv1 *rt)
 	t_vect3d	cam_p;
 
 	cam_p = sub_vect3d(&rt->calc.p, &rt->cam->center);
+	norm_vect3d(&cam_p);
 	rt->calc.n = sub_vect3d(&rt->calc.closest_f->center, &rt->calc.p);
 	norm_vect3d(&rt->calc.n);
 	if (dot_vect3d(&rt->calc.n, &cam_p) < 0)
@@ -43,6 +45,7 @@ void	normal_cone(t_rtv1 *rt)
 	t_vect3d	cam_p;
 
 	cam_p = sub_vect3d(&rt->calc.p, &rt->cam->center);
+	norm_vect3d(&cam_p);
 	x = sub_vect3d(&rt->calc.closest_f->center, &rt->cam->center);
 	pc = sub_vect3d(&rt->calc.closest_f->center, &rt->calc.p);
 	m = dot_vect3d(&rt->calc.ray, &rt->calc.closest_f->direction)
@@ -64,6 +67,7 @@ void	normal_cylinder(t_rtv1 *rt)
 	t_vect3d	cam_p;
 
 	cam_p = sub_vect3d(&rt->calc.p, &rt->cam->center);
+	norm_vect3d(&cam_p);
 	x = sub_vect3d(&rt->calc.closest_f->center, &rt->cam->center);
 	v = scale_vect3d(rt->calc.t.closest_t, &rt->calc.closest_f->direction);
 	m = dot_vect3d(&rt->calc.ray, &rt->calc.closest_f->direction)

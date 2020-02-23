@@ -25,7 +25,12 @@ t_roots		manage(double a, double b, double c)
 		return (t);
 	t.t1 = (-b + sqrt(d)) / (2.0 * a);
 	t.t2 = (-b - sqrt(d)) / (2.0 * a);
-	t.closest_t = t.t1 < t.t2 ? t.t1 : t.t2;
+	if (t.t1 > 0 && t.t2 < 0)
+		t.closest_t = t.t1;
+	else if (t.t2 > 0 && t.t1 < 0)
+		t.closest_t = t.t2;
+	else if (t.t2 > 0 && t.t1 > 0)
+		t.closest_t = t.t1 < t.t2 ? t.t1 : t.t2;
 	return (t);
 }
 
