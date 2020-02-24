@@ -5,7 +5,7 @@
 	"camera":{
 		"center": [0,2,-2],
 		"direction": [0,0,1],
-		"rotation": [-30, 0, 0]
+		"rotation": [15, 0, 0]
 	},
 	"lights":[
 		{
