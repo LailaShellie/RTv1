@@ -26,7 +26,7 @@ CFILE = ft_isalpha.c ft_lstadd.c ft_lstnew.c ft_memcpy.c ft_putchar_fd.c \
 		ft_strlen.c ft_strncpy.c ft_strsplit.c ft_toupper.c ft_sqrt.c \
 		ft_strstr_kmp.c ft_zfunc.c ft_is_prime.c ft_gcd.c ft_fast_bin_pow.c ft_fast_bit_pow.c \
 		get_next_line.c ft_abs.c ft_free_mas.c ft_itoa.c ft_atod.c ft_isnumber.c \
-		ft_trim_stop.c
+		ft_trim_stop.c count_split.c
 
 OFILE = $(CFILE:.c=.o)
 

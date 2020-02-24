@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_trim_stop.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lshellie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/22 13:14:35 by lshellie          #+#    #+#             */
+/*   Updated: 2020/02/22 13:14:36 by lshellie         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 char	*ft_strtrim_stop(char **str, const char *pattern, const char *stop)
@@ -12,7 +24,7 @@ char	*ft_strtrim_stop(char **str, const char *pattern, const char *stop)
 		return (NULL);
 	if (pattern == NULL || *pattern == '\0')
 		return (*str);
-	stop_str = (stop == NULL || stop[0] == '\0')?
+	stop_str = (stop == NULL || stop[0] == '\0') ?
 				NULL : ft_strstr(*str, stop);
 	len_trim_str = 0;
 	i_str = *str;
@@ -22,7 +34,7 @@ char	*ft_strtrim_stop(char **str, const char *pattern, const char *stop)
 	str_new = (char*)malloc(sizeof(char) * (len_trim_str + 1));
 	i_str = *str;
 	j_str = str_new;
-	while(*i_str && len_trim_str)
+	while (*i_str && len_trim_str)
 	{
 		if (!ft_strchr(pattern, *i_str))
 		{
@@ -48,10 +60,10 @@ char	*ft_filetrim_stop(int fd, const char *pattern, const char *stop)
 	while (get_next_line(fd, &line) > 0)
 	{
 		ft_strtrim_stop(&line, pattern, stop);
- 		tmp = file;
- 		file = ft_strjoin(file, line);
- 		ft_memdel((void**)&tmp);
- 		ft_memdel((void**)&line);
+		tmp = file;
+		file = ft_strjoin(file, line);
+		ft_memdel((void**)&tmp);
+		ft_memdel((void**)&line);
 	}
 	ft_memdel((void**)&line);
 	return (file);

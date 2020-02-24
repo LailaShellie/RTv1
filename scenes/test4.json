@@ -6,7 +6,7 @@
 	},
 	"lights": [
 		{
-			"center": [-1,0,4],
+			"center": [0,10,0],
 			"intensity": 1
 		}
 	],
@@ -15,8 +15,48 @@
 			"type": "sphere",
 			"center": [0,0,7],
 			"direction": [1,1,0],
-			"color": [255,0,0],
-			"radius": 2,
+			"color": [200,0,0],
+			"radius": 1,
+			"specularity": 200
+		},
+		{
+			"type": "cylinder",
+			"center": [0,0,6.5],
+			"direction": [1,1,0],
+			"color": [200,0,0],
+			"radius": 0.1,
+			"specularity": 200
+		},
+		{
+			"type": "cylinder",
+			"center": [0,0,6.5],
+			"direction": [-1,1,0],
+			"color": [200,0,0],
+			"radius": 0.1,
+			"specularity": 200
+		},
+		{
+			"type": "cylinder",
+			"center": [0,0,6.5],
+			"direction": [0,1,0.3],
+			"color": [200,0,0],
+			"radius": 0.1,
+			"specularity": 200
+		},
+		{
+			"type": "cylinder",
+			"center": [0,0,6.2],
+			"direction": [1,0,0],
+			"color": [200,0,0],
+			"radius": 0.1,
+			"specularity": 200
+		},
+		{
+			"type": "plane",
+			"center": [0,0,9],
+			"direction": [0,0,1],
+			"color": [200,0,0],
+			"radius": 0.1,
 			"specularity": 200
 		}
 	]

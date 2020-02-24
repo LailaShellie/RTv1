@@ -1,67 +1,107 @@
 {
 	"title": "test1",
 	"camera":{
-		"center": [0,0,1],
-		"direction": [0,0,2]
+		"center": [0,0,0],
+		"direction": [0,0,1]
 	},
 	"lights":[
 		{
-			"center": [1,10,4],
+			"center": [0,10,0],
 			"intensity": 1
 		},
 		{
-			"center": [1,2,4],
+			"center": [0.5,0.5,2],
 			"intensity": 1
 		}
 	],
 	"figures":[
 		{
-			"type": "plane",
-			"center": [0,-1,10],
-			"direction": [0,1,-0.1],
-			"color": [150,0,0],
-			"radius": 0.9,
-			"specularity": 12
-		},
-		{
-			"type": "cylinder",
-			"center": [1,-1,6],
-			"direction": [1,1,0],
-			"color": [200,0,200],
-			"radius": 0.3,
-			"specularity": 200
-		},
-		{
-			"type": "sphere",
-			"center": [-1.8,-1,7],
-			"direction": [1,1,0],
-			"color": [150,0,150],
-			"radius": 1,
-			"specularity": 200
-		},
-		{
-			"type": "cylinder",
-			"center": [1,-1,6],
-			"direction": [1,1,0],
-			"color": [200,200,200],
-			"radius": 0.3,
-			"specularity": 200
-		},
-		{
-			"type": "cylinder",
-			"center": [1,-1,6],
+			"type": "cone",
+			"center": [0,0,5],
 			"direction": [1,0,0],
-			"color": [200,200,0],
-			"radius": 0.2,
-			"specularity": 200
+			"color": [200,0,0],
+			"radius": 0.3,
+			"specularity": 123
 		},
 		{
 			"type": "cone",
-			"center": [-1.5,-0.5,6.5],
-			"direction": [0.1,1,0],
-			"color": [150,50,100],
-			"radius": 0.7,
-			"specularity": 200
+			"center": [0,1,6],
+			"direction": [1,0,0],
+			"color": [200,0,0],
+			"radius": 0.3,
+			"specularity": 123
+		},
+		{
+			"type": "cone",
+			"center": [0,2,7],
+			"direction": [1,0,0],
+			"color": [200,0,0],
+			"radius": 0.3,
+			"specularity": 123
+		},
+		{
+			"type": "cone",
+			"center": [0,3,8],
+			"direction": [1,0,0],
+			"color": [200,0,0],
+			"radius": 0.3,
+			"specularity": 123
+		},
+		{
+			"type": "plane",
+			"center": [0,-1,0],
+			"direction": [0,1,-0.1],
+			"color": [200,200,200],
+			"radius": 100,
+			"specularity": 123
+		},
+		{
+			"type": "sphere",
+			"center": [0.2,4,8],
+			"direction": [0,1,-0.1],
+			"color": [200,0,200],
+			"radius": 0.4,
+			"specularity": 123
+		},
+		{
+			"type": "sphere",
+			"center": [-0.2,5,9],
+			"direction": [0,1,-0.1],
+			"color": [200,200,20],
+			"radius": 0.4,
+			"specularity": 123
+		},
+		{
+			"type": "sphere",
+			"center": [0,7,11],
+			"direction": [0,1,-0.1],
+			"color": [0,200,20],
+			"radius": 0.4,
+			"specularity": 123
+		},
+		{
+			"type": "sphere",
+			"center": [-0.2,-0.5,3],
+			"direction": [0,1,-0.1],
+			"color": [0,200,20],
+			"radius": 0.4,
+			"specularity": 123
+		},
+		{
+			"type": "sphere",
+			"center": [0.5,1,2],
+			"direction": [0,1,-0.1],
+			"color": [0,200,20],
+			"radius": 0.4,
+			"specularity": 123
+		},
+		{
+			"type": "cylinder",
+			"center": [0,0,6],
+			"direction": [0,1,1],
+			"color": [200,200,200],
+			"radius": 0.6,
+			"specularity": 123
 		}
 	]
 }

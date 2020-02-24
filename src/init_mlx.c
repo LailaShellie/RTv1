@@ -1,38 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_mlx.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lshellie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/22 13:28:43 by lshellie          #+#    #+#             */
+/*   Updated: 2020/02/22 13:29:08 by lshellie         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "rtv1.h"
-
-int			testing(int key, t_rtv1 *rt)
-{
-	printf("%d\n", key);
-	if (key >= 123 && key <= 126)
-	{
-		if (key == 123)
-			rt->lights->center.x -= 0.1;
-		if (key == 124)
-			rt->lights->center.x += 0.1;
-		if (key == 126)
-			rt->lights->center.z += 0.1;
-		if (key == 125)
-			rt->lights->center.z -= 0.1;
-		prepare_figures(rt);
-		render(rt);
-	}
-	if (key == 24)
-	{
-		rt->lights->center.y += 0.01;
-		prepare_figures(rt);
-		render(rt);
-	}
-	else if (key == 27)
-	{
-		rt->lights->center.y -= 0.01;
-		prepare_figures(rt);
-		render(rt);
-	}
-	else if (key == FDF_KEY_ESC || key == FDF_KEY_Q)
-	    exit(0);
-
-	return (1);
-}
 
 int			ft_close(t_rtv1 *rt)
 {
@@ -41,23 +19,22 @@ int			ft_close(t_rtv1 *rt)
 
 void		hooks(t_rtv1 *rt)
 {
-	mlx_hook(rt->win_ptr, 2, 0, testing, rt);
 	mlx_hook(rt->win_ptr, 17, 0, ft_close, rt);
 	mlx_loop(rt->mlx_ptr);
 }
 
-int  init_mlx(t_rtv1 *rt)
+int			init_mlx(t_rtv1 *rt)
 {
-    if (!(rt->mlx_ptr = mlx_init()))
-        return (ERR);
-    if (!(rt->win_ptr = mlx_new_window(rt->mlx_ptr, W, H, "RTv1")))
-        return (ERR);
-    if (!(rt->img = ft_memalloc(sizeof(t_img))))
-        return (ERR);
-    if (!(rt->img->img_ptr = mlx_new_image(rt->mlx_ptr, W, H)))
-        return (ERR);
-    if (!(rt->img->data = mlx_get_data_addr(rt->img->img_ptr,
-            &rt->img->bpp, &rt->img->size_line, &rt->img->endian)))
-        return (ERR);
-    return (1);
+	if (!(rt->mlx_ptr = mlx_init()))
+		return (ERR);
+	if (!(rt->win_ptr = mlx_new_window(rt->mlx_ptr, W, H, "RTv1")))
+		return (ERR);
+	if (!(rt->img = ft_memalloc(sizeof(t_img))))
+		return (ERR);
+	if (!(rt->img->img_ptr = mlx_new_image(rt->mlx_ptr, W, H)))
+		return (ERR);
+	if (!(rt->img->data = mlx_get_data_addr(rt->img->img_ptr,
+			&rt->img->bpp, &rt->img->size_line, &rt->img->endian)))
+		return (ERR);
+	return (1);
 }

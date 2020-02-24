@@ -1,0 +1,59 @@
+{
+  "title": "test1",
+  "camera":{
+    "center": [0,0,-1],
+    "direction": [0,0,1]
+  },
+  "lights":[
+    {
+      "center": [0,0,0],
+      "intensity": 1
+    },
+    {
+      "center": [0,10,-2],
+      "intensity": 1
+    }
+  ],
+  "figures":[
+    {
+      "type": "cone",
+      "center": [0,0,5],
+      "direction": [1,1,0],
+      "color": [200,0,0],
+      "radius": 1,
+      "specularity": 123
+    },
+    {
+      "type": "plane",
+      "center": [0,-1,0],
+      "direction": [0,1,-0.1],
+      "color": [200,200,200],
+      "radius": 100,
+      "specularity": 123
+    },
+    {
+      "type": "plane",
+      "center": [-4,0,0],
+      "direction": [1,0,-1],
+      "color": [200,200,200],
+      "radius": 1,
+      "specularity": 123
+    },
+    {
+      "type": "cylinder",
+      "center": [0,0,0],
+      "direction": [0,1,0],
+      "color": [200,200,0],
+      "radius": 2,
+      "specularity": 123
+    },
+    {
+      "type": "cylinder",
+      "center": [0.3,0,2],
+      "direction": [0,1,0],
+      "color": [200,200,0],
+      "radius": 0.1,
+      "specularity": 123
+    }
+  ]
+}

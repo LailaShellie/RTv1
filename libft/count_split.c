@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   diffusive_light.c                                  :+:      :+:    :+:   */
+/*   count_split.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lshellie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/22 13:26:15 by lshellie          #+#    #+#             */
-/*   Updated: 2020/02/22 13:26:16 by lshellie         ###   ########.fr       */
+/*   Created: 2020/02/22 13:22:37 by lshellie          #+#    #+#             */
+/*   Updated: 2020/02/22 13:22:39 by lshellie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "libft.h"
 
-double		get_diffusive(t_rtv1 *rt, t_light *light)
+int		count_split(char **split)
 {
-	t_vect3d	l;
-	double		dot;
+	int		len;
 
-	l = sub_vect3d(&rt->calc.p, &light->center);
-	norm_vect3d(&l);
-	dot = dot_vect3d(&l, &rt->calc.n);
-	if (dot > 0)
-		return (light->i * dot / rt->total_light);
-	return (0);
+	len = 0;
+	while (split[len])
+		++len;
+	return (len);
 }

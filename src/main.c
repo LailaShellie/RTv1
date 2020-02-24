@@ -1,14 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lshellie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/22 13:36:26 by lshellie          #+#    #+#             */
+/*   Updated: 2020/02/22 13:36:29 by lshellie         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "rtv1.h"
 #include "validation.h"
 #include "test_render.h"
 
-void test(union u_color col)
-{
-	printf("%#x %#x %#x %#x %#x\n", col.color, col.s_parts.b, col.s_parts.g, col.s_parts.r, col.s_parts.o);
-
-}
-
-int main(int ac, char** av)
+int		main(int ac, char **av)
 {
 	t_rtv1		*rt;
 	int			fd;
@@ -41,4 +47,8 @@ int main(int ac, char** av)
 		hooks(rt);
 	}
     return (0);
+	prepare_figures(rt);
+	render(rt);
+	hooks(rt);
+	return (0);
 }

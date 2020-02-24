@@ -1,100 +1,118 @@
-//
-// Created by Ivan on 20/01/2020.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   intersection.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lshellie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/22 13:33:11 by lshellie          #+#    #+#             */
+/*   Updated: 2020/02/22 13:33:12 by lshellie         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "rtv1.h"
 
-int			intersect_cylinder(t_rtv1 *rt, t_figure *f)
+t_roots		manage(double a, double b, double c)
 {
-	double		a;
-	double 		b;
-	double 		c;
+	t_roots		t;
 	double		d;
 
-	a = dot_vect3d(&f->v1, &rt->calc.ray) * dot_vect3d(&f->v1, &rt->calc.ray)
-			+ dot_vect3d(&f->v2, &rt->calc.ray) * dot_vect3d(&f->v2, &rt->calc.ray);
-	b = 2.0 * (dot_vect3d(&f->v1, &f->oc) * dot_vect3d(&f->v1, &rt->calc.ray)
-			+ dot_vect3d(&f->v2, &f->oc) * dot_vect3d(&f->v2, &rt->calc.ray));
-	c = dot_vect3d(&f->v1, &f->oc) * dot_vect3d(&f->v1, &f->oc)
-			+ dot_vect3d(&f->v2, &f->oc)* dot_vect3d(&f->v2, &f->oc)
+	t.t1 = INF;
+	t.t2 = INF;
+	t.closest_t = INF;
+	d = b * b - 4.0 * a * c;
+	if (d < 0)
+		return (t);
+	t.t1 = (-b + sqrt(d)) / (2.0 * a);
+	t.t2 = (-b - sqrt(d)) / (2.0 * a);
+	return (t);
+}
+
+t_roots		intersect_cylinder(t_vect3d *ray, t_vect3d *o, t_figure *f)
+{
+	double		a;
+	double		b;
+	double		c;
+	t_vect3d	oc;
+
+	oc = sub_vect3d(&f->center, o);
+	a = dot_vect3d(&f->v1, ray) * dot_vect3d(&f->v1, ray)
+			+ dot_vect3d(&f->v2, ray) * dot_vect3d(&f->v2, ray);
+	b = 2.0 * (dot_vect3d(&f->v1, &oc) * dot_vect3d(&f->v1, ray)
+			+ dot_vect3d(&f->v2, &oc) * dot_vect3d(&f->v2, ray));
+	c = dot_vect3d(&f->v1, &oc) * dot_vect3d(&f->v1, &oc)
+			+ dot_vect3d(&f->v2, &oc) * dot_vect3d(&f->v2, &oc)
 			- f->radius * f->radius;
-	d = b * b - 4.0 * a * c;
-	if (d < 0)
-		return (0);
-    rt->calc.t.t1 = (-b + sqrt(d)) / (2.0 * a);
-    rt->calc.t.t2 = (-b - sqrt(d)) / (2.0 * a);
-	return (1);
+	return (manage(a, b, c));
 }
 
-int			intersect_cone(t_rtv1 *rt, t_figure *f)
+t_roots		intersect_cone(t_vect3d *ray, t_vect3d *o, t_figure *f)
 {
 	double		a;
-	double 		b;
-	double 		c;
-	double		d;
+	double		b;
+	double		c;
+	t_vect3d	oc;
 
-	double 		k = (1 + f->radius * f->radius);
-
-	double v1_dot_ray = dot_vect3d(&f->v1, &rt->calc.ray);
-	double v2_dot_ray = dot_vect3d(&f->v2, &rt->calc.ray);
-	double v3_dot_ray = dot_vect3d(&f->v3, &rt->calc.ray);
-
-	a = pow(v1_dot_ray, 2) * k + pow(v2_dot_ray, 2) * k - pow(v3_dot_ray, 2);
-	b = 2.0 * (v1_dot_ray * dot_vect3d(&f->v1, &f->oc) * k
-			   + v2_dot_ray * dot_vect3d(&f->v2, &f->oc) * k
-			   - v3_dot_ray * dot_vect3d(&f->v3, &f->oc));
-	c = pow(dot_vect3d(&f->v1, &f->oc), 2) * k
-			+ pow(dot_vect3d(&f->v2, &f->oc), 2) * k
-			- pow(dot_vect3d(&f->v3, &f->oc), 2);
-	d = b * b - 4.0 * a * c;
-	if (d < 0)
-		return (0);
-    rt->calc.t.t1 = (-b + sqrt(d)) / (2.0 * a);
-    rt->calc.t.t2 = (-b - sqrt(d)) / (2.0 * a);
-	return (1);
+	oc = sub_vect3d(&f->center, o);
+	a = dot_vect3d(ray, ray)
+			- (1 + f->radius * f->radius) * dot_vect3d(ray, &f->direction)
+			* dot_vect3d(ray, &f->direction);
+	b = 2.0 * (dot_vect3d(ray, &oc) - (1 + f->radius * f->radius) * dot_vect3d(ray, &f->direction) *
+			dot_vect3d(&oc, &f->direction));
+	c = dot_vect3d(&oc, &oc) - (1 + f->radius * f->radius) * dot_vect3d(&oc, &f->direction) *
+			dot_vect3d(&oc, &f->direction);
+	return (manage(a, b, c));
 }
 
-int			intersect_plane(t_rtv1 *rt, t_figure *plane)
+t_roots		intersect_plane(t_vect3d *ray, t_vect3d *o, t_figure *f)
 {
-	double	a;
-	double	b;
+	double		a;
+	double		b;
+	t_roots		t;
+	t_vect3d	oc;
 
-	a = dot_vect3d(&plane->oc, &plane->direction);
-	b = dot_vect3d(&rt->calc.ray, &plane->direction);
+	oc = sub_vect3d(&f->center, o);
+	t.t1 = INF;
+	t.t2 = INF;
+	t.closest_t = INF;
+	a = dot_vect3d(&oc, &f->direction);
+	b = dot_vect3d(ray, &f->direction);
 	if (b == 0)
-		return (0);
-    rt->calc.t.t1 = -a / b;
-    rt->calc.t.t2 = -a / b;
-	return (1);
+		return (t);
+	t.t1 = -a / b;
+	t.t2 = -a / b;
+	t.closest_t = t.t1;
+	return (t);
 }
 
-int			intersect_sphere(t_rtv1 *rt, t_figure *sphere)
+t_roots		intersect_sphere(t_vect3d *ray, t_vect3d *o, t_figure *f)
 {
 	double		a;
-	double 		b;
-	double 		c;
-	double		d;
+	double		b;
+	double		c;
+	t_vect3d	oc;
 
-	a = dot_vect3d(&rt->calc.ray, &rt->calc.ray);
-	b = 2.0 * dot_vect3d(&sphere->oc, &rt->calc.ray);
-	c = dot_vect3d(&sphere->oc, &sphere->oc) - (sphere->radius * sphere->radius);
-	d = b * b - 4.0 * a * c;
-	if (d < 0)
-		return (0);
-	rt->calc.t.t1 = (-b + sqrt(d)) / (2.0 * a);
-    rt->calc.t.t2 = (-b - sqrt(d)) / (2.0 * a);
-	return (1);
+	oc = sub_vect3d(&f->center, o);
+	a = dot_vect3d(ray, ray);
+	b = 2.0 * dot_vect3d(&oc, ray);
+	c = dot_vect3d(&oc, &oc) - (f->radius * f->radius);
+	return (manage(a, b, c));
 }
 
-int					intersection(t_rtv1 *rt, t_figure *figure)
+t_roots		intersection(t_vect3d *ray, t_vect3d *o, t_figure *figure)
 {
+	t_roots t;
+
+	t.t1 = INF;
+	t.t2 = INF;
+	t.closest_t = INF;
 	if (figure->type == SPHERE)
-		return (intersect_sphere(rt, figure));
+		return (intersect_sphere(ray, o, figure));
 	if (figure->type == PLANE)
-		return (intersect_plane(rt, figure));
+		return (intersect_plane(ray, o, figure));
 	if (figure->type == CONE)
-		return (intersect_cone(rt, figure));
+		return (intersect_cone(ray, o, figure));
 	if (figure->type == CYLINDER)
-		return (intersect_cylinder(rt, figure));
-	return (0);
+		return (intersect_cylinder(ray, o, figure));
+	return (t);
 }

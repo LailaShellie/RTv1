@@ -92,7 +92,6 @@ typedef struct		s_figure
 	t_vect3d		v1;
 	t_vect3d		v2;
 	t_vect3d		v3;
-	t_vect3d		oc;
 	int				color;
     double			radius;
     double			s;
@@ -131,8 +130,6 @@ typedef struct		s_rtv1
     void			*mlx_ptr;
     void			*win_ptr;
     t_img			*img;
-    char			*file;
-    char			**split;
 	char			*title;
     int             total_light;
 	int				background_color;
@@ -144,7 +141,6 @@ typedef struct		s_rtv1
 }                     t_rtv1;
 
 int					init_mlx(t_rtv1 *rt);
-int					validation_main(t_rtv1 *rt, int ac, char **av);
 void				prepare_figures(t_rtv1 *rt);
 
 t_vect3d			scale_vect3d(double scale, t_vect3d *a);
@@ -158,16 +154,14 @@ t_vect3d            cross_vect3d(t_vect3d *a, t_vect3d *b);
 void				print_vect3d(t_vect3d *a);
 
 void				render(t_rtv1 *rt);
-int					trace_ray(t_rtv1 *rt);
+int					trace_ray(t_rtv1 *rt, t_vect3d *ray, t_vect3d *point);
 void				hooks(t_rtv1 *rt);
 
-int					intersection(t_rtv1 *rt, t_figure *figure);
+t_roots 			intersection(t_vect3d *ray, t_vect3d *p, t_figure *figure);
 
 int					calc_light(t_rtv1 *rt);
 double				get_diffusive(t_rtv1 *rt, t_light *light);
 double				get_specular(t_rtv1 *rt, t_light *light);
-
-int 				check_light(t_rtv1 *rt, t_vect3d *p, t_light *light);
 
 void			get_normal_of_figure(t_rtv1 *rt);
 
