@@ -65,9 +65,16 @@ int			trace_ray(t_rtv1 *rt, t_vect3d *ray, t_vect3d *o)
 	while (cur)
 	{
 		t = intersection(ray, o, cur);
-		if (t.closest_t > VZ && t.closest_t <= rt->calc.t.closest_t)
+		if (t.t1 > VZ && t.t1 <= rt->calc.t.closest_t)
 		{
 			rt->calc.closest_f = cur;
+			t.closest_t = t.t1;
+			rt->calc.t = t;
+		}
+		if (t.t2 > VZ && t.t2 <= rt->calc.t.closest_t)
+		{
+			rt->calc.closest_f = cur;
+			t.closest_t = t.t2;
 			rt->calc.t = t;
 		}
 		cur = cur->next;
