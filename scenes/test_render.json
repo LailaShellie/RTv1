@@ -1,7 +1,7 @@
 {
 	"title": "test1",
 	"background_color": [0,0,0],
-	"reflection_depth": 2,
+	"reflection_depth": 3,
 	"camera":{
 		"center": [0,0,0],
 		"direction": [0,0,1],
@@ -67,6 +67,15 @@
 			"color": [200,0,0],
 			"radius": 0.2,
 			"specularity": 123
+		},
+		{
+			"type": "cylinder",
+			"center": [0,0,10],
+			"direction": [0,1,0],
+			"color": [200,200,0],
+			"radius": 2,
+			"specularity": 200,
+			"reflective": 0
 		},
 		// {
 		// 	"type": "sphere",
