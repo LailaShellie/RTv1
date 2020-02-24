@@ -51,9 +51,8 @@ t_vect3d	reflect_ray(t_vect3d *ray, t_vect3d *normal)
 	return (res);
 }
 
-
-void	closest_intersection(t_rtv1 *rt, t_vect3d O, t_vect3d D, double t_min, double t_max,
-							t_figure **figure_closest, t_calc *calc_params)
+void	closest_intersection(t_rtv1 *rt, t_trace_ray_params trace_params,
+ 							t_calc *calc_params)
 {
 	t_figure	*figure_curr = NULL;
 
@@ -61,16 +60,16 @@ void	closest_intersection(t_rtv1 *rt, t_vect3d O, t_vect3d D, double t_min, doub
 	figure_curr = rt->figures;
 	while (figure_curr)
 	{
-		intersect_ray_sphere(O, D, figure_curr, calc_params);
-		if (t_min <= calc_params->t.t1 && calc_params->t.t1 < calc_params->t.closest_t)
+		intersect_ray_sphere(trace_params.o, trace_params.d, figure_curr, calc_params);
+		if (trace_params.t_min <= calc_params->t.t1 && calc_params->t.t1 < calc_params->t.closest_t)
 		{
 			calc_params->t.closest_t = calc_params->t.t1;
-			*figure_closest = figure_curr;
+			calc_params->closest_f = figure_curr;
 		}
-		if (t_min <= calc_params->t.t2 && calc_params->t.t2 < calc_params->t.closest_t)
+		if (trace_params.t_min <= calc_params->t.t2 && calc_params->t.t2 < calc_params->t.closest_t)
 		{
 			calc_params->t.closest_t = calc_params->t.t2;
-			*figure_closest = figure_curr;
+			calc_params->closest_f = figure_curr;
 		}
 		figure_curr = figure_curr->next;
 	}
@@ -107,12 +106,16 @@ double	compute_light(t_rtv1 *rt, t_vect3d point, t_vect3d normal, t_vect3d V, do
 			t_max = INF;
 		}
 
-		t_roots		shadow_roots;
+		t_trace_ray_params	shadow_trace_params;
 		t_calc		shadow_calcs;
 
+		shadow_trace_params.o = point;
+		shadow_trace_params.d = L;
+		shadow_trace_params.t_min = 0.001;
+		shadow_trace_params.t_max = t_max;
 		shadow_calcs.closest_f = NULL;
 
-		closest_intersection(rt, point, L, 0.001, t_max, &(shadow_calcs.closest_f), &shadow_calcs);
+		closest_intersection(rt, shadow_trace_params, &shadow_calcs);
 		if (shadow_calcs.closest_f)
 		{
 			light = light->next;
@@ -140,7 +143,6 @@ double	compute_light(t_rtv1 *rt, t_vect3d point, t_vect3d normal, t_vect3d V, do
 
 int		test_trace_ray(t_rtv1 *rt, t_trace_ray_params trace_params)
 {
-	// t_figure	*figure_closest = NULL;
 	t_figure	*figure_curr = NULL;
 	t_calc		calc_params;
 	t_vect3d	P;
@@ -152,8 +154,7 @@ int		test_trace_ray(t_rtv1 *rt, t_trace_ray_params trace_params)
 	int			reflected_color;
 
 	calc_params.closest_f = NULL;
-	closest_intersection(rt, trace_params.o, trace_params.d,
-								trace_params.t_min, trace_params.t_max, &(calc_params.closest_f), &calc_params);
+	closest_intersection(rt, trace_params, &calc_params);
 
 	if (calc_params.closest_f == NULL)
 		return (rt->background_color);
