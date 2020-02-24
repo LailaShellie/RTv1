@@ -16,15 +16,17 @@ t_vect3d canvas_to_viewport(int x, int y)
 	return (res);
 }
 
-t_roots		intersect_ray_sphere(t_vect3d O, t_vect3d D, t_figure *figure)
+void	intersect_ray_sphere(t_vect3d O, t_vect3d D, t_figure *figure, t_calc *calc_params)
 {
 	double discrim;
 	double k1;
 	double k2;
 	double k3;
 	t_vect3d	oc;
-	t_roots		roots;
 
+
+	calc_params->t.t1 = INF;
+	calc_params->t.t2 = INF;
 	oc = sub_vect3d(&figure->center, &O);
 	k1 = dot_vect3d(&D, &D);
 	k2 = 2 * dot_vect3d(&oc, &D);
@@ -33,16 +35,14 @@ t_roots		intersect_ray_sphere(t_vect3d O, t_vect3d D, t_figure *figure)
 	discrim = k2 * k2 - 4 * k1 * k3;
 	if (discrim < 0)
 	{
-		roots.t1 = INF;
-		roots.t2 = INF;
+		calc_params->t.t1 = INF;
+		calc_params->t.t2 = INF;
 	}
 	else
 	{
-		roots.t1 = (-k2 + sqrt(discrim)) / (2 * k1);
-    	roots.t2 = (-k2 - sqrt(discrim)) / (2 * k1);
+		calc_params->t.t1 = (-k2 + sqrt(discrim)) / (2 * k1);
+    	calc_params->t.t2 = (-k2 - sqrt(discrim)) / (2 * k1);
 	}
-	roots.closest_t = INF;
-	return (roots);
 }
 
 t_vect3d	reflect_ray(t_vect3d *ray, t_vect3d *normal)
@@ -60,10 +60,11 @@ void	closest_intersection(t_rtv1 *rt, t_trace_ray_params trace_params,
 	t_figure	*figure_curr = NULL;
 
 	calc_params->closest_f = NULL;
+	calc_params->t.closest_t = INF;
 	figure_curr = rt->figures;
 	while (figure_curr)
 	{
-		calc_params->t = intersect_ray_sphere(trace_params.o, trace_params.d, figure_curr);
+		intersect_ray_sphere(trace_params.o, trace_params.d, figure_curr, calc_params);
 		if (trace_params.t_min <= calc_params->t.t1 && calc_params->t.t1 < calc_params->t.closest_t)
 		{
 			calc_params->t.closest_t = calc_params->t.t1;
@@ -143,12 +144,39 @@ double	compute_light(t_rtv1 *rt, t_vect3d point, t_vect3d normal, t_vect3d V, do
 	return (intensity);
 }
 
+t_vect3d		test_get_normal_sphere(t_figure *figure, t_vect3d *p, t_vect3d *o)
+{
+	t_vect3d	ray_from_o;
+	t_vect3d	n;
+
+	ray_from_o = sub_vect3d(p, o);
+	norm_vect3d(&ray_from_o);
+	n = sub_vect3d(&figure->center, p);
+	norm_vect3d(&n);
+	if (dot_vect3d(&n, &ray_from_o) < 0)
+		n = scale_vect3d(-1, &n);
+	return (n);
+}
+
+t_vect3d		test_get_point_intersect(double closest_t, t_vect3d o, t_vect3d d)
+{
+	t_vect3d	p;
+	p = scale_vect3d(closest_t, &d);
+	p = add_vect3d(&o, &p);
+	return (p);
+}
+
+void			test_calculate_p_n(t_calc *calc_params, t_trace_ray_params trace_params)
+{
+		calc_params->p = test_get_point_intersect(calc_params->t.closest_t, trace_params.o, trace_params.d);
+		calc_params->n = test_get_normal_sphere(calc_params->closest_f, &calc_params->p, &trace_params.o);
+}
+
+
 int		test_trace_ray(t_rtv1 *rt, t_trace_ray_params trace_params)
 {
 	t_figure	*figure_curr = NULL;
 	t_calc		calc_params;
-	t_vect3d	P;
-	t_vect3d	N;
 	t_vect3d	V;
 	t_vect3d	reflected_ray;
 	int			local_color;
@@ -156,28 +184,24 @@ int		test_trace_ray(t_rtv1 *rt, t_trace_ray_params trace_params)
 	int			reflected_color;
 
 	closest_intersection(rt, trace_params, &calc_params);
-
 	if (calc_params.closest_f == NULL)
 		return (rt->background_color);
 	else
 	{
-		P = scale_vect3d(calc_params.t.closest_t, &trace_params.d);
-		P = add_vect3d(&trace_params.o, &P);
-		N = sub_vect3d(&calc_params.closest_f->center, &P);
-		norm_vect3d(&N);
+		test_calculate_p_n(&calc_params, trace_params);
 		V = scale_vect3d(-1.0, &trace_params.d);
-		local_color = calculate_color(calc_params.closest_f->color, compute_light(rt, P, N, V, calc_params.closest_f->s));
+		local_color = calculate_color(calc_params.closest_f->color, compute_light(rt, calc_params.p, calc_params.n, V, calc_params.closest_f->s));
 
 		reflect = calc_params.closest_f->reflect;
 		if (trace_params.reflection_depth <= 0 || reflect <= 0.001)
 			return (local_color);
 		else
 		{
-			reflected_ray = reflect_ray(&V, &N);
+			reflected_ray = reflect_ray(&V, &calc_params.n);
 
 			t_trace_ray_params		trace_params_reflect;
 
-			trace_params_reflect.o = P;
+			trace_params_reflect.o = calc_params.p;
 			trace_params_reflect.d = reflected_ray;
 			trace_params_reflect.t_min = 0.001;
 			trace_params_reflect.t_max = INF;
@@ -206,6 +230,7 @@ void test_render(t_rtv1 *rt)
 		x = -1;
 		while (++x < W)
 		{
+
 			trace_params.d = canvas_to_viewport(x, y);
 			trace_params.d = mult_vect3d_rmatrix(&trace_params.d, rot_matrixes.r_all);
 			trace_params.t_min = 1;

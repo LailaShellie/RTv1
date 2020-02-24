@@ -3,9 +3,9 @@
 	"background_color": [0,0,0],
 	"reflection_depth": 2,
 	"camera":{
-		"center": [0,2,-2],
+		"center": [0,0,0],
 		"direction": [0,0,1],
-		"rotation": [-30, 0, 0]
+		"rotation": [0, 0, 0]
 	},
 	"lights":[
 		{
@@ -59,6 +59,15 @@
 			"radius": 5000,
 			"specularity": 1000,
 			"reflective": 0.3
-		}
+		},
+		// {
+		// 	"type": "sphere",
+		// 	"center": [0,0,-5],
+		// 	"direction": [1,1,0],
+		// 	"color": [255,255,255],
+		// 	"radius": 300,
+		// 	"specularity": 100,
+		// 	"reflective": 0.1
+		// }
 	]
 }
