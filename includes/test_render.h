@@ -2,17 +2,9 @@
 # define TEST_RENDER_H
 
 #include "rtv1.h"
-typedef struct		s_rot
-{
-	double			r_x[16];
-	double			r_y[16];
-	double			r_z[16];
-	double			r_persp[16];
-	double			r_all[16];
-}					t_rot;
-
 
 void test_render(t_rtv1 *rt);
+t_vect3d canvas_to_viewport(int x, int y);
 
 /*
 ** rotation functions
@@ -28,6 +20,5 @@ void				mult_rmatrix(double *res, double *a, double *b);
 void				calc_r_x_y_z(t_rot *mr, t_vect3d *angles);
 void				calc_rotate_all(t_rot *mr, t_vect3d *angles);
 t_vect3d			mult_vect3d_rmatrix(t_vect3d *ray, double *rmatrix);
-
 
 #endif

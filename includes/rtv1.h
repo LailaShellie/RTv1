@@ -51,6 +51,15 @@ union				u_color
 	}					s_parts;
 };
 
+typedef struct		s_rot
+{
+	double			r_x[16];
+	double			r_y[16];
+	double			r_z[16];
+	double			r_persp[16];
+	double			r_all[16];
+}					t_rot;
+
 typedef	struct		s_roots
 {
 	double			t1;
@@ -134,6 +143,7 @@ typedef struct		s_rtv1
     int             total_light;
 	int				background_color;
 	int				reflection_depth;
+	t_rot			rotation_matrixes;
     t_cam			*cam;
     t_light			*lights;
     t_figure		*figures;

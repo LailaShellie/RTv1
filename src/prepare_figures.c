@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "rtv1.h"
+#include "test_render.h"
 
 void		calculate_cam_consts(t_rtv1 *rt)
 {
@@ -65,4 +66,5 @@ void		prepare_figures(t_rtv1 *rt)
 		calculate_consts(cur);
 		cur = cur->next;
 	}
+	calc_rotate_all(&rt->rotation_matrixes, &rt->cam->rotation);
 }

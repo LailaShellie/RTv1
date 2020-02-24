@@ -47,8 +47,4 @@ int		main(int ac, char **av)
 		hooks(rt);
 	}
     return (0);
-	prepare_figures(rt);
-	render(rt);
-	hooks(rt);
-	return (0);
 }

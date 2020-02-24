@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "rtv1.h"
+#include "test_render.h"
 
 int			sum_color(int color1, int color2)
 {
@@ -90,12 +91,16 @@ t_vect3d	gen_ray(t_rtv1 *rt, int x, int y)
 	double		u;
 	double		v;
 
-	u = ((double)W - (double)x * VZ) / H;
-	v = ((double)H - (double)y * VZ) / W;
-	ray = init_vect3d(u * rt->cam->v1.x + v
-			* rt->cam->v2.x + VZ * rt->cam->v3.x,
-			u * rt->cam->v1.y + v * rt->cam->v2.y + VZ * rt->cam->v3.y,
-			u * rt->cam->v1.z + v * rt->cam->v2.z + VZ * rt->cam->v3.z);
+	// u = ((double)W - (double)x * VZ) / H;
+	// v = ((double)H - (double)y * VZ) / W;
+	// ray = init_vect3d(u * rt->cam->v1.x + v
+	// 		* rt->cam->v2.x + VZ * rt->cam->v3.x,
+	// 		u * rt->cam->v1.y + v * rt->cam->v2.y + VZ * rt->cam->v3.y,
+	// 		u * rt->cam->v1.z + v * rt->cam->v2.z + VZ * rt->cam->v3.z);
+
+	ray = canvas_to_viewport(x, y);
+	ray = mult_vect3d_rmatrix(&ray, rt->rotation_matrixes.r_all);
+
 	norm_vect3d(&ray);
 	return (ray);
 }
