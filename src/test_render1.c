@@ -16,13 +16,14 @@ t_vect3d canvas_to_viewport(int x, int y)
 	return (res);
 }
 
-void	intersect_ray_sphere(t_vect3d O, t_vect3d D, t_figure *figure, t_calc *calc_params)
+t_roots		intersect_ray_sphere(t_vect3d O, t_vect3d D, t_figure *figure)
 {
 	double discrim;
 	double k1;
 	double k2;
 	double k3;
 	t_vect3d	oc;
+	t_roots		roots;
 
 	oc = sub_vect3d(&figure->center, &O);
 	k1 = dot_vect3d(&D, &D);
@@ -32,14 +33,16 @@ void	intersect_ray_sphere(t_vect3d O, t_vect3d D, t_figure *figure, t_calc *calc
 	discrim = k2 * k2 - 4 * k1 * k3;
 	if (discrim < 0)
 	{
-		calc_params->t.t1 = INF;
-		calc_params->t.t2 = INF;
+		roots.t1 = INF;
+		roots.t2 = INF;
 	}
 	else
 	{
-		calc_params->t.t1 = (-k2 + sqrt(discrim)) / (2 * k1);
-    	calc_params->t.t2 = (-k2 - sqrt(discrim)) / (2 * k1);
+		roots.t1 = (-k2 + sqrt(discrim)) / (2 * k1);
+    	roots.t2 = (-k2 - sqrt(discrim)) / (2 * k1);
 	}
+	roots.closest_t = INF;
+	return (roots);
 }
 
 t_vect3d	reflect_ray(t_vect3d *ray, t_vect3d *normal)
@@ -57,11 +60,10 @@ void	closest_intersection(t_rtv1 *rt, t_trace_ray_params trace_params,
 	t_figure	*figure_curr = NULL;
 
 	calc_params->closest_f = NULL;
-	calc_params->t.closest_t = INF;
 	figure_curr = rt->figures;
 	while (figure_curr)
 	{
-		intersect_ray_sphere(trace_params.o, trace_params.d, figure_curr, calc_params);
+		calc_params->t = intersect_ray_sphere(trace_params.o, trace_params.d, figure_curr);
 		if (trace_params.t_min <= calc_params->t.t1 && calc_params->t.t1 < calc_params->t.closest_t)
 		{
 			calc_params->t.closest_t = calc_params->t.t1;
@@ -204,7 +206,6 @@ void test_render(t_rtv1 *rt)
 		x = -1;
 		while (++x < W)
 		{
-
 			trace_params.d = canvas_to_viewport(x, y);
 			trace_params.d = mult_vect3d_rmatrix(&trace_params.d, rot_matrixes.r_all);
 			trace_params.t_min = 1;
