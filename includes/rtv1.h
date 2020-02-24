@@ -113,6 +113,7 @@ typedef struct      s_calc
     t_vect3d        ray;
     t_vect3d        p;
     t_vect3d        n;
+	t_vect3d		v;
     t_roots         t;
     t_figure        *closest_f;
 }                   t_calc;

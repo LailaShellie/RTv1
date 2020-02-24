@@ -43,6 +43,7 @@ int		main(int ac, char **av)
 	}
 	else
 	{
+		prepare_figures(rt);
 		test_render(rt);
 		hooks(rt);
 	}

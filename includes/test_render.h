@@ -30,4 +30,7 @@ void				calc_rotate_all(t_rot *mr, t_vect3d *angles);
 t_vect3d			mult_vect3d_rmatrix(t_vect3d *ray, double *rmatrix);
 
 
+
+t_roots		intersect_cylinder(t_vect3d *ray, t_vect3d *o, t_figure *f);
+
 #endif
