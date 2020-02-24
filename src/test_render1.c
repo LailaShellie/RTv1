@@ -56,6 +56,7 @@ void	closest_intersection(t_rtv1 *rt, t_trace_ray_params trace_params,
 {
 	t_figure	*figure_curr = NULL;
 
+	calc_params->closest_f = NULL;
 	calc_params->t.closest_t = INF;
 	figure_curr = rt->figures;
 	while (figure_curr)
@@ -113,7 +114,6 @@ double	compute_light(t_rtv1 *rt, t_vect3d point, t_vect3d normal, t_vect3d V, do
 		shadow_trace_params.d = L;
 		shadow_trace_params.t_min = 0.001;
 		shadow_trace_params.t_max = t_max;
-		shadow_calcs.closest_f = NULL;
 
 		closest_intersection(rt, shadow_trace_params, &shadow_calcs);
 		if (shadow_calcs.closest_f)
@@ -153,7 +153,6 @@ int		test_trace_ray(t_rtv1 *rt, t_trace_ray_params trace_params)
 	double		reflect;
 	int			reflected_color;
 
-	calc_params.closest_f = NULL;
 	closest_intersection(rt, trace_params, &calc_params);
 
 	if (calc_params.closest_f == NULL)
