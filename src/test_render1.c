@@ -107,12 +107,13 @@ double	compute_light(t_rtv1 *rt, t_vect3d point, t_vect3d normal, t_vect3d V, do
 			t_max = INF;
 		}
 
-		t_figure	*shadow_figure = NULL;
 		t_roots		shadow_roots;
 		t_calc		shadow_calcs;
 
-		closest_intersection(rt, point, L, 0.001, t_max, &shadow_figure, &shadow_calcs);
-		if (shadow_figure)
+		shadow_calcs.closest_f = NULL;
+
+		closest_intersection(rt, point, L, 0.001, t_max, &(shadow_calcs.closest_f), &shadow_calcs);
+		if (shadow_calcs.closest_f)
 		{
 			light = light->next;
 			continue ;
@@ -137,10 +138,9 @@ double	compute_light(t_rtv1 *rt, t_vect3d point, t_vect3d normal, t_vect3d V, do
 	return (intensity);
 }
 
-// int		test_trace_ray(t_rtv1 *rt, t_vect3d O, t_vect3d D, double t_min, double t_max, int depth)
 int		test_trace_ray(t_rtv1 *rt, t_trace_ray_params trace_params)
 {
-	t_figure	*figure_closest = NULL;
+	// t_figure	*figure_closest = NULL;
 	t_figure	*figure_curr = NULL;
 	t_calc		calc_params;
 	t_vect3d	P;
@@ -151,21 +151,22 @@ int		test_trace_ray(t_rtv1 *rt, t_trace_ray_params trace_params)
 	double		reflect;
 	int			reflected_color;
 
+	calc_params.closest_f = NULL;
 	closest_intersection(rt, trace_params.o, trace_params.d,
-								trace_params.t_min, trace_params.t_max, &figure_closest, &calc_params);
+								trace_params.t_min, trace_params.t_max, &(calc_params.closest_f), &calc_params);
 
-	if (figure_closest == NULL)
+	if (calc_params.closest_f == NULL)
 		return (rt->background_color);
 	else
 	{
 		P = scale_vect3d(calc_params.t.closest_t, &trace_params.d);
 		P = add_vect3d(&trace_params.o, &P);
-		N = sub_vect3d(&figure_closest->center, &P);
+		N = sub_vect3d(&calc_params.closest_f->center, &P);
 		norm_vect3d(&N);
 		V = scale_vect3d(-1.0, &trace_params.d);
-		local_color = calculate_color(figure_closest->color, compute_light(rt, P, N, V, figure_closest->s));
+		local_color = calculate_color(calc_params.closest_f->color, compute_light(rt, P, N, V, calc_params.closest_f->s));
 
-		reflect = figure_closest->reflect;
+		reflect = calc_params.closest_f->reflect;
 		if (trace_params.reflection_depth <= 0 || reflect <= 0.001)
 			return (local_color);
 		else
@@ -192,13 +193,9 @@ void test_render(t_rtv1 *rt)
 	int		x;
 	int		y;
 	t_trace_ray_params	trace_params;
-	// t_vect3d	D;
-	// t_vect3d	O;
 	int			color;
-	// int		Cx, Cy;
 	t_rot	rot_matrixes;
 
-	//O = rt->cam->center;
 	trace_params.o = rt->cam->center;
 	y = -1;
 	calc_rotate_all(&rot_matrixes, &rt->cam->rotation);
@@ -213,7 +210,6 @@ void test_render(t_rtv1 *rt)
 			trace_params.t_min = 1;
 			trace_params.t_max = INF;
 			trace_params.reflection_depth = rt->reflection_depth;
-			// color = test_trace_ray(rt, O, D, 1, INF, rt->reflection_depth);
 			color = test_trace_ray(rt, trace_params);
 			((int *)rt->img->data)[x + y * rt->img->size_line / 4] = color;
 		}

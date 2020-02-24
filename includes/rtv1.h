@@ -114,10 +114,6 @@ typedef struct      s_calc
     t_vect3d        ray;
     t_vect3d        p;
     t_vect3d        n;
-	t_vect3d		o; // ray_source
-	t_vect3d		d; // ray_direction
-	double			t_min;
-	double			t_max;
     t_roots         t;
     t_figure        *closest_f;
 }                   t_calc;
