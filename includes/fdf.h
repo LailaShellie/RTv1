@@ -28,6 +28,12 @@
 # define FDF_KEY_S 1
 # define FDF_KEY_Z 6
 # define FDF_KEY_D 2
+# define FDF_KEY_U 32
+# define FDF_KEY_J 38
+# define FDF_KEY_H 4
+# define FDF_KEY_K 40
+# define FDF_KEY_Y 16
+# define FDF_KEY_I 34
 # define FDF_Z 6
 
 #endif

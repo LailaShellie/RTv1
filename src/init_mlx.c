@@ -34,14 +34,26 @@ int			rt_keyhooks(int keycode, t_rtv1 *rt)
 		rt->cam->center.z += 1;
 	else if (keycode == FDF_KEY_A)
 		rt->cam->center.z -= 1;
+	else if (keycode == FDF_KEY_U)
+		rt->cam->rotation.x -= FDF_ANGLE_ROTATE_PRECISION;
+	else if (keycode == FDF_KEY_J)
+		rt->cam->rotation.x += FDF_ANGLE_ROTATE_PRECISION;
+	else if (keycode == FDF_KEY_H)
+		rt->cam->rotation.y += FDF_ANGLE_ROTATE_PRECISION;
+	else if (keycode == FDF_KEY_K)
+		rt->cam->rotation.y -= FDF_ANGLE_ROTATE_PRECISION;
+	else if (keycode == FDF_KEY_Y)
+		rt->cam->rotation.z += FDF_ANGLE_ROTATE_PRECISION;
+	else if (keycode == FDF_KEY_I)
+		rt->cam->rotation.z -= FDF_ANGLE_ROTATE_PRECISION;
 	else
 	{
 		printf("%d\n", keycode);
 		fflush(stdout);
 		return (0);
 	}
-	render(rt);
 	prepare_figures(rt);
+	render(rt);
 	return (1);
 }
 
