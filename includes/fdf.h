@@ -2,6 +2,7 @@
 # define FDF_H
 
 # define FDF_ANGLE_ROTATE_PRECISION 15
+# define FDF_STEP_SIZE 2
 
 # define FDF_KEY_UP 126
 # define FDF_KEY_DOWN 125
