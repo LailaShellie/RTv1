@@ -8,10 +8,10 @@
 		"rotation": [15, 0, 0]
 	},
 	"lights":[
-		{
-			"type": "ambient",
-			"intensity": 0.2
-		},
+		// {
+			// "type": "ambient",
+			// "intensity": 0.2
+		// },
 		{
 			"type": "point",
 			"center": [2,1,0],

@@ -3,7 +3,8 @@
 		"rtv1.h": "c",
 		"validation.h": "c",
 		"sstream": "c",
-		"stdio.h": "c"
+		"stdio.h": "c",
+		"fdf.h": "c"
 	},
 	"zenMode.hideLineNumbers": false
 }
