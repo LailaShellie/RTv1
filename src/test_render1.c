@@ -58,13 +58,26 @@ void	closest_intersection(t_rtv1 *rt, t_trace_ray_params trace_params,
  							t_calc *calc_params)
 {
 	t_figure	*figure_curr = NULL;
+	t_roots		roots;
 
 	calc_params->closest_f = NULL;
 	calc_params->t.closest_t = INF;
 	figure_curr = rt->figures;
 	while (figure_curr)
 	{
-		intersect_ray_sphere(trace_params.o, trace_params.d, figure_curr, calc_params);
+		if (figure_curr->type == SPHERE)
+			intersect_ray_sphere(trace_params.o, trace_params.d, figure_curr, calc_params);
+		else
+		{
+			if (figure_curr->type == CYLINDER)
+				roots = intersect_cylinder(&trace_params.d, &trace_params.o, figure_curr);
+			else if (figure_curr->type == PLANE)
+				roots = intersect_plane(&trace_params.d, &trace_params.o, figure_curr);
+			else if (figure_curr->type == CONE)
+				roots = intersect_cone(&trace_params.d, &trace_params.o, figure_curr);
+			calc_params->t.t1 = roots.t1;
+			calc_params->t.t2 = roots.t2;
+		}
 		if (trace_params.t_min <= calc_params->t.t1 && calc_params->t.t1 < calc_params->t.closest_t)
 		{
 			calc_params->t.closest_t = calc_params->t.t1;
@@ -158,6 +171,32 @@ t_vect3d		test_get_normal_sphere(t_figure *figure, t_vect3d *p, t_vect3d *o)
 	return (n);
 }
 
+t_vect3d		test_get_normal_cylinder(t_figure *figure, t_vect3d *p, t_vect3d *o, t_vect3d *d, double closest_t)
+{
+	double		m;
+	t_vect3d	pc;
+	t_vect3d	v;
+	t_vect3d	x;
+	t_vect3d	cam_p;
+	t_vect3d	n;
+
+	cam_p = sub_vect3d(p, o);
+	norm_vect3d(&cam_p);
+	x = sub_vect3d(&figure->center, o);
+	pc = sub_vect3d(&figure->center, p);
+	m = dot_vect3d(d, &figure->direction)
+		* closest_t
+		+ dot_vect3d(&x, &figure->direction);
+	v = scale_vect3d(m * (1 + figure->radius * figure->radius),
+			&figure->direction);
+	n = sub_vect3d(&v, &pc);
+	norm_vect3d(&n);
+	if (dot_vect3d(&n, &cam_p) < 0)
+		n = scale_vect3d(-1, &n);
+	return (n);
+}
+
+
 t_vect3d		test_get_point_intersect(double closest_t, t_vect3d o, t_vect3d d)
 {
 	t_vect3d	p;
@@ -168,8 +207,12 @@ t_vect3d		test_get_point_intersect(double closest_t, t_vect3d o, t_vect3d d)
 
 void			test_calculate_p_n(t_calc *calc_params, t_trace_ray_params trace_params)
 {
-		calc_params->p = test_get_point_intersect(calc_params->t.closest_t, trace_params.o, trace_params.d);
+	calc_params->p = test_get_point_intersect(calc_params->t.closest_t, trace_params.o, trace_params.d);
+	if (calc_params->closest_f->type == SPHERE)
 		calc_params->n = test_get_normal_sphere(calc_params->closest_f, &calc_params->p, &trace_params.o);
+	else if (calc_params->closest_f->type == CYLINDER)
+		calc_params->n = test_get_normal_cylinder(calc_params->closest_f, &calc_params->p, &trace_params.o,
+										&trace_params.d, calc_params->t.closest_t);
 }
 
 
@@ -177,7 +220,6 @@ int		test_trace_ray(t_rtv1 *rt, t_trace_ray_params trace_params)
 {
 	t_figure	*figure_curr = NULL;
 	t_calc		calc_params;
-	t_vect3d	V;
 	t_vect3d	reflected_ray;
 	int			local_color;
 	double		reflect;
@@ -189,15 +231,15 @@ int		test_trace_ray(t_rtv1 *rt, t_trace_ray_params trace_params)
 	else
 	{
 		test_calculate_p_n(&calc_params, trace_params);
-		V = scale_vect3d(-1.0, &trace_params.d);
-		local_color = calculate_color(calc_params.closest_f->color, compute_light(rt, calc_params.p, calc_params.n, V, calc_params.closest_f->s));
+		calc_params.v = scale_vect3d(-1.0, &trace_params.d);
+		local_color = calculate_color(calc_params.closest_f->color, compute_light(rt, calc_params.p, calc_params.n, calc_params.v, calc_params.closest_f->s));
 
 		reflect = calc_params.closest_f->reflect;
 		if (trace_params.reflection_depth <= 0 || reflect <= 0.001)
 			return (local_color);
 		else
 		{
-			reflected_ray = reflect_ray(&V, &calc_params.n);
+			reflected_ray = reflect_ray(&calc_params.v, &calc_params.n);
 
 			t_trace_ray_params		trace_params_reflect;
 
