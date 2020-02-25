@@ -67,17 +67,17 @@ void	closest_intersection(t_rtv1 *rt, t_trace_ray_params trace_params,
 	{
 		if (figure_curr->type == SPHERE)
 			intersect_ray_sphere(trace_params.o, trace_params.d, figure_curr, calc_params);
-		else
-		{
-			if (figure_curr->type == CYLINDER)
-				roots = intersect_cylinder(&trace_params.d, &trace_params.o, figure_curr);
-			else if (figure_curr->type == PLANE)
-				roots = intersect_plane(&trace_params.d, &trace_params.o, figure_curr);
-			else if (figure_curr->type == CONE)
-				roots = intersect_cone(&trace_params.d, &trace_params.o, figure_curr);
-			calc_params->t.t1 = roots.t1;
-			calc_params->t.t2 = roots.t2;
-		}
+		// else
+		// {
+		// 	if (figure_curr->type == CYLINDER)
+		// 		roots = intersect_cylinder(&trace_params.d, &trace_params.o, figure_curr);
+		// 	else if (figure_curr->type == PLANE)
+		// 		roots = intersect_plane(&trace_params.d, &trace_params.o, figure_curr);
+		// 	else if (figure_curr->type == CONE)
+		// 		roots = intersect_cone(&trace_params.d, &trace_params.o, figure_curr);
+		// 	calc_params->t.t1 = roots.t1;
+		// 	calc_params->t.t2 = roots.t2;
+		// }
 		if (trace_params.t_min <= calc_params->t.t1 && calc_params->t.t1 < calc_params->t.closest_t)
 		{
 			calc_params->t.closest_t = calc_params->t.t1;
@@ -166,8 +166,8 @@ t_vect3d		test_get_normal_sphere(t_figure *figure, t_vect3d *p, t_vect3d *o)
 	norm_vect3d(&ray_from_o);
 	n = sub_vect3d(&figure->center, p);
 	norm_vect3d(&n);
-	if (dot_vect3d(&n, &ray_from_o) < 0)
-		n = scale_vect3d(-1, &n);
+	// if (dot_vect3d(&n, &ray_from_o) < 0)
+	// 	n = scale_vect3d(-1, &n);
 	return (n);
 }
 
@@ -208,11 +208,11 @@ t_vect3d		test_get_point_intersect(double closest_t, t_vect3d o, t_vect3d d)
 void			test_calculate_p_n(t_calc *calc_params, t_trace_ray_params trace_params)
 {
 	calc_params->p = test_get_point_intersect(calc_params->t.closest_t, trace_params.o, trace_params.d);
-	if (calc_params->closest_f->type == SPHERE)
-		calc_params->n = test_get_normal_sphere(calc_params->closest_f, &calc_params->p, &trace_params.o);
-	else if (calc_params->closest_f->type == CYLINDER)
-		calc_params->n = test_get_normal_cylinder(calc_params->closest_f, &calc_params->p, &trace_params.o,
-										&trace_params.d, calc_params->t.closest_t);
+	// if (calc_params->closest_f->type == SPHERE)
+	calc_params->n = test_get_normal_sphere(calc_params->closest_f, &calc_params->p, &trace_params.o);
+	// else if (calc_params->closest_f->type == CYLINDER)
+	// 	calc_params->n = test_get_normal_cylinder(calc_params->closest_f, &calc_params->p, &trace_params.o,
+	// 									&trace_params.d, calc_params->t.closest_t);
 }
 
 

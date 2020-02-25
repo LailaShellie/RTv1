@@ -60,20 +60,20 @@
 			"specularity": 1000,
 			"reflective": 0.3
 		},
+		// {
+		// 	"type": "cylinder",
+		// 	"center": [1.3,0,5],
+		// 	"direction": [-1,2,0],
+		// 	"color": [200,0,0],
+		// 	"radius": 0.2,
+		// 	"specularity": 123
+		// },
 		{
-			"type": "cylinder",
-			"center": [1.3,0,5],
-			"direction": [-1,2,0],
-			"color": [200,0,0],
-			"radius": 0.2,
-			"specularity": 123
-		},
-		{
-			"type": "cylinder",
-			"center": [0,0,10],
+			"type": "sphere",
+			"center": [0,0,100],
 			"direction": [0,1,0],
 			"color": [200,200,0],
-			"radius": 2,
+			"radius": 90,
 			"specularity": 200,
 			"reflective": 0
 		},
