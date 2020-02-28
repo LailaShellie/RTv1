@@ -45,4 +45,5 @@ void		free_rtv1(t_rtv1 *rt)
 	free_figures(rt->figures);
 	free_lights(rt->lights);
 	free(rt->cam);
+	free(rt);
 }
