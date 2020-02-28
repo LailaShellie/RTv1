@@ -5,7 +5,7 @@ SRC = init_mlx.c main.c objects.c vector3d_1.c vector3d_2.c render.c intersectio
 		print_data.c parse_json_getdata.c parse_json_data_params.c \
 		parse_json_name_value.c \
 		parse_json_2nd_level.c parse_json_3rd_level.c \
-		test_render1.c test_rotation_matrix.c
+		test_render1.c test_rotation_matrix.c free_rtv1.c
 
 OBJ_DIR = ./objects
 SRC_DIR = ./src

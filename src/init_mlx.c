@@ -15,6 +15,7 @@
 
 int			ft_close(t_rtv1 *rt)
 {
+	free(rt);
 	exit(0);
 }
 

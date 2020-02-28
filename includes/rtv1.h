@@ -122,7 +122,7 @@ typedef struct      s_calc
     t_vect3d        ray;
     t_vect3d        p;
     t_vect3d        n;
-	t_vect3d		v;
+    t_vect3d		v;
     t_roots         t;
     t_figure        *closest_f;
 }                   t_calc;
@@ -178,5 +178,6 @@ void			get_normal_of_figure(t_rtv1 *rt);
 
 int					calculate_color(int color, double intensity);
 int	sum_color(int color1, int color2);
+void		free_rtv1(t_rtv1 *rt);
 
 #endif

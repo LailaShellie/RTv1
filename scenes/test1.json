@@ -2,7 +2,7 @@
 	"title": "test1",
 	"camera":{
 		"center": [0,0,0],
-		"direction": [0,0,1]
+		"rotation": [0,0,30]
 	},
 	"lights":[
 		{
