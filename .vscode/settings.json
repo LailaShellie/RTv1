@@ -4,7 +4,8 @@
 		"validation.h": "c",
 		"sstream": "c",
 		"stdio.h": "c",
-		"fdf.h": "c"
+		"fdf.h": "c",
+		"math.h": "c"
 	},
 	"zenMode.hideLineNumbers": false
 }

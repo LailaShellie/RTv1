@@ -1,17 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_json_getdata.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: odrinkwa <odrinkwa@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/29 14:54:59 by odrinkwa          #+#    #+#             */
+/*   Updated: 2020/02/29 14:59:38 by odrinkwa         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "rtv1.h"
 #include "validation.h"
 #include "errno.h"
 
-int	set_colors(unsigned char o, unsigned char r, \
+int			set_colors(unsigned char o, unsigned char r, \
 			unsigned char g, unsigned char b)
 {
 	return ((int)o << 24 | (int)r << 16 | (int)g << 8 | (int)b);
 }
 
-int				get_rgb(char *str)
+int			get_rgb(char *str)
 {
 	char	**split;
-	int 	len;
+	int		len;
+	int		color;
 
 	if (!(split = ft_strsplit(str, ',')))
 		return (ERR);
@@ -27,8 +40,10 @@ int				get_rgb(char *str)
 		ft_free_mas(split, len);
 		return (ERR);
 	}
-	return (set_colors(0, ft_atoi(split[R]),
-					   ft_atoi(split[G]), ft_atoi(split[B])));
+	color = set_colors(0, ft_atoi(split[R]), ft_atoi(split[G]),
+						ft_atoi(split[B]));
+	ft_free_mas(split, len);
+	return (color);
 }
 
 int			choose_type(char *line)
@@ -44,10 +59,10 @@ int			choose_type(char *line)
 	return (ERR);
 }
 
-int		get_xyz(char *str, t_vect3d *vect)
+int			get_xyz(char *str, t_vect3d *vect)
 {
 	char	**split;
-	int 	len;
+	int		len;
 
 	if (!(split = ft_strsplit(str, ',')))
 		return (ERR);
@@ -64,7 +79,7 @@ int		get_xyz(char *str, t_vect3d *vect)
 	}
 	vect->x = ft_atod(split[X]);
 	vect->y = ft_atod(split[Y]);
-	vect->z= ft_atod(split[Z]);
+	vect->z = ft_atod(split[Z]);
 	ft_free_mas(split, len);
 	return (1);
 }
@@ -76,30 +91,6 @@ double		get_double(char *str)
 	else
 	{
 		errno = 127;
-		return(ERR_1);
+		return (ERR_1);
 	}
-}
-
-double		get_light_intensity(char *str)
-{
-	double 	i;
-
-	i = get_double(str);
-	if (i > 1.0)
-		i = 1.0;
-	if (i < 0.0)
-		i = 0.0;
-	return (i);
-}
-
-double		get_light_type(char *str)
-{
-	if (ft_strequ(str, "ambient"))
-		return (AMBIENT);
-	else if (ft_strequ(str, "point"))
-		return (POINT);
-	else if (ft_strequ(str, "directional"))
-		return (DIRECTIONAL);
-	else
-		return (0);
 }

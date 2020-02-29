@@ -3,20 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   ft_trim_stop.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lshellie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: odrinkwa <odrinkwa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/22 13:14:35 by lshellie          #+#    #+#             */
-/*   Updated: 2020/02/22 13:14:36 by lshellie         ###   ########.fr       */
+/*   Updated: 2020/02/29 15:29:10 by odrinkwa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+void	ft_strtrim_aux(char **str, char *str_new, size_t len_trim_str,
+						const char *pattern)
+{
+	char	*i_str;
+	char	*j_str;
+
+	i_str = *str;
+	j_str = str_new;
+	while (*i_str && len_trim_str)
+	{
+		if (!ft_strchr(pattern, *i_str))
+		{
+			*(j_str++) = *i_str;
+			len_trim_str--;
+		}
+		i_str++;
+	}
+	*j_str = '\0';
+}
+
 char	*ft_strtrim_stop(char **str, const char *pattern, const char *stop)
 {
 	size_t	len_trim_str;
 	char	*i_str;
-	char	*j_str;
 	char	*stop_str;
 	char	*str_new;
 
@@ -32,18 +51,7 @@ char	*ft_strtrim_stop(char **str, const char *pattern, const char *stop)
 		if (!ft_strchr(pattern, *(i_str++)))
 			len_trim_str++;
 	str_new = (char*)malloc(sizeof(char) * (len_trim_str + 1));
-	i_str = *str;
-	j_str = str_new;
-	while (*i_str && len_trim_str)
-	{
-		if (!ft_strchr(pattern, *i_str))
-		{
-			*(j_str++) = *i_str;
-			len_trim_str--;
-		}
-		i_str++;
-	}
-	*j_str = '\0';
+	ft_strtrim_aux(str, str_new, len_trim_str, pattern);
 	ft_memdel((void**)str);
 	*str = str_new;
 	return (*str);

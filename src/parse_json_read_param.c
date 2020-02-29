@@ -1,34 +1,49 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_json_read_param.c                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: odrinkwa <odrinkwa@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/29 15:09:38 by odrinkwa          #+#    #+#             */
+/*   Updated: 2020/02/29 15:17:48 by odrinkwa         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "rtv1.h"
 #include "validation.h"
 
-char	*read_parameter_to_str(char **file)
+static	char	find_openchar(char **file)
+{
+	char	openchar;
+
+	while (**file)
+	{
+		if (('0' <= **file && **file <= '9') || **file == '.')
+			return (**file);
+		else if ((**file == '"') || (**file == '[') || (**file == '{'))
+		{
+			openchar = **file;
+			(*file)++;
+			return (openchar);
+		}
+		(*file)++;
+	}
+	return (0);
+}
+
+char			*read_parameter_to_str(char **file)
 {
 	char	*res;
 	int		len_param;
 	char	*start_param;
 	char	openchar;
 
-	while (**file)
-	{
-		if (('0' <= **file && **file <= '9') || **file == '.')
-		{
-			openchar = **file;
-			break ;
-		}
-		else if ( (**file == '"') || (**file == '[') || (**file == '{'))
-		{
-			openchar = **file;
-			(*file)++;
-			break ;
-		}
-		(*file)++;
-		continue ;
-	}
+	openchar = find_openchar(file);
 	if (**file == '\0')
 		return (NULL);
 	start_param = *file;
 	len_param = ft_goto_endparam(file, openchar);
-
 	if (len_param)
 	{
 		res = (char*)malloc(sizeof(char) * (len_param + 1));

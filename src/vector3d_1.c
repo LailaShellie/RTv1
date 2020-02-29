@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector3d_1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lshellie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: odrinkwa <odrinkwa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/22 14:57:42 by lshellie          #+#    #+#             */
-/*   Updated: 2020/02/22 14:57:42 by lshellie         ###   ########.fr       */
+/*   Updated: 2020/02/29 15:20:41 by odrinkwa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,4 @@ double		length_vect3d(t_vect3d *a)
 	len += a->y * a->y;
 	len += a->z * a->z;
 	return (sqrt(len));
-}
-
-void		print_vect3d(t_vect3d *a)
-{
-	printf("%lf %lf %lf\n", a->x, a->y, a->z);
 }
