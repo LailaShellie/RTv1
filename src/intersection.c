@@ -12,22 +12,6 @@
 
 #include "rtv1.h"
 
-t_roots		manage(double a, double b, double c)
-{
-	t_roots		t;
-	double		d;
-
-	t.t1 = INF;
-	t.t2 = INF;
-	t.closest_t = INF;
-	d = b * b - 4.0 * a * c;
-	if (d < 0)
-		return (t);
-	t.t1 = (-b + sqrt(d)) / (2.0 * a);
-	t.t2 = (-b - sqrt(d)) / (2.0 * a);
-	return (t);
-}
-
 t_roots		intersect_cylinder(t_vect3d *ray, t_vect3d *o, t_figure *f)
 {
 	double		a;
@@ -57,9 +41,11 @@ t_roots		intersect_cone(t_vect3d *ray, t_vect3d *o, t_figure *f)
 	a = dot_vect3d(ray, ray)
 			- (1 + f->radius * f->radius) * dot_vect3d(ray, &f->direction)
 			* dot_vect3d(ray, &f->direction);
-	b = 2.0 * (dot_vect3d(ray, &oc) - (1 + f->radius * f->radius) * dot_vect3d(ray, &f->direction) *
+	b = 2.0 * (dot_vect3d(ray, &oc) - (1 +
+			f->radius * f->radius) * dot_vect3d(ray, &f->direction) *
 			dot_vect3d(&oc, &f->direction));
-	c = dot_vect3d(&oc, &oc) - (1 + f->radius * f->radius) * dot_vect3d(&oc, &f->direction) *
+	c = dot_vect3d(&oc, &oc) - (1 +
+			f->radius * f->radius) * dot_vect3d(&oc, &f->direction) *
 			dot_vect3d(&oc, &f->direction);
 	return (manage(a, b, c));
 }

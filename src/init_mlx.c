@@ -19,6 +19,23 @@ int			ft_close(t_rtv1 *rt)
 	exit(0);
 }
 
+int			rt_keyhooks_angle(int keycode, t_rtv1 *rt)
+{
+	if (keycode == FDF_KEY_U)
+		rt->cam->rotation.x -= FDF_ANGLE_ROTATE_PRECISION;
+	else if (keycode == FDF_KEY_J)
+		rt->cam->rotation.x += FDF_ANGLE_ROTATE_PRECISION;
+	else if (keycode == FDF_KEY_H)
+		rt->cam->rotation.y += FDF_ANGLE_ROTATE_PRECISION;
+	else if (keycode == FDF_KEY_K)
+		rt->cam->rotation.y -= FDF_ANGLE_ROTATE_PRECISION;
+	else if (keycode == FDF_KEY_Y)
+		rt->cam->rotation.z += FDF_ANGLE_ROTATE_PRECISION;
+	else if (keycode == FDF_KEY_I)
+		rt->cam->rotation.z -= FDF_ANGLE_ROTATE_PRECISION;
+	return (1);
+}
+
 int			rt_keyhooks(int keycode, t_rtv1 *rt)
 {
 	if (keycode == FDF_KEY_ESC || keycode == FDF_KEY_Q)
@@ -35,24 +52,12 @@ int			rt_keyhooks(int keycode, t_rtv1 *rt)
 		rt->cam->center.z += FDF_STEP_SIZE;
 	else if (keycode == FDF_KEY_A)
 		rt->cam->center.z -= FDF_STEP_SIZE;
-	else if (keycode == FDF_KEY_U)
-		rt->cam->rotation.x -= FDF_ANGLE_ROTATE_PRECISION;
-	else if (keycode == FDF_KEY_J)
-		rt->cam->rotation.x += FDF_ANGLE_ROTATE_PRECISION;
-	else if (keycode == FDF_KEY_H)
-		rt->cam->rotation.y += FDF_ANGLE_ROTATE_PRECISION;
-	else if (keycode == FDF_KEY_K)
-		rt->cam->rotation.y -= FDF_ANGLE_ROTATE_PRECISION;
-	else if (keycode == FDF_KEY_Y)
-		rt->cam->rotation.z += FDF_ANGLE_ROTATE_PRECISION;
-	else if (keycode == FDF_KEY_I)
-		rt->cam->rotation.z -= FDF_ANGLE_ROTATE_PRECISION;
+	else if (keycode == FDF_KEY_U || keycode == FDF_KEY_J
+	|| keycode == FDF_KEY_H || keycode == FDF_KEY_K
+	|| keycode == FDF_KEY_Y || keycode == FDF_KEY_I)
+		rt_keyhooks_angle(keycode, rt);
 	else
-	{
-		printf("%d\n", keycode);
-		fflush(stdout);
 		return (0);
-	}
 	prepare_figures(rt);
 	render(rt);
 	return (1);

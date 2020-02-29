@@ -12,6 +12,20 @@
 
 #include "rtv1.h"
 
+t_vect3d	canvas_to_viewport(int x, int y)
+{
+	t_vect3d	res;
+	int			cx;
+	int			cy;
+
+	cx = x - W / 2;
+	cy = H / 2 - y;
+	res.x = (double)cx * 1.0 / W;
+	res.y = (double)cy * 1.0 / H;
+	res.z = 1;
+	return (res);
+}
+
 double		get_specular(t_rtv1 *rt, t_light *light)
 {
 	t_vect3d	l;

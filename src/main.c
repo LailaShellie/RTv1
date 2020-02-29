@@ -14,38 +14,37 @@
 #include "validation.h"
 #include "test_render.h"
 
-int		main(int ac, char **av)
+t_roots		manage(double a, double b, double c)
+{
+	t_roots		t;
+	double		d;
+
+	t.t1 = INF;
+	t.t2 = INF;
+	t.closest_t = INF;
+	d = b * b - 4.0 * a * c;
+	if (d < 0)
+		return (t);
+	t.t1 = (-b + sqrt(d)) / (2.0 * a);
+	t.t2 = (-b - sqrt(d)) / (2.0 * a);
+	return (t);
+}
+
+int			main(int ac, char **av)
 {
 	t_rtv1		*rt;
 	int			fd;
-	int			is_test_render = 0;
 
 	if (!(rt = ft_memalloc(sizeof(t_rtv1))))
 		return (0);
-	if (ac != 2)
-	{
-		if (ac == 3 && ft_strequ(av[2], "--test-render"))
-			is_test_render = 1;
-		else
-			return (ERR);
-	}
 	if ((fd = open(av[1], O_RDONLY)) == -1)
-		return (ERR);
+		return (ft_close(rt));
 	if (!(read_json(rt, fd)))
-		return (ERR);
+		return (ft_close(rt));
 	if (ERR == init_mlx(rt))
-		return (0);
-	if (!is_test_render)
-	{
-		prepare_figures(rt);
-		render(rt);
-		hooks(rt);
-	}
-	else
-	{
-		prepare_figures(rt);
-		test_render(rt);
-		hooks(rt);
-	}
-    return (0);
+		return (ft_close(rt));
+	prepare_figures(rt);
+	render(rt);
+	hooks(rt);
+	return (0);
 }

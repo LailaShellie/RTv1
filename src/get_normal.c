@@ -51,7 +51,8 @@ void	normal_cone(t_rtv1 *rt)
 	m = dot_vect3d(&rt->calc.ray, &rt->calc.closest_f->direction)
 		* rt->calc.t.closest_t
 		+ dot_vect3d(&x, &rt->calc.closest_f->direction);
-	v = scale_vect3d(m * (1 + rt->calc.closest_f->radius * rt->calc.closest_f->radius),
+	v = scale_vect3d(m * (1 + rt->calc.closest_f->radius
+			* rt->calc.closest_f->radius),
 			&rt->calc.closest_f->direction);
 	rt->calc.n = sub_vect3d(&v, &pc);
 	norm_vect3d(&rt->calc.n);

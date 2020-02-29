@@ -191,5 +191,7 @@ void					get_normal_of_figure(t_rtv1 *rt);
 int						calculate_color(int color, double intensity);
 int						sum_color(int color1, int color2);
 void					free_rtv1(t_rtv1 *rt);
+t_roots					manage(double a, double b, double c);
+int						ft_close(t_rtv1 *rt);
 
 #endif

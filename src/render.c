@@ -80,9 +80,7 @@ int			trace_ray(t_rtv1 *rt, t_vect3d *ray, t_vect3d *o)
 		}
 		cur = cur->next;
 	}
-	if (rt->calc.closest_f == 0)
-		return (BACKGROUND);
-	return (calc_light(rt));
+	return (rt->calc.closest_f == 0 ? BACKGROUND : calc_light(rt));
 }
 
 t_vect3d	gen_ray(t_rtv1 *rt, int x, int y)
@@ -91,16 +89,8 @@ t_vect3d	gen_ray(t_rtv1 *rt, int x, int y)
 	double		u;
 	double		v;
 
-	// u = ((double)W - (double)x * VZ) / H;
-	// v = ((double)H - (double)y * VZ) / W;
-	// ray = init_vect3d(u * rt->cam->v1.x + v
-	// 		* rt->cam->v2.x + VZ * rt->cam->v3.x,
-	// 		u * rt->cam->v1.y + v * rt->cam->v2.y + VZ * rt->cam->v3.y,
-	// 		u * rt->cam->v1.z + v * rt->cam->v2.z + VZ * rt->cam->v3.z);
-
 	ray = canvas_to_viewport(x, y);
 	ray = mult_vect3d_rmatrix(&ray, rt->rotation_matrixes.r_all);
-
 	norm_vect3d(&ray);
 	return (ray);
 }
