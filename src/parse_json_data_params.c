@@ -6,7 +6,7 @@
 /*   By: odrinkwa <odrinkwa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/29 14:59:05 by odrinkwa          #+#    #+#             */
-/*   Updated: 2020/02/29 14:59:05 by odrinkwa         ###   ########.fr       */
+/*   Updated: 2020/02/29 15:42:26 by odrinkwa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,17 +52,19 @@ int		parse_params_camera(char *param_name, char *value, t_cam *camera)
 
 int		parse_params_light(char *param_name, char *value, t_light *light)
 {
+	int		res;
+
 	if (ft_strequ(param_name, "center"))
-		get_xyz(value, &light->center);
+		res = get_xyz(value, &light->center);
 	else if (ft_strequ(param_name, "direction"))
-		get_xyz(value, &light->direction);
+		res = get_xyz(value, &light->direction);
 	else if (ft_strequ(param_name, "intensity"))
 		light->i = get_light_intensity(value);
 	else if (ft_strequ(param_name, "type"))
 		light->type = get_light_type(value);
 	else
 		return (ERR);
-	return (1);
+	return (res);
 }
 
 int		parse_params_figure(char *param_name, char *value, t_figure *figure)
