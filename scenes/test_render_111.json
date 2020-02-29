@@ -1,0 +1,90 @@
+{
+	"title": "test1",
+	"background_color": [0,0,0],
+	"reflection_depth": 3,
+	"camera":{
+		"center": [0,2,-2],
+		"direction": [0,0,1],
+		"rotation": [15, 0, 0]
+	},
+	"lights":[
+		// {
+			// "type": "ambient",
+			// "intensity": 0.2
+		// },
+		{
+			"type": "point",
+			"center": [2,1,0],
+			"intensity": 0.6
+		},
+		{
+			"type": "directional",
+			"direction": [1,4,4],
+			"intensity": 0.2
+		}
+	],
+	"figures":[
+		{
+			"type": "sphere",
+			"center": [0,-1,6],
+			"direction": [1,1,0],
+			"color": [255,0,0],
+			"radius": 1,
+			"specularity": 500,
+			"reflective": 0.3
+		},
+		{
+			"type": "sphere",
+			"center": [2,0,7],
+			"direction": [1,1,0],
+			"color": [0,0,255],
+			"radius": 1,
+			"specularity": 500,
+			"reflective": 0.3
+		},
+		{
+			"type": "sphere",
+			"center": [-2,0,7],
+			"direction": [1,1,0],
+			"color": [0,255,0],
+			"radius": 1,
+			"specularity": 10,
+			"reflective": 0.3
+		},
+		{
+			"type": "sphere",
+			"center": [0,-5001,0],
+			"direction": [1,1,0],
+			"color": [255,255,0],
+			"radius": 5000,
+			"specularity": 1000,
+			"reflective": 0.3
+		},
+		// {
+		// 	"type": "cylinder",
+		// 	"center": [1.3,0,5],
+		// 	"direction": [-1,2,0],
+		// 	"color": [200,0,0],
+		// 	"radius": 0.2,
+		// 	"specularity": 123
+		// },
+		{
+			"type": "sphere",
+			"center": [0,0,100],
+			"direction": [0,1,0],
+			"color": [200,200,0],
+			"radius": 90,
+			"specularity": 200,
+			"reflective": 0
+		},
+		// {
+		// 	"type": "sphere",
+		// 	"center": [0,0,-5],
+		// 	"direction": [1,1,0],
+		// 	"color": [255,255,255],
+		// 	"radius": 300,
+		// 	"specularity": 100,
+		// 	"reflective": 0.1
+		// }
+	]
+}
