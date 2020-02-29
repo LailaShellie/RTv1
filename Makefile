@@ -19,16 +19,14 @@ LIB = libft/libft.a
 MLX = mlx/lmlx.a
 NAME = RTv1
 
-all: $(NAME)
-
-# %.o: src/%.c $(HDR)
-# 	gcc -c $<
+all: libs $(NAME)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HDR)
 	gcc -g3  -I $(HDR_DIR) -I $(LIBFT_HDR_DIR) -I $(MLX_HDR_DIR) -o $@ -c $<
 
 libs:
-	make -C ./libft
+	@make -C ./libft
+
 clean:
 	make clean -C ./libft
 	rm -rf $(OBJ)
@@ -38,9 +36,7 @@ fclean: clean
 	rm -rf $(NAME)
 re: fclean all
 
-$(NAME): $(OBJ_DIR) libs $(OBJ)
-	#gcc -Wall -Wextra -Werror -o $(NAME) -I $(HDR) $(LIB) $(VAL) $(OBJ) -L mlx -lmlx -framework OpenGL -framework AppKit
-	@echo "test1"
+$(NAME): $(OBJ_DIR) $(OBJ)
 	gcc -Wall -Wextra -Werror -g3 -o $(NAME) -I $(HDR_DIR) -I $(LIBFT_HDR_DIR) -I $(MLX_HDR_DIR) $(LIB) $(VAL) $(OBJ) -L mlx -lmlx -framework OpenGL -framework AppKit
 
 $(OBJ_DIR):
