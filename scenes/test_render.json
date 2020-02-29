@@ -1,7 +1,7 @@
 {
 	"title": "test1",
 	"background_color": [0,0,0],
-	"reflection_depth": 2,
+	"reflection_depth": 3,
 	"camera":{
 		"center": [0,2,-2],
 		"direction": [0,0,1],
@@ -14,14 +14,14 @@
 		// },
 		{
 			"type": "point",
-			"center": [2,1,0],
+			"center": [2,4,0],
 			"intensity": 0.6
 		},
-		{
-			"type": "directional",
-			"direction": [1,4,4],
-			"intensity": 0.2
-		}
+//		{
+//			"type": "directional",
+//			"direction": [1,4,4],
+//			"intensity": 0.2
+//		}
 	],
 	"figures":[
 		{
@@ -60,6 +60,16 @@
 			"specularity": 1000,
 			"reflective": 0.3
 		},
+		{
+			"type": "sphere",
+			"center": [0,0,100],
+			"direction": [1,1,0],
+			"color": [255,255,0],
+			"radius": 80,
+			"specularity": 1000,
+			"reflective": 0.3
+		},
+
 		// {
 		// 	"type": "sphere",
 		// 	"center": [0,0,-5],

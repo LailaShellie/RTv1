@@ -65,12 +65,14 @@ void	closest_intersection(t_rtv1 *rt, t_trace_ray_params trace_params,
 	while (figure_curr)
 	{
 		intersect_ray_sphere(trace_params.o, trace_params.d, figure_curr, calc_params);
-		if (trace_params.t_min <= calc_params->t.t1 && calc_params->t.t1 < calc_params->t.closest_t)
+		if (trace_params.t_min <= calc_params->t.t1 && calc_params->t.t1 < calc_params->t.closest_t
+			&& calc_params->t.t1 < trace_params.t_max)
 		{
 			calc_params->t.closest_t = calc_params->t.t1;
 			calc_params->closest_f = figure_curr;
 		}
-		if (trace_params.t_min <= calc_params->t.t2 && calc_params->t.t2 < calc_params->t.closest_t)
+		if (trace_params.t_min <= calc_params->t.t2 && calc_params->t.t2 < calc_params->t.closest_t
+			&& calc_params->t.t2 < trace_params.t_max)
 		{
 			calc_params->t.closest_t = calc_params->t.t2;
 			calc_params->closest_f = figure_curr;
@@ -102,7 +104,7 @@ double	compute_light(t_rtv1 *rt, t_vect3d point, t_vect3d normal, t_vect3d V, do
 		else if (light->type == POINT)
 		{
 			L = sub_vect3d(&point, &light->center);
-			t_max = 1;
+			t_max = length_vect3d(&L);
 		}
 		else
 		{
@@ -116,7 +118,7 @@ double	compute_light(t_rtv1 *rt, t_vect3d point, t_vect3d normal, t_vect3d V, do
 		shadow_trace_params.o = point;
 		shadow_trace_params.d = L;
 		shadow_trace_params.t_min = 0.001;
-		shadow_trace_params.t_max = t_max;
+		shadow_trace_params.t_max = 1;
 
 		closest_intersection(rt, shadow_trace_params, &shadow_calcs);
 		if (shadow_calcs.closest_f)
